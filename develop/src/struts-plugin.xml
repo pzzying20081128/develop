@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<!-- 提供了Session 拦获 -->
+<struts>
+          <package name="struts-appframe" extends="struts-default" abstract="true" namespace="/">
+                    <!-- Interceptor 拦截器设置 -->
+                    <interceptors>
+                              <interceptor name="AutoParametersInterceptor" class="cn.zy.apps.tools.web.AutoParametersInterceptor">
+                                        <param name="acceptParamNames">\D+DynaBean(\.\D+)*</param>
+                              </interceptor>
+                              <interceptor name="sessionTimeOut" class="cn.zy.apps.tools.web.ActionSessionInterceptor">
+                                        <param name="excludeMethods">login</param>
+                              </interceptor>
+                              <!-- 把sessionTimeOut设置到拦截堆栈中 login,monitor -->
+                              <interceptor-stack name="myappStack">
+                                        <interceptor-ref name="defaultStack" />
+                                        <interceptor-ref name="AutoParametersInterceptor" />
+                                        <interceptor-ref name="sessionTimeOut" />
+                              </interceptor-stack>
+                    </interceptors>
+                    <!-- 自动调用的拦截器myappStack -->
+                    <default-interceptor-ref name="myappStack" />
+                    <global-results>
+                              <result name="1001" type="redirect">
+                                        <param name="location">/index.html</param>
+                              </result>
+                    </global-results>
+          </package>
+          <package name="struts-ajax" extends="json-default" abstract="true" namespace="/">
+                    <!-- Interceptor 拦截器设置 -->
+                    <interceptors>
+                              <interceptor name="AutoParametersInterceptor" class="cn.zy.apps.tools.web.AutoParametersInterceptor">
+                                        <param name="acceptParamNames">\D+DynaBean(\.\D+)*</param>
+                              </interceptor>
+                              <interceptor name="sessionTimeOut" class="cn.zy.apps.tools.web.ActionAjaxSessionInterceptor">
+                                        <param name="excludeMethods">login</param>
+                              </interceptor>
+                              <!-- 把sessionTimeOut设置到拦截堆栈中 login,monitor -->
+                              <interceptor-stack name="myappStack">
+                                        <interceptor-ref name="defaultStack" />
+                                        <interceptor-ref name="sessionTimeOut" />
+                                        <interceptor-ref name="AutoParametersInterceptor" />
+                              </interceptor-stack>
+                    </interceptors>
+                    <!-- 自动调用的拦截器myappStack -->
+                    <default-interceptor-ref name="myappStack" />
+                    <!-- 全局result -->
+                    <global-results>
+                              <result name="1001" type="redirect">
+                                        <param name="location">/index.html</param>
+                              </result>
+                    </global-results>
+          </package>
+</struts>
