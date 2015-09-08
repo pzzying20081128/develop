@@ -3,18 +3,20 @@ package zy.apps.demo.pojos;
 import java.util.List;
 
 public class Order {
-	
+
 	private Long money;
-	
+
 	private String moneyMoneyShow;
-	
+
 	private String name;
-	
+
 	private String sax;
-	
+
 	private String nameSaxNameSaxShow;
-	
-	private List<Order>  orders;
+
+	private User user;
+
+	private Integer userId;
 
 	public Long getMoney() {
 		return money;
@@ -56,12 +58,20 @@ public class Order {
 		this.nameSaxNameSaxShow = nameSaxNameSaxShow;
 	}
 
-	public List<Order> getOrders() {
-		return orders;
+	public User getUser() {
+		return user;
 	}
 
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 }

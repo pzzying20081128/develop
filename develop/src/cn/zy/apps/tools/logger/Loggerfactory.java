@@ -58,10 +58,24 @@ public class Loggerfactory {
 
 	
 	public static void devError(org.apache.log4j.Logger logger, Throwable message) {
-//		if(print)
+		if(print)
 		logger.warn(message);
 			
 	}
+	
+	public static void devError(org.apache.log4j.Logger logger, String message) {
+		if(print)
+		logger.warn(message);
+			
+	}
+	
+	public static void devError(org.apache.log4j.Logger logger, Throwable e,String message) {
+		if(print)
+			
+		logger.warn(message,e);
+			
+	}
+  
   
 
     public static void warn(Logger logger, String message) {

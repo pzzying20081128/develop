@@ -1,10 +1,6 @@
 package zy.apps.demo.units;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import cn.zy.apps.tools.units.PrpertiesSetValueService;
-import zy.apps.demo.pojos.Order;
 
 public class DemoPrpertiesSetValueService extends PrpertiesSetValueService {
 
@@ -31,35 +27,35 @@ public class DemoPrpertiesSetValueService extends PrpertiesSetValueService {
 		
 		String regexPackage= "^zy.apps.demo(\\.\\D+)*(.pojos|.views|.beans)$";
 		
-		PrpertiesSetValueService  prpertiesSetValueService  =new DemoPrpertiesSetValueService(regexPackage);
-		Order  order=new Order();
-		order.setMoney(1200L);
-		List<Order>   orders=new ArrayList<Order>();
-		order.setOrders(orders);
-		{
-			Order  order1=new Order();
-			order1.setMoney(200L);
-			orders.add(order1);
-		}
-		
-		{
-			Order  order2=new Order();
-			order2.setMoney(100L);
-			orders.add(order2);
-		}
-		
-		try {
-			prpertiesSetValueService.execactionaftereturn(order);
-			String xx =order.getMoneyMoneyShow();
-			System.out.println("==> "+xx);
-			for(Order  order_:order.getOrders() ){
-				String xx1 =order_.getMoneyMoneyShow();
-				System.out.println("==> "+xx1);
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		PrpertiesSetValueService  prpertiesSetValueService  =new DemoPrpertiesSetValueService(regexPackage);
+//		Order  order=new Order();
+//		order.setMoney(1200L);
+//		List<Order>   orders=new ArrayList<Order>();
+//		order.setOrders(orders);
+//		{
+//			Order  order1=new Order();
+//			order1.setMoney(200L);
+//			orders.add(order1);
+//		}
+//		
+//		{
+//			Order  order2=new Order();
+//			order2.setMoney(100L);
+//			orders.add(order2);
+//		}
+//		
+//		try {
+//			prpertiesSetValueService.execactionaftereturn(order);
+//			String xx =order.getMoneyMoneyShow();
+//			System.out.println("==> "+xx);
+//			for(Order  order_:order.getOrders() ){
+//				String xx1 =order_.getMoneyMoneyShow();
+//				System.out.println("==> "+xx1);
+//			}
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 	}
 
