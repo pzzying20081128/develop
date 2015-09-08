@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="build.base.tools" default="build.tools">
+          <property name="release" value="release" />
+          <property name="release.src" value="${release}/src" />
+          <property name="release.class" value="${release}/class" />
+          <property name="project.lib" value="H4libs" />
+          <path id="build.lib">
+                    <fileset dir="${project.lib}">
+                              <include name="**/*.jar" />
+                    </fileset>
+          </path>
+          <target name="init" depends="depends" description="--> description">
+                    <mkdir dir="${release}" />
+                    <mkdir dir="${release.src}" />
+                    <mkdir dir="${release.class}" />
+          </target>
+          <target name="depends">
+          </target>
+          <target name="build.java">
+                    <!-- executable="${javac.path}" -->
+                    <javac encoding="UTF-8" executable="/media/you/tools/tools/jdk1.7.0_79/bin/javac" includeantruntime='flase' fork="true" srcdir="${release.src}" destdir="${release.class}"
+                              classpathref="build.lib" debug="on" />
+          </target>
+          <target name="build.tools" depends="init">
+                    <copy todir="${release.src}">
+                              <fileset dir="src">
+                                        <include name="**/*.java" />
+                              </fileset>
+                              <fileset dir="json">
+                                        <include name="**/*.java" />
+                              </fileset>
+                    </copy>
+                    <antcall target="build.java">
+                    </antcall>
+                    <jar destfile="${release}/apps_base_tools.jar">
+                              <fileset dir="${release.class}">
+                                        <include name="cn/zy/apps/tools/**/**.class" />
+                                        <exclude name="org/apache/struts2/json/**/*.class" />
+                              </fileset>
+                              <fileset dir="src">
+                                        <include name="*.xml" />
+                              </fileset>
+                    </jar>
+                    <jar destfile="${release}/apps_base_json.jar">
+                              <fileset dir="${release.class}">
+                                        <include name="org/apache/struts2/json/**/*.class" />
+                              </fileset>
+                              <fileset dir="json">
+                                        <include name="*.xml" />
+                              </fileset>
+                    </jar>
+                    <antcall target="clear.release">
+                    </antcall>
+          </target>
+          <target name="clear.release">
+                    <delete dir="${release.src}">
+                    </delete>
+                    <delete dir="${release.class}">
+                    </delete>
+          </target>
+</project>

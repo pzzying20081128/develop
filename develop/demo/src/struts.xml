@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.action.extension" value="do" />
+	<constant name="struts.locale" value="zh_CN" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.velocity.configfile" value="/WEB-INF/classes/velocity.properties" />
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.multipart.maxSize" value="10857600" />
+	<constant name="struts.custom.i18n.resources" value="globalMessages" />
+	<constant name="struts.objectFactory" value="spring" />
+     <constant name="struts.apps.session" value="true" />
+          
+         
+	<!-- <include file="struts_matrial.xml"></include> -->
+
+
+	<package name="login" namespace="/" extends="struts-appframe">
+
+
+		<action name="testDynaProperties" class="DemoDynaGeneralAction" method="testDynaProperties">
+		
+		</action>
+		
+	</package>
+
+	<package name="loginajax" namespace="/" extends="struts-ajax">
+	    
+		<action name="login" class="VodLoginAction" method="login">
+			<result type="json" name="success">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">
+					success,msg
+				</param>
+			</result>
+			<result type="json" name="loginerror">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">
+					success,msg
+				</param>
+			</result>
+			
+		</action>
+		
+	
+	</package>
+
+
+
+</struts>

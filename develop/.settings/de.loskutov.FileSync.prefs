@@ -1,0 +1,7 @@
+WARNING=DO NOT MODIFY THIS FILE IF YOU DON'T UNDERSTAND
+defaultDestination=/media/truecrypt7/tools/apache-tomcat-7.0.59/webapps/demo/
+defaultVariables=
+eclipse.preferences.version=1
+includeTeamPrivateFiles=false
+map|0=demo/web|,|,|,|,
+useCurrentDateForDestinationFiles=false
