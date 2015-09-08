@@ -4,6 +4,7 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <!-- 提供了Session 拦获 -->
 <struts>
+<constant name="struts.apps.session" value="true" />
           <package name="struts-appframe" extends="struts-default" abstract="true" namespace="/">
                     <!-- Interceptor 拦截器设置 -->
                     <interceptors>
@@ -12,11 +13,15 @@
                               </interceptor>
                               <interceptor name="sessionTimeOut" class="cn.zy.apps.tools.web.ActionSessionInterceptor">
                                         <param name="excludeMethods">login</param>
+                                        <param name="isSession">false</param>
                               </interceptor>
                               <!-- 把sessionTimeOut设置到拦截堆栈中 login,monitor -->
                               <interceptor-stack name="myappStack">
                                         <interceptor-ref name="defaultStack" />
+                                        <!-- 
                                         <interceptor-ref name="AutoParametersInterceptor" />
+                                         -->
+                                        
                                         <interceptor-ref name="sessionTimeOut" />
                               </interceptor-stack>
                     </interceptors>
@@ -29,6 +34,7 @@
                     </global-results>
           </package>
           <package name="struts-ajax" extends="json-default" abstract="true" namespace="/">
+          
                     <!-- Interceptor 拦截器设置 -->
                     <interceptors>
                               <interceptor name="AutoParametersInterceptor" class="cn.zy.apps.tools.web.AutoParametersInterceptor">
@@ -41,7 +47,10 @@
                               <interceptor-stack name="myappStack">
                                         <interceptor-ref name="defaultStack" />
                                         <interceptor-ref name="sessionTimeOut" />
+                                        <!-- 
                                         <interceptor-ref name="AutoParametersInterceptor" />
+                                         -->
+                                        
                               </interceptor-stack>
                     </interceptors>
                     <!-- 自动调用的拦截器myappStack -->

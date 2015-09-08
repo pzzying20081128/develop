@@ -85,6 +85,7 @@ public class AutoParametersInterceptor extends MethodFilterInterceptor {
     @Override
     public String doIntercept(ActionInvocation invocation) throws Exception {
         Object action = invocation.getAction() ;
+        
         if (!(action instanceof NoParameters)) {
             ActionContext ac = invocation.getInvocationContext() ;
             final Map<String, Object> parameters = retrieveParameters(ac) ;
@@ -92,7 +93,7 @@ public class AutoParametersInterceptor extends MethodFilterInterceptor {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Setting params " + getParameterLogMap(parameters)) ;
             }
-
+           
             if (parameters != null) {
                 Map<String, Object> contextMap = ac.getContextMap() ;
                 try {
@@ -102,6 +103,8 @@ public class AutoParametersInterceptor extends MethodFilterInterceptor {
 
                     ValueStack stack = ac.getValueStack() ;
                     setParameters(action, stack, parameters) ;
+                }catch(Exception e){
+                	e.printStackTrace();
                 } finally {
                     ReflectionContextState.setCreatingNullObjects(contextMap, false) ;
                     ReflectionContextState.setDenyMethodExecution(contextMap, false) ;
@@ -197,7 +200,6 @@ public class AutoParametersInterceptor extends MethodFilterInterceptor {
                     dynaBean1.set(startkey_, value) ;
                     LOG.info("dynaBean  startHead  " + startHead + "  startkey_  " + startkey_ + "  value : " + value) ;
                 } else if (!startHead.equals(startHead_)) {
-
                     newStack.setValue(startHead, dynaBean1) ;
                     dynaBean1 = new ReDynaBean() ;
                     startHead = startHead_ ;
@@ -223,7 +225,6 @@ public class AutoParametersInterceptor extends MethodFilterInterceptor {
         if (dynaBean1 != null) {
 
             newStack.setValue(startHead, dynaBean1) ;
-            //            System.out.println("==1> newStack startHead  : " + startHead + "  value : " +dynaBean1) ;
             if (clearableStack && (stack.getContext() != null) && (newStack.getContext() != null)) stack.getContext().put(ActionContext.CONVERSION_ERRORS, newStack.getContext().get(ActionContext.CONVERSION_ERRORS)) ;
 
             addParametersToContext(ActionContext.getContext(), acceptableParameters) ;

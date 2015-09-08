@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="json"/>
 	<classpathentry kind="src" path="configs"/>
 	<classpathentry kind="src" path="demo/src"/>
 	<classpathentry kind="src" path="apps"/>
@@ -84,5 +85,5 @@
 	<classpathentry kind="lib" path="H4libs/build/servlet-api.jar"/>
 	<classpathentry kind="lib" path="H4libs/build/spring-test-4.1.4.RELEASE.jar"/>
 	<classpathentry kind="lib" path="H4libs/build/struts2-junit-plugin-2.3.20.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="output" path="demo/web/WEB-INF/classes"/>
 </classpath>

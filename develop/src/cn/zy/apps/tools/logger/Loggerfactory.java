@@ -4,7 +4,7 @@ import org.apache.log4j.Logger ;
 
 public class Loggerfactory {
 
-    private static final boolean print = false ;
+    private static final boolean print = true ;
 
     public static <T> Logger instance(Class<T> clazz) {
         return Logger.getLogger(clazz) ;
@@ -55,6 +55,14 @@ public class Loggerfactory {
         error(logger, message, null) ;
 
     }
+
+	
+	public static void devError(org.apache.log4j.Logger logger, Throwable message) {
+//		if(print)
+		logger.warn(message);
+			
+	}
+  
 
     public static void warn(Logger logger, String message) {
 
