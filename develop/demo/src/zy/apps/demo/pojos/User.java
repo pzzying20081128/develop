@@ -1,39 +1,51 @@
-package zy.apps.demo.pojos;
+package zy.apps.demo.pojos ;
 
-import java.util.List;
+import java.util.List ;
 
+import javax.persistence.CascadeType ;
+import javax.persistence.Column ;
+import javax.persistence.Entity ;
+import javax.persistence.FetchType ;
+import javax.persistence.Id ;
+import javax.persistence.OneToMany ;
+import javax.persistence.OneToOne ;
+import javax.persistence.Table ;
+
+@Entity
+@Table(name = "user")
 public class User {
+    @Column(name = "uuids")
+    @Id
+    private Integer id ;
 
-	private Integer id;
+    @Column(name = "name")
+    private String name ;
 
-	private String name;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL ,mappedBy="user")
+    private List<UserOrder> orders ;
 
-	private List<Order> orders;
+    public Integer getId() {
+        return id ;
+    }
 
+    public void setId(Integer id) {
+        this.id = id ;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public String getName() {
+        return name ;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setName(String name) {
+        this.name = name ;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public List<UserOrder> getOrders() {
+        return orders ;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setOrders(List<UserOrder> orders) {
+        this.orders = orders ;
+    }
 
-	public List<Order> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
-
-	
 }

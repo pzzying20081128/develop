@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence:persistence version="1.0" xmlns:persistence="http://java.sun.com/xml/ns/persistence" 
+                                                                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                                                                xsi:schemaLocation="http://java.sun.com/xml/ns/persistence persistence_1_0.xsd ">
+	<persistence:persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
+		<persistence:provider>org.hibernate.ejb.HibernatePersistence</persistence:provider>
+		<!-- <persistence:mapping-file>ormx/ormx_vod_order_watch_count.xml</persistence:mapping-file> -->
+		<persistence:properties>
+			<persistence:property name="hibernate.ejb.cfgfile" value="configs/hibernates.cfg.xml" />
+		</persistence:properties>
+	</persistence:persistence-unit>
+</persistence:persistence>
