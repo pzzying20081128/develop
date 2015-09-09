@@ -9,7 +9,7 @@ public class DefaultsERPSetPrpertiesUnits extends ERPSetPrpertiesUnits {
 		this.idfield = idfield;
 
 	}
-
+   
 	@Override
 	protected boolean isEqualsParents(Object child, Object parents) {
 		Object id = readFieldValue(idfield, child);
