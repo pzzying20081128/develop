@@ -22,18 +22,18 @@ public class WeiXinPayMD5Units {
 
     public static String buildParamsMd5(Map<String, String> params, HttpMD5Prams httpMD5Prams, String signKey, String input_charset) throws ToolsUnitsException {
         String paramsUrl = createSortParams(params, httpMD5Prams) ;
-        System.out.println("==> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  " + paramsUrl) ;
+//        System.out.println("==> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  " + paramsUrl) ;
         String md5 = createMD5(paramsUrl, signKey, input_charset) ;
         return md5 ;
     }
 
-    public static String sign(String text, String key, String input_charset) {
+    public static String sign(String text, String key, String input_charset) throws ToolsUnitsException {
         text = text + "&key=" + key ;
-        System.out.println("==> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  " + text) ;
+//        System.out.println("==> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  " + text) ;
         return DigestUtils.md5Hex(getContentBytes(text, input_charset)) ;
     }
 
-    private static byte[] getContentBytes(String content, String charset) {
+    private static byte[] getContentBytes(String content, String charset) throws ToolsUnitsException {
         if (charset == null || "".equals(charset)) {
             return content.getBytes() ;
         }

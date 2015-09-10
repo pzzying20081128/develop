@@ -21,20 +21,21 @@ import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
  * SessionInterceptor 判断用户是否登陆
  * 
  * @author zy
- * 
+ *   
  */
 @SuppressWarnings("serial")
 public class ActionSessionInterceptor extends MethodFilterInterceptor implements IBaseAction {
-
-	public boolean isSession = false;
-
+    
+    static boolean useSession = false ;
+      
+    
 	protected static Logger logger = Loggerfactory.instance(ActionSessionInterceptor.class);
 
 	// @SuppressWarnings("unchecked")
 	protected String doIntercept(ActionInvocation arg0) throws Exception {
-		if (!isSession)
+		if (!useSession)
 			return arg0.invoke();
-		System.out.println("--> isSession " + isSession);
+		System.out.println("--> isSession " + useSession);
 		// 定义个session获取arg0的内容并且得到它的Session
 		Map<String, Object> session = arg0.getInvocationContext().getSession();
 
@@ -57,13 +58,12 @@ public class ActionSessionInterceptor extends MethodFilterInterceptor implements
 		return httpServletResponse;
 	}
 
-	public boolean isSession() {
-		return isSession;
-	}
+    @Inject("useSession")
+    public static void setUseSession(boolean useSession) {
+        ActionSessionInterceptor.useSession = useSession ;
+    }
 
-	@Inject(value = "struts.apps.session")
-	public void setSession(boolean isSession) {
-		this.isSession = isSession;
-	}
+  
+
 
 }

@@ -18,7 +18,7 @@ public class UserOrder {
 
     @Column(name = "money")
     private Long money ;
-
+    
     @Transient
     private String moneyMoneyShow ;
 

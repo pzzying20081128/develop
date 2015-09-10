@@ -1,11 +1,12 @@
 package zy.apps.demo.units;
 
+import zy.apps.demo.PropertiesUnits ;
 import cn.zy.apps.tools.units.PrpertiesSetValueService;
 
 public class DemoPrpertiesSetValueService extends PrpertiesSetValueService {
 
-	public DemoPrpertiesSetValueService(String regexPackage) {
-		super(regexPackage);
+	public DemoPrpertiesSetValueService() {
+		super(PropertiesUnits.regexPackage);
 	}
 
 	@Override

@@ -23,12 +23,12 @@ public class PayMD5Units {
         return md5 ;
     }
 
-    public static String sign(String text, String key, String input_charset) {
+    public static String sign(String text, String key, String input_charset) throws ToolsUnitsException {
         text = text + key ;
         return DigestUtils.md5Hex(getContentBytes(text, input_charset)) ;
     }
 
-    private static byte[] getContentBytes(String content, String charset) {
+    private static byte[] getContentBytes(String content, String charset) throws ToolsUnitsException {
         if (charset == null || "".equals(charset)) {
             return content.getBytes() ;
         }

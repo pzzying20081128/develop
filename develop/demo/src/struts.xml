@@ -10,7 +10,7 @@
 	<constant name="struts.multipart.maxSize" value="10857600" />
 	<constant name="struts.custom.i18n.resources" value="globalMessages" />
 	<constant name="struts.objectFactory" value="spring" />
-     <constant name="struts.apps.session" value="true" />
+     <constant name="struts.useSession" value="true" />
           
          
 	<!-- <include file="struts_matrial.xml"></include> -->

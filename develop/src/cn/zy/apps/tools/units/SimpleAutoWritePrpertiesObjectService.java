@@ -1,10 +1,10 @@
 package cn.zy.apps.tools.units;
 
-public class DefaultsERPSetPrpertiesUnits extends ERPSetPrpertiesUnits {
+public  abstract class SimpleAutoWritePrpertiesObjectService extends AutoWritePrpertiesObjectService {
 
 	private String idfield;
 
-	public DefaultsERPSetPrpertiesUnits(String regexPackage, String idfield) {
+	public SimpleAutoWritePrpertiesObjectService(String regexPackage, String idfield) {
 		super(regexPackage);
 		this.idfield = idfield;
 
@@ -13,9 +13,8 @@ public class DefaultsERPSetPrpertiesUnits extends ERPSetPrpertiesUnits {
 	@Override
 	protected boolean isEqualsParents(Object child, Object parents) {
 		Object id = readFieldValue(idfield, child);
-
 		Object parentsId = readFieldValue(idfield, parents);
-
+		
 		return id.equals(parentsId);
 	}
 

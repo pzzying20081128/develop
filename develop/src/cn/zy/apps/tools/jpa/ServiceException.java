@@ -1,6 +1,6 @@
 package cn.zy.apps.tools.jpa ;
 
-public class ServiceException extends RuntimeException {
+public class ServiceException extends AccessErrorException {
 
     private static final long serialVersionUID = -7794449894704756047L ;
 

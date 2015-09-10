@@ -9,15 +9,15 @@ import java.util.Map;
 
 import cn.zy.apps.tools.logger.Loggerfactory;
 
-public abstract class HandAutoWriteObject {
+public abstract class AutoWriteObject {
 
 	private boolean isSetNull = false;
 
-	public  HandAutoWriteObject() {
+	public  AutoWriteObject() {
 //		this.isSetNull = isSetNull;
 	}
 
-	private org.apache.log4j.Logger logger = Loggerfactory.instance(HandAutoWriteObject.class);
+	protected org.apache.log4j.Logger logger = Loggerfactory.instance(AutoWriteObject.class);
 
 	/**
 	 * MAP FieldName
@@ -60,9 +60,9 @@ public abstract class HandAutoWriteObject {
 
 			PropertyDescriptor propertyDescriptor_ = searchPropertyDescriptor(clazz, fieldNameId);
 			{
-				Method methodStaffInfoRead = propertyDescriptor_.getReadMethod();
+				Method  readMethod_ = propertyDescriptor_.getReadMethod();
 
-				Object id_ = methodStaffInfoRead.invoke(object);
+				Object id_ = readMethod_.invoke(object);
 				if (id_ == null) {
 					if (isSetNull) {
 						Object result = popertyDescriptors.getPropertyType().newInstance();
@@ -71,7 +71,7 @@ public abstract class HandAutoWriteObject {
 					return;
 				}
 
-				Object value = searchCacheObject(id_);
+				Object value = searchCacheObject(id_,popertyDescriptors.getPropertyType());
 				if (value == null)
 					value = popertyDescriptors.getPropertyType().newInstance();
 				popertyDescriptors.getWriteMethod().invoke(object, value);
@@ -79,13 +79,13 @@ public abstract class HandAutoWriteObject {
 			}
 
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | InstantiationException
-				| IntrospectionException e) {
+				| IntrospectionException  | ToolsUnitsException e) {
 			Loggerfactory.devError(logger, e, e.getMessage() + " handValues  ex class" + e.getClass().toString()
 					+ "  clazz   " + popertyDescriptors.getPropertyType().getName());
 		}
 	}
 
-	protected abstract Object searchCacheObject(Object key);
+	protected abstract <V> V searchCacheObject(Object id,Class<V> cacheObject) throws ToolsUnitsException;
 
 	private PropertyDescriptor searchPropertyDescriptor(Class<?> clazz, String fieldNameId)
 			throws IntrospectionException {
