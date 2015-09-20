@@ -1,4 +1,4 @@
-package cn.zy.apps.tools.dev;
+package cn.zy.apps.tools.dev.javascript;
 
 public class JavaScript {
     

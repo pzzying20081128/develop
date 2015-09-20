@@ -18,7 +18,7 @@ import cn.zy.apps.tools.jpa.FieldDesc ;
  */
 @Entity
 @Table(name = "staff_info")
-public class StaffInfo extends CommBean {
+public class StaffInfo1 extends CommBean {
 
     private static final long serialVersionUID = 466546235646688855L ;
 

@@ -1,4 +1,4 @@
-package cn.zy.apps.tools.dev.builds ;
+package cn.zy.apps.tools.dev.javascript ;
 
 import java.io.File ;
 import java.io.FileReader ;

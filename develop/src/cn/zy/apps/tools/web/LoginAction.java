@@ -36,7 +36,10 @@ public abstract class LoginAction<V> extends GeneralAction {
     
    
     
-    public  abstract String   intoMain() ;
+    /**
+     * 进入主页面初始化
+     */
+    public  abstract void   intoMain() ;
     
     
     public String exit()throws Exception {

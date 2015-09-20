@@ -17,7 +17,7 @@ import cn.zy.apps.tools.jpa.FieldDesc ;
  */
 @Entity
 @Table(name = "system_user")
-public class SystemUser extends CommBean {
+public class SystemUser1 extends CommBean {
 
 
     private static final long serialVersionUID = 8238708907376609336L ;
@@ -38,7 +38,7 @@ public class SystemUser extends CommBean {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "staff_info_id")
     @FieldDesc(name = "员工", mapping = "name.ss")
-    private StaffInfo staffInfo ;
+    private StaffInfo1 staffInfo ;
 
     @Column(name = "staff_info_id", updatable = false, insertable = false)
     private Integer staffInfoId ;
@@ -95,11 +95,11 @@ public class SystemUser extends CommBean {
         this.pwd = pwd ;
     }
 
-    public StaffInfo getStaffInfo() {
+    public StaffInfo1 getStaffInfo() {
         return staffInfo ;
     }
 
-    public void setStaffInfo(StaffInfo staffInfo) {
+    public void setStaffInfo(StaffInfo1 staffInfo) {
         this.staffInfo = staffInfo ;
     }
 
