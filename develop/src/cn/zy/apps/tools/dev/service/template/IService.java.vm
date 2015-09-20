@@ -1,0 +1,31 @@
+ package  ${buildJavaCommProperties.servicePackage};
+
+ 
+ 
+ import cn.zy.apps.tools.web.SelectPage ;
+import ${buildJavaCommProperties.clssPackage}.${buildJavaCommProperties.className} ; 
+import ${buildJavaCommProperties.servicePackage}.units.${buildJavaCommProperties.className}SearchBean ;
+
+public interface I${buildJavaCommProperties.className}Service {
+    
+            public String name="I${buildJavaCommProperties.className}Service";
+            
+                
+            /**
+             *  增加或更新
+             */
+            public void saveUpdate(OptType  optType ,   ${buildJavaCommProperties.className}   opt${buildJavaCommProperties.className} )throws SystemOptServiceException;
+            
+       	  
+            public SelectPage<${buildJavaCommProperties.className} > search(OptType  optType ,    ${buildJavaCommProperties.className}SearchBean  searchBean )throws SystemOptServiceException;
+            
+            
+            public  void   remove(OptType  optType ,  ${buildJavaCommProperties.className}   opt${buildJavaCommProperties.className})throws SystemOptServiceException;
+            
+            
+           
+            
+            
+            
+
+}

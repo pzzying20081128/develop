@@ -1,0 +1,35 @@
+package  ${buildJavaCommProperties.servicePackage}.units ;
+
+import org.springframework.stereotype.Component ;
+
+
+import ${buildJavaCommProperties.clssPackage}.${buildJavaCommProperties.className} ; 
+
+
+@Component("${buildJavaCommProperties.className}SaveUpdateUnits")
+public class ${buildJavaCommProperties.className}SaveUpdateUnits extends ABCommonsService {
+
+    public void saveUpdate(OptType optType, ${buildJavaCommProperties.className} opt${buildJavaCommProperties.className}) throws SystemOptServiceException {
+
+        switch (optType) {
+        case save:
+            save(opt${buildJavaCommProperties.className}) ;
+            break ;
+        case update:
+            update(opt${buildJavaCommProperties.className}) ;
+            break ;
+
+        default:
+            throw new SystemOptServiceException("[opt type error ]") ;
+        }
+    }
+
+    public void save(${buildJavaCommProperties.className} opt${buildJavaCommProperties.className}) throws SystemOptServiceException {
+
+    }
+
+    public void update(${buildJavaCommProperties.className} opt${buildJavaCommProperties.className}) throws SystemOptServiceException {
+
+    }
+
+}

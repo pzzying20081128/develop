@@ -1,0 +1,7 @@
+package  ${buildJavaCommProperties.servicePackage}.units ;
+
+import ${buildJavaCommProperties.clssPackage}.${buildJavaCommProperties.className} ;
+
+public class ${buildJavaCommProperties.className}SearchBean extends ${buildJavaCommProperties.className} {
+
+}

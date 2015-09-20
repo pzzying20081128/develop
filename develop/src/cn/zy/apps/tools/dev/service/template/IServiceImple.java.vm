@@ -1,0 +1,40 @@
+ package  ${buildJavaCommProperties.servicePackage}.imples;
+ 
+
+  import org.springframework.stereotype.Component ;
+ import cn.zy.apps.tools.web.SelectPage ;
+import ${buildJavaCommProperties.clssPackage}.${buildJavaCommProperties.className} ; 
+import  ${buildJavaCommProperties.servicePackage}.I${buildJavaCommProperties.className}Service ;
+import ${buildJavaCommProperties.servicePackage}.units.${buildJavaCommProperties.className}SearchBean ;
+
+import ${buildJavaCommProperties.servicePackage}.units.${buildJavaCommProperties.className}SaveUpdateUnits ;
+
+import ${buildJavaCommProperties.servicePackage}.units.${buildJavaCommProperties.className}SearchUnits ;
+ 
+
+@Component(I${buildJavaCommProperties.className}Service.name)
+public class ${buildJavaCommProperties.className}ServiceImple extends  ABCommonsService  implements I${buildJavaCommProperties.className}Service {
+
+            @Resource(name=" ${buildJavaCommProperties.className}SearchUnits")
+            private  ${buildJavaCommProperties.className}SearchUnits  i${buildJavaCommProperties.className}SearchUnits;
+           
+           @Resource(name=" ${buildJavaCommProperties.className}SaveUpdateUnits")
+           private ${buildJavaCommProperties.className}SaveUpdateUnits  i${buildJavaCommProperties.className}SaveUpdateUnits;
+			
+			@Override
+            public void saveUpdate(OptType  optType ,   ${buildJavaCommProperties.className}   opt${buildJavaCommProperties.className} )throws SystemOptServiceException{
+        		 i${buildJavaCommProperties.className}SaveUpdateUnits.saveUpdate(optType, opt${buildJavaCommProperties.className});
+        		}
+            
+       	   @Override
+            public SelectPage<${buildJavaCommProperties.className} > search(OptType  optType ,    ${buildJavaCommProperties.className}SearchBean  searchBean )throws SystemOptServiceException{
+				    return  i${buildJavaCommProperties.className}SearchUnits.search(optType, searchBean);
+            }
+            
+			@Override
+            public  void   remove(OptType  optType ,   ${buildJavaCommProperties.className}   opt${buildJavaCommProperties.className})throws SystemOptServiceException{
+			  
+			  }
+            
+            
+}

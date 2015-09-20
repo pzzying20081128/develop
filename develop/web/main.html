@@ -1,0 +1,304 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>教育</title>
+
+<link rel="stylesheet" type="text/css" href="./ext3/fileupload/css/fileuploadfield.css" />
+
+
+<link rel="stylesheet" type="text/css" href="./ext3/resources/css/ext-all.css" />
+<link rel="stylesheet" type="text/css" href="./ext3/privates/privates.js" />
+
+<script type="text/javascript" src="./ext3/adapter/ext/ext-base.min.js"></script>
+<script type="text/javascript" src="./ext3/my-ext-all-debug.min.js"></script>
+<script type="text/javascript" src="./ext3/ext-basex-debug.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="./ext3/boxselect/superboxselect.css" />
+<script type="text/javascript" src="./ext3/boxselect/SuperBoxSelect.js"></script>
+
+<!-- 
+<link rel="stylesheet" type="text/css" href="./ext3/tables/tab-scroller-menu.css" />
+<script type="text/javascript" src="./ext3/tables/TabScrollerMenu.js"></script>
+ -->
+
+
+
+<script type="text/javascript" src="./ext3/toolbarkeymap.js"></script>
+<script type="text/javascript" src="./ext3/privates/base.js"></script>
+<script type="text/javascript" src="./ext3/privates/privates.js"></script>
+<script type="text/javascript" src="./ext3/privates/vtype.js"></script>
+
+
+<script type="text/javascript" src="./module/module.js"></script>
+
+
+<script type="text/javascript" src="./ext3/kindeditor/kindeditor.js"></script>
+<script type="text/javascript" src="./ext3/kindeditor/lang/zh_CN.js"></script>
+
+
+
+
+
+
+<script type="text/javascript">
+
+</script>
+
+
+<script type="text/javascript">
+	function init(userId,userName, loginUser, regGUest) {
+		Ext.QuickTips.init();
+		var isUnlogin = false;
+		IndexPanel(userId,userName, loginUser, regGUest,{
+			openModule:function(node,userId){
+				//alert("node : "+node+"   userId  "+userId);
+				createModule(node,userId);
+			}
+		});
+		document.oncontextmenu = function(e) {
+			return true;
+		}
+	}
+</script>
+
+<style type="text/css">
+
+
+  .upload-icon {
+       // width:100px
+         background: url('./ext3/fileupload/css/image_add.png') no-repeat 0 0 !important;
+        }
+      
+
+.x-grid-row-page-total {
+	background-color: #C9D8FC;
+	color: #000000;
+}
+
+.x-window-footer {
+	position: relative;
+	top: 0;
+	right: 0;
+}
+
+.x-tab-strip SPAN.x-tab-strip-text {
+	font-size: 12px;
+}
+
+.x-panel-header {
+	font-size: 12px;
+}
+
+.x-tree-node {
+	font-size: 12px;
+}
+
+.x-grid3-hd-row TD {
+	font-size: 12px;
+}
+
+.x-grid3-row TD {
+	font-size: 12px;
+	LINE-HEIGHT: 16px;
+}
+
+.x-tip .x-tip-bd {
+	font-size: 12px;
+}
+
+.x-tip h3 {
+	font-size: 12px;
+}
+
+.x-tip .x-tip-bd-inner {
+	font-size: 12px;
+}
+
+.x-panel-tl .x-panel-header {
+	FONT: normal 12px tahoma, arial, verdana, sans-serif;
+}
+
+.x-form-field {
+	FONT: 12px tahoma, arial, helvetica, sans-serif
+}
+
+.x-small-editor .x-form-field {
+	FONT: 12px tahoma, arial, helvetica, sans-serif
+}
+
+.x-combo-list-item {
+	FONT: 12px tahoma, arial, helvetica, sans-serif;
+}
+
+.x-menu-list-item {
+	FONT: 12px tahoma, arial, sans-serif;
+}
+
+.x-window-tl .x-window-header {
+	FONT: bold 12px tahoma, arial, verdana, sans-serif;
+}
+
+.x-layout-split-west .x-layout-mini {
+	BACKGROUND-IMAGE: url(../images/mini-left.jpg);
+}
+
+.ext-ie .x-form-text {
+	margin-top: 1px;
+}
+
+.x-form-item {
+	FONT: 12px tahoma, arial, helvetica, sans-serif
+}
+
+.x-grid-group-hd div {
+	FONT: bold 12px tahoma, arial, helvetica, sans-serif;
+}
+
+.
+.x-btn-text-icon .x-btn-center .x-btn-text {ext-all .css (line 227)
+	background-position:0pt2px;
+	background-repeat: no-repeat;
+	padding: 3px 0pt 2px 18px;
+}
+
+.ext-gecko .x-btn button {ext-all .css (line 222) padding-left:0pt;
+	padding-right: 0pt;
+}
+
+.x-btn button {
+	font-size: 12px;
+}
+
+.my-disabled {
+	color: black;
+	cursor: default;
+	background-color: background:   none repeat scroll 0% 0%
+		rgb(237, 245, 252);
+}
+
+.my-disabled .x-form-trigger-over {
+	background-position: 0 0 !important;
+	border-bottom: 1px solid #B5B8C8;
+}
+
+.my-disabled .x-form-trigger-click {
+	background-position: 0 0 !important;
+	border-bottom: 1px solid #B5B8C8;
+}
+
+.x-selectable,.x-selectable * {
+	user-select: text ! important;
+	-o-user-select: text ! important;
+	-moz-user-select: text ! important;
+	-khtml-user-select: text ! important;
+	-webkit-user-select: text ! important;
+}
+
+.x-grid3-row-selected {
+	background: #C9D8FC !important;
+	border: 1px dotted #a3bae9;
+} /*鼠标移动上面改变背景色*/
+.x-grid3-row-over {
+	border-color: #009999;
+	background-color: #009999; /*鼠标移上去改变行的底色 #C9D8FC*/
+	/**background-image:url(../images/default/grid/row-over.gif); **/
+}
+
+#img { //
+	z-index: -1; //
+	filter: alpha(opacity =     85);
+	/*设置透明度，针对 IE8 以及更早的版本。IE9, Firefox, Chrome, Opera 和 Safari 使用属性 opacity 来设定透明度。opacity 属性能够设置的值从 0.0 到 1.0。值越小，越透明。*/
+	//
+	position: absolute;
+	/*这里要注意一下，需要设置成 absolute，绝对定位。绝对定位使元素的位置与文档流无关，因此不占据空间*/
+	width: 100%;
+	height: 100%; //
+	background: url(images/top.gif) left top no-repeat;
+	filter:
+		"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+	-moz-background-size: 100% 100%;
+	background-size: 100% 100%;
+}
+
+.imgTop { //
+	z-index: -1; //
+	filter: alpha(opacity =     85);
+	/*设置透明度，针对 IE8 以及更早的版本。IE9, Firefox, Chrome, Opera 和 Safari 使用属性 opacity 来设定透明度。opacity 属性能够设置的值从 0.0 到 1.0。值越小，越透明。*/
+	//
+	position: absolute;
+	/*这里要注意一下，需要设置成 absolute，绝对定位。绝对定位使元素的位置与文档流无关，因此不占据空间*/
+	width: 100%;
+	height: 100%;
+	background: url(images/top.gif) left top no-repeat;
+	filter:
+		"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+	-moz-background-size: 100% 100%;
+	background-size: 100% 100%;
+}
+
+
+
+.ext-el-mask {
+	z-index: 20000;
+	position: absolute;
+	top: 0;
+	left: 0;
+	-moz-opacity: 0.5;
+	opacity: .30;
+	filter: alpha(opacity =   50);
+	background-color: #fffffff;
+	width: 100%;
+	height: 100%;
+	zoom: 1;
+}
+
+#msg-div {
+	position: absolute;
+	left: 50%;
+	top: 10px;
+	width: 400px;
+	margin-left: -200px;
+	z-index: 20000;
+}
+
+#msg-div .msg { //
+	border-radius: 8px; //
+	-moz-border-radius: 8px;
+	background: #C9D8FC; //
+	border: 2px solid #ccc;
+	margin-top: 2px;
+	padding: 10px 15px;
+	height: 50px;
+	color: #555;
+}
+
+#msg-div .msg h3 {
+	margin: 0 0 8px;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+#msg-div .msg p {
+	margin: 0;
+}
+
+#msg-div .msg img {
+	overflow: hidden;
+	cursor: pointer;
+	width: 15px;
+	height: 15px;
+	background-image: url(./images/js/close.png); //
+	这边使用的是ext提供的关闭小图标 margin: 0;
+	float: right;
+}
+</style>
+
+
+
+
+</head>
+<body onload=" init('userId','userName', 'loginUser', 'regGUest')">
+
+</body>
+</html>

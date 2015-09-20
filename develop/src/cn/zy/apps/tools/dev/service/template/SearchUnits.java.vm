@@ -1,0 +1,39 @@
+package  ${buildJavaCommProperties.servicePackage}.units ;
+
+import java.util.List ;
+
+import org.springframework.stereotype.Component ;
+
+import cn.zy.apps.tools.web.SelectPage ;
+
+import ${buildJavaCommProperties.clssPackage}.${buildJavaCommProperties.className} ; 
+import cn.zying.osales.service.ABCommonsService ;
+
+
+@Component("${buildJavaCommProperties.className}Units")
+public class ${buildJavaCommProperties.className}SearchUnits extends ABCommonsService {
+
+    public SelectPage<${buildJavaCommProperties.className}> search(OptType optType,${buildJavaCommProperties.className}SearchBean searchBean) throws SystemOptServiceException {
+        SelectPage<${buildJavaCommProperties.className}> selectPage = new SelectPage<${buildJavaCommProperties.className}>() ;
+
+        List<${buildJavaCommProperties.className}> result = list(searchBean) ;
+
+        Long sum = sum(searchBean) ;
+
+        selectPage.setCount(sum) ;
+
+        selectPage.setResult(result) ;
+
+        return selectPage ;
+
+    }
+
+    private List<${buildJavaCommProperties.className}> list(${buildJavaCommProperties.className}SearchBean searchBean) throws SystemOptServiceException {
+
+    }
+
+    private Long sum(${buildJavaCommProperties.className}SearchBean searchBean) throws SystemOptServiceException {
+
+    }
+
+}

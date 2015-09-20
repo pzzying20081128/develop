@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<title>BoxSelect</title>
+<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+<link rel="stylesheet" type="text/css" href="../../css/index.css" />
+<link rel="stylesheet" type="text/css" href="../resources/css/ext-all.css" />
+
+<script type="text/javascript" src="./ext-base-debug.js"></script>
+<!-- 
+http://qd.baidupcs.com/file/95b6bd1b08b7886324298ac96977f170?xcode=9b087949ce315b5bbf1bf89be69b9a0e82eb4e1846da131e&fid=3527371159-250528-2933162715&time=1387442776&sign=FDTAXER-DCb740ccc5511e5e8fedcff06b081203-ky152tledTtrW7IIBD%2FBBzn9QQg%3D&to=qb&fm=Q,B,T,t&expires=1387443376&rt=sh&r=173559727&logid=2896984935&sh=1&vuk=3527371159
+ <script type="text/javascript" src="./ext3/my-ext-all-debug.min.js"></script>
+ -->
+
+ <script type="text/javascript" src="../my-ext-all-debug.js"></script>
+
+
+<script type="text/javascript" src="SuperBoxSelect.js"></script>
+<link rel="stylesheet" type="text/css" href="superboxselect.css" />  
+ 
+<script type="text/javascript" src="../locale/ext-lang-zh_CN.debug.min.js"></script>
+<script type="text/javascript" src="../bignumber.debug.min.js"></script>
+<script type="text/javascript" src="../accounting.debug.min.js"></script>
+<script type="text/javascript" src="../tools.min.js"></script>
+
+<script type="text/javascript" src="../../js/vtype.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/index.js"></script>
+<!--拼音检索 -->
+<script type="text/javascript" src="../PinyinFilter.js"></script>
+
+<script type="text/javascript" src="states.js"></script>
+
+
+
+
+    <script type="text/javascript">
+	
+	
+    var tempIdCounter = 0;
+	Ext.BLANK_IMAGE_URL = 'http://static.technomedia.co.uk/libs/ext-3.2.0/resources/images/default/s.gif';
+
+    Ext.onReady(function() {
+        
+        Ext.QuickTips.init();
+
+        var states = new Ext.data.SimpleStore({
+            fields: ['abbr', 'state', 'nick', 'cls'],
+            data: Ext.exampledata.states,
+            sortInfo: {field: 'state', direction: 'ASC'}
+        });
+        
+		
+		
+		var sbs1 = ({
+	        allowBlank:false,
+	        id:'selector1',
+	        xtype:'superboxselect',
+	       // fieldLabel: 'States',
+	        emptyText: 'Select some US States',
+	        resizable: true,
+	        name: 'states',
+	        anchor:'100%',
+	        store: states,
+	        mode: 'local',
+	        displayField: 'state',
+	        displayFieldTpl: '{state} ({abbr})',
+	        valueField: 'abbr',
+	        
+	        forceSelection : true,
+			allowQueryAll : false,
+	
+	    });
+		
+      	var form1 = new Ext.form.FormPanel({
+            id:'f1Form',
+			renderTo: 'f1',
+            title:'Base Functionality',
+            autoHeight: true,
+			bodyStyle: 'padding:50px;',
+			width: 700,
+            items: [sbs1],
+			buttons: [{
+                text: "setValue('AK,NY,CO')",
+                scope: this,
+                handler: function(){
+                    Ext.getCmp('selector1').setValue('AK,NY,CO');
+                }
+            },{
+                text: 'getValue()',
+                scope: this,
+                handler: function(){
+                    alert(Ext.getCmp('selector1').getValue());
+                }
+            }, {
+                text: 'BasicForm.getValues()',
+                scope: this,
+                handler: function(){
+                    var v = form1.getForm().getValues(true);
+                    alert(v);
+                }
+            },{
+                text: "reset",
+                scope: this,
+                handler: function(){
+                    Ext.getCmp('selector1').reset();
+                }
+            },{
+                text: "disable",
+                scope: this,
+                handler: function(){
+                    Ext.getCmp('selector1').disable();
+                }
+            },{
+                text: "enable",
+                scope: this,
+                handler: function(){
+                    Ext.getCmp('selector1').enable();
+                }
+            }]
+        });
+      	
+      	
+      	var form1 = new Ext.form.FormPanel({
+            id:'f2Form',
+			renderTo: 'f2',
+            title:'Base Functionality',
+            autoHeight: true,
+
+			width: 700,
+            items: [{
+
+				id : 'guestInfoMainId',
+				name : 'guestInfoMainId',
+				hiddenName : 'guestInfoMainId',
+				
+				xtype : 'ERPBoxSelect',
+				
+				allowBlank : true,
+		        style : 'background:FFFFFF;',
+		
+				store : new Ext.data.ERPComboStore({
+						
+							baseParams : {
+								type : 'all'
+							},
+							proxy : new Ext.data.HttpProxy({
+										url : 'comboguest.do'
+									}),
+							reader : new Ext.data.JsonReader({
+										id : "id",
+										root : 'results',
+										successProperty : 'success'
+									}, Ext.data.Record.create([{
+												name : 'id'
+											}, {
+												name : 'name'
+											}])),
+							remoteSort : true,
+							listeners : {
+								'load' : function() {
+//									Ext.getCmp('guestInfoMainId').setValue(Ext
+//											.getCmp('guestInfoMainId').getValue());
+								}
+							}
+						}),
+				listeners : {
+					"change" : function(field) {
+						var text = field.getValue();
+						if (Ext.util.Format.trim(text) != '') {
+							Ext.getCmp('guestInfoMainId_cond').setValue(true);
+						}
+					}
+				}
+			
+            	
+            }],
+			
+        });
+        
+	
+    });
+</script>
+
+</head>
+<body style="font: 12px;">
+		<div id="f1" style="font-size: 12px"></div>
+		
+		<div id="f2" style="font-size: 12px"></div>
+</body>
+</html>
