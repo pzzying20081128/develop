@@ -20,7 +20,7 @@ public class ${buildJavaCommProperties.className}SaveUpdateUnits extends ABCommo
             break ;
 
         default:
-            throw new SystemOptServiceException("[opt type error ]") ;
+            throw new SystemOptServiceException("[操作类型错误]") ;
         }
     }
 

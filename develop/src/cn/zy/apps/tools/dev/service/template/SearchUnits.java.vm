@@ -1,24 +1,33 @@
 package  ${buildJavaCommProperties.servicePackage}.units ;
 
 import java.util.List ;
+import java.util.Map ;
 
 import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.web.SelectPage ;
 
+import cn.zy.apps.tools.units.CommSearchBean ;
+import cn.zy.apps.tools.units.ToolsUnits ;
+
 import ${buildJavaCommProperties.clssPackage}.${buildJavaCommProperties.className} ; 
 import cn.zying.osales.service.ABCommonsService ;
 
 
-@Component("${buildJavaCommProperties.className}Units")
+@Component("${buildJavaCommProperties.className}SearchUnits")
 public class ${buildJavaCommProperties.className}SearchUnits extends ABCommonsService {
 
-    public SelectPage<${buildJavaCommProperties.className}> search(OptType optType,${buildJavaCommProperties.className}SearchBean searchBean) throws SystemOptServiceException {
+    public SelectPage<${buildJavaCommProperties.className}> search(OptType optType,
+		                            ${buildJavaCommProperties.className}SearchBean searchBean,CommSearchBean commSearchBean ,int... startLimit) throws SystemOptServiceException {
         SelectPage<${buildJavaCommProperties.className}> selectPage = new SelectPage<${buildJavaCommProperties.className}>() ;
 
-        List<${buildJavaCommProperties.className}> result = list(searchBean) ;
+		Map<String, Object> value=ToolsUnits.createSearchMap();
+			
+		 String sqlWhere=createWhere(value,searchBean,commSearchBean);
+				
+        List<${buildJavaCommProperties.className}> result = list(sqlWhere,value,startLimit) ;
 
-        Long sum = sum(searchBean) ;
+        Long sum = sum(sqlWhere,value) ;
 
         selectPage.setCount(sum) ;
 
@@ -28,12 +37,22 @@ public class ${buildJavaCommProperties.className}SearchUnits extends ABCommonsSe
 
     }
 
-    private List<${buildJavaCommProperties.className}> list(${buildJavaCommProperties.className}SearchBean searchBean) throws SystemOptServiceException {
-
+	 private  String sql ="";   
+    private List<${buildJavaCommProperties.className}> list(String sqlWhere ,Map<String, Object> value ,int... startLimit) throws SystemOptServiceException {
+   String sql_ =sql+ sqlWhere ;
+        List<${buildJavaCommProperties.className}>  result = baseService.findByHSQL(sql_, value, startLimit);
+        return result;
     }
-
-    private Long sum(${buildJavaCommProperties.className}SearchBean searchBean) throws SystemOptServiceException {
-
+ private  String sqlsum ="";   
+    private Long sum(String sqlWhere ,Map<String, Object> value) throws SystemOptServiceException {
+ String sql_ =sqlsum+ sqlWhere ;
+        Long  sum = baseService.findSinglenessByHSQL(sql_, value);
+        return sum;
+    }
+	
+	 private String createWhere(Map<String, Object> value,${buildJavaCommProperties.className}SearchBean searchBean ,CommSearchBean commSearchBean){
+        String sqlWhere="";
+        return sqlWhere;
     }
 
 }

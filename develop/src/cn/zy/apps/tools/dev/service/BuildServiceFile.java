@@ -105,6 +105,16 @@ public class BuildServiceFile implements IBuildServiceFile {
             buildServiceFile(context, vmFile, buildJavaCommProperties, clazz, basePath+"/units",outFile) ;
             
         }
+        
+        {
+            //RemoveUnits.java.vm
+            File vmFile= new File(templatePath + "/RemoveUnits.java.vm") ;
+
+            String outFile =  clazz.getSimpleName() + "RemoveUnits.java" ;
+
+            buildServiceFile(context, vmFile, buildJavaCommProperties, clazz, basePath+"/units",outFile) ;
+            
+        }
 
     }
 

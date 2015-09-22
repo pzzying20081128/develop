@@ -6,6 +6,7 @@ import java.lang.reflect.InvocationTargetException ;
 import java.lang.reflect.Method ;
 import java.math.BigDecimal ;
 import java.util.ArrayList ;
+import java.util.HashMap ;
 import java.util.List ;
 import java.util.Map ;
 import java.util.regex.Matcher ;
@@ -14,6 +15,11 @@ import java.util.regex.Pattern ;
 import org.apache.commons.beanutils.BeanUtils ;
 
 public class ToolsUnits {
+    
+    public static Map<String,Object> createSearchMap() {
+                   return new HashMap<String, Object>();
+
+    }
 
     private static boolean matcher(String zz, String matcherStr) {
 
