@@ -6,6 +6,6 @@ import cn.zy.apps.tools.logger.Loggerfactory ;
 
 public class ABJUnitSping4Tests extends AbstractJUnit4SpringContextTests {
     
-    protected org.apache.log4j.Logger logger = Loggerfactory.instance("ABJUnitSping4Tests") ;
+    protected org.apache.log4j.Logger logger = Loggerfactory.instance(ABJUnitSping4Tests.class) ;
 
 }

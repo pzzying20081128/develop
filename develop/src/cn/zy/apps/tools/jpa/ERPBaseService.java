@@ -7,11 +7,13 @@ import org.springframework.stereotype.Component ;
 
 import cn.zy.apps.tools.jpa.Basevisit ;
 
-@Component(IERPBaseService.name)
-public class ERPBaseService extends Basevisit implements IERPBaseService {
+//@Component(IERPBaseService.name)
+public abstract  class ERPBaseService extends Basevisit implements IERPBaseService {
 
-	@PersistenceContext(name = "erp")
+	@PersistenceContext(name = "db")
 	private EntityManager entityManager;
+	
+	
 
     @Override
     public EntityManager getEntityManager() {

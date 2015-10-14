@@ -48,6 +48,12 @@ public class ${buildJavaCommProperties.className}ServiceImple extends  ABCommons
             public  void   remove(OptType  optType ,   ${buildJavaCommProperties.className}   opt${buildJavaCommProperties.className})throws SystemOptServiceException{
 			    i${buildJavaCommProperties.className}RemoveUnits.remove(optType, opt${buildJavaCommProperties.className});
 			  }
+			  
+			   @Override
+            public ${buildJavaCommProperties.className} get(Integer id) throws SystemOptServiceException {
+                
+                return baseService.get(id, ${buildJavaCommProperties.className}.class) ;
+            }
             
             
 }

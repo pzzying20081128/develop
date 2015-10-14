@@ -20,7 +20,7 @@ public abstract class SearchUserPowerAction extends GeneralAction {
     protected abstract IUserPowerMdouleService getIUserMdoulePowerService() ;
 
     protected abstract boolean isAdmin() ;
-    
+
     protected String moduleId;
     
     protected  Map<String,  List<UserOptPower>> powerMap;

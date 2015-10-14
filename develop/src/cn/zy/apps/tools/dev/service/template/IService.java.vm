@@ -24,7 +24,7 @@ public interface I${buildJavaCommProperties.className}Service {
             public  void   remove(OptType  optType ,  ${buildJavaCommProperties.className}   opt${buildJavaCommProperties.className})throws SystemOptServiceException;
             
             
-           
+           public  ${buildJavaCommProperties.className} get(Integer id)throws SystemOptServiceException;
             
             
             

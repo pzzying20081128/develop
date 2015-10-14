@@ -79,5 +79,14 @@
 	<classpathentry kind="lib" path="H4libs/xwork-core-2.3.20.jar"/>
 	<classpathentry kind="lib" path="H4libs/build/ant_1.9.2/ant.jar"/>
 	<classpathentry kind="lib" path="H4libs/build/js/compiler.jar"/>
+	<classpathentry kind="lib" path="H4libs/build/servlet/servlet-api.jar"/>
+	<classpathentry kind="lib" path="H4libs/build/other/asm-3.3.jar"/>
+	<classpathentry kind="lib" path="H4libs/build/other/asm-commons-3.3.jar"/>
+	<classpathentry kind="lib" path="H4libs/build/other/asm-tree-3.3.jar"/>
+	<classpathentry kind="lib" path="H4libs/build/other/compiler.jar"/>
+	<classpathentry kind="lib" path="H4libs/build/other/hamcrest-all-1.3.0RC2.jar"/>
+	<classpathentry kind="lib" path="H4libs/build/other/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="H4libs/build/other/spring-test-4.1.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="H4libs/build/other/struts2-junit-plugin-2.3.20.jar"/>
 	<classpathentry kind="output" path="demo/web/WEB-INF/classes"/>
 </classpath>

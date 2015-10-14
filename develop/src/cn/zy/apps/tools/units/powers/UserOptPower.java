@@ -17,13 +17,13 @@ public    class  UserOptPower {
 
 //    
     
-    @Column(name = "power_name")
+    @Column(name = "power_name" , length = 10)
     protected String powerName ;
-    @Column(name = "power_code")
+    @Column(name = "power_code" , length = 10)
     protected String powerCode ;
 
     // 0 no 1 use
-    @Column(name = "is_use")
+    @Column(name = "is_use" , length = 1)
     protected Integer  isUse ;
 
     public String getPowerName() {

@@ -26,26 +26,22 @@ import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
 @SuppressWarnings("serial")
 public class ActionSessionInterceptor extends MethodFilterInterceptor implements IBaseAction {
     
-    static boolean useSession = false ;
+    static boolean useSession = true ;
       
     
 	protected static Logger logger = Loggerfactory.instance(ActionSessionInterceptor.class);
 
 	// @SuppressWarnings("unchecked")
 	protected String doIntercept(ActionInvocation arg0) throws Exception {
-		if (!useSession)
-			return arg0.invoke();
-		System.out.println("--> isSession " + useSession);
+//		if (!useSession)return arg0.invoke();
 		// 定义个session获取arg0的内容并且得到它的Session
 		Map<String, Object> session = arg0.getInvocationContext().getSession();
 
 		Object object = session.get(IBaseAction.session_key_userinfo);
 
-		Loggerfactory.error(logger,
-				" : " + arg0.getProxy().getMethod() + "   " + arg0.getProxy().getActionName() + "  object  " + object);
+//		Loggerfactory.error(logger," : " + arg0.getProxy().getMethod() + "   " + arg0.getProxy().getActionName() + "  object  " + object);
 
 		if (object == null) {
-
 			return user_no_login_or_timeout;
 		} else
 			return arg0.invoke();
