@@ -1,0 +1,46 @@
+<project name="build.develop.js">
+	<import file="./build.common.xml" />
+
+	<target name="create.comp.js.tools">
+		<path id="build.erp.ant.libs">
+			<fileset dir="${project.lib}/build/ant_1.9.2/">
+				<include name="ant.jar" />
+			</fileset>
+			<fileset dir="${project.lib}/build/js/">
+				<include name="*.jar" />
+			</fileset>
+			<fileset dir="${project.lib}/">
+
+				<include name="*.jar" />
+			</fileset>
+		</path>
+		<antcall target="build.apps.java" />
+		<taskdef name="comp_js" classname="cn.zy.apps.tools.dev.compjs.CompileJavaScriptBuildTask" classpathref="build.erp.ant.libs" classpath="${release.class}" />
+
+	</target>
+
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: name                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="build.comp.js" depends="create.comp.js.tools">
+
+		<comp_js buildoutfile="${release.web.js}" buildbasepath="./web/ext3/privates/module" time="${build_js_time}" buildType="merge" buildOutFileName="private.js">
+
+		</comp_js>
+
+	</target>
+
+
+
+	<target name="build.comp.private.js" depends="create.comp.js.tools">
+		<comp_js buildoutfile="${release.web.js}" buildbasepath="./web/ext3/privates/module"  time="0000-00-00"  buildType="merge" buildOutFileName="private.js">
+
+		</comp_js>
+		<copyfile dest="/media/you/MY_WORKSHOPS/tools/git/project/OSalesSystem/OSalesSystem/web/ext3/privates/private.0000-00-00.js" src="/media/you/MY_WORKSHOPS/tools/git/project/develop/develop/release/web/js/private.0000-00-00.js"/>
+
+	</target>
+
+
+
+</project>

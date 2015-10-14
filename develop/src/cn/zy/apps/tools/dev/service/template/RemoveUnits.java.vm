@@ -1,0 +1,19 @@
+package  ${buildJavaCommProperties.servicePackage}.units ;
+
+import org.springframework.stereotype.Component ;
+
+import ${buildJavaCommProperties.clssPackage}.${buildJavaCommProperties.className} ; 
+
+
+@Component("${buildJavaCommProperties.className}RemoveUnits")
+public class ${buildJavaCommProperties.className}RemoveUnits extends ABCommonsService {
+
+    public void remove(OptType optType, ${buildJavaCommProperties.className}  opt${buildJavaCommProperties.className} ) throws SystemOptServiceException {
+        
+         Integer id =opt${buildJavaCommProperties.className}.get ;
+        ${buildJavaCommProperties.className}   remove${buildJavaCommProperties.className} =baseService.load(id, ${buildJavaCommProperties.className}.class);
+        baseService.update(remove${buildJavaCommProperties.className});
+
+    }
+
+}

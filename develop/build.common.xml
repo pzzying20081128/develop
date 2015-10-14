@@ -1,0 +1,51 @@
+<project name="build.common">
+	<property name="release" value="release" />
+	<property name="release.src" value="${release}/src" />
+	<property name="release.class" value="${release}/class" />
+	<property name="release.web.js" value="${release}/web/js" />
+	
+	<property name="project.lib" value="H4libs" />
+	<property name="javac" value="/media/you/tools/tools/jdk1.7.0_79/bin/javac" />
+
+	<tstamp>
+		<format property="build_js_time" pattern="yyyy_MM_dd_HH_mm_ss" />
+	</tstamp>
+
+	<path id="build.lib">
+		<fileset dir="${project.lib}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="build.java">
+		<javac encoding="UTF-8" executable="javac" includeantruntime='flase' fork="true" srcdir="${release.src}" destdir="${release.class}" classpathref="build.lib" debug="on" />
+	</target>
+
+	<target name="build.apps.java" depends="build.init">
+		<copy todir="${release.src}">
+			<fileset dir="src">
+				<include name="**/*.java" />
+			</fileset>
+		</copy>
+		<antcall target="build.java" />
+
+	</target>
+
+	<target name="build.apps.json.java">
+
+		<copy todir="${release.src}">
+
+			<fileset dir="json">
+				<include name="**/*.java" />
+			</fileset>
+		</copy>
+
+	</target>
+
+
+	<target name="build.init">
+		<mkdir dir="${release}" />
+		<mkdir dir="${release.src}" />
+		<mkdir dir="${release.class}" />
+	</target>
+</project>
