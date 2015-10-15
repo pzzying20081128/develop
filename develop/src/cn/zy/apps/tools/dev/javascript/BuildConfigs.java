@@ -46,6 +46,7 @@ public class BuildConfigs extends IBuildJavaScriptFile {
                     record.setCanSort(fieldDesc.isSort()) ;
                     record.setCanShow(fieldDesc.isShow()) ;
                     record.setRendererValueKey("value") ;
+                    record.setClassfiled(clazz.getSimpleName().toLowerCase());
 
                     if (ToolsUnits.isNOtNulll(fieldDesc.mapping())) {
 

@@ -9,7 +9,7 @@ function create_${javaScript.module}_window(moduleId, moduleName) {
 		// grid_column.column
 		column : ${javaScript.module}_grid_column.column,
 		tbar : {
-			plugins : new Ext.ux.ToolbarKeyMap(),
+			//plugins : new Ext.ux.ToolbarKeyMap(),
 			items : [{
 				id : moduleId + '_add',
 				xtype : "tbbutton",

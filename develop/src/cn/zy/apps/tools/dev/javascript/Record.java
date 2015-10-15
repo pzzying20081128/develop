@@ -16,6 +16,8 @@ public class Record {
     
     private String    rendererValueKey ;
     
+    private String  classfiled;
+    
     
 
     public String getName() {
@@ -72,6 +74,14 @@ public class Record {
 
     public void setRendererValueKey(String rendererValueKey) {
         this.rendererValueKey = rendererValueKey ;
+    }
+
+    public String getClassfiled() {
+        return classfiled ;
+    }
+
+    public void setClassfiled(String classfiled) {
+        this.classfiled = classfiled ;
     }
 
    

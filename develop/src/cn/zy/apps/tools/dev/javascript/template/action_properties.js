@@ -1,19 +1,4 @@
 var ${javaScript.module}_grid_column = {
-//	record : [{
-//		name : 'id'
-//	}, {
-//		name : 'name'
-//	}, {
-//		name : 'job'
-//	}, {
-//		name : 'sex'
-//	}, {
-//		name : 'access'
-//	}, {
-//		name : 'departmentParents.name',
-//		mapping : "departmentParents"
-//	}],
-	
    record : [
          #foreach($record in $records)
 			  {
@@ -40,7 +25,7 @@ var ${javaScript.module}_grid_column = {
 		            	}
 		            	 else
 		            	 {
-		            	     $!record.rendererValueKey;
+		            	   return   $!record.rendererValueKey;
 		            	 }
 		          }
                 },

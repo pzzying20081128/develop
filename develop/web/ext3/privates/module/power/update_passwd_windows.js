@@ -34,7 +34,7 @@ function updateUserPasswdWindows(){
 					}
 				}]
 			}// 1-2end,
-			,
+			
 			
 			]
 		},		{// 第一排
@@ -64,10 +64,10 @@ function updateUserPasswdWindows(){
 					}
 				}]
 			}// 1-2end,
-			,
+			
 			
 			]
-		},
+		}
 	
 		
 		

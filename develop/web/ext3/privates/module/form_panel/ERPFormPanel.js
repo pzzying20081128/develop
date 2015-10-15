@@ -74,6 +74,10 @@ Ext.form.ERPFormPanel = Ext.extend(Ext.form.FormPanel, {
 				if (errormsg == null || errormsg == "") {
 
 					showErrorMsg("错误提示", "提交请求操作失败【系统错误[" + failureType + "]】");
+				} else if (jsonData.msg == 1001 || jsonData.msg == '1001') {
+					Ext.MessageBox.alert('标题', '用户没有登录/用户超时，请重新登录系统！ ', function() {
+						window.location.href = "./";
+					});
 				} else {
 					if (typeof ( properties.errors ) == 'function')
 						properties.errors(form, action, errormsg);

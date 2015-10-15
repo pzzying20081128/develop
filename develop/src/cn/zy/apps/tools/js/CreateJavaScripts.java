@@ -16,7 +16,7 @@ import org.apache.tools.ant.types.resources.FileResource ;
 import org.apache.velocity.VelocityContext ;
 import org.apache.velocity.app.Velocity ;
 
-public class CreateJavaScript {
+public class CreateJavaScripts {
 
     // js 输出路径
     private  String outPath ;

@@ -60,7 +60,7 @@ function IndexPanel(userId, userName, loginUser, regGUest, properties) {
 					    	   tohome();
 					    }
 					
-				},
+				}
 		
 			}
 		})

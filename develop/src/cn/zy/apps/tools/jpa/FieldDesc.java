@@ -15,5 +15,7 @@ public abstract @interface FieldDesc {
     public String mapping() default "" ;
 
     public boolean isSort() default true ;
+    
+    public int length() default 100 ;
 
 }

@@ -1,4 +1,4 @@
-function ${javaScript.packages}_update_windows(moduleId, moduleName, params) {
+function ${javaScript.module}_update_windows(moduleId, moduleName, params) {
 
 	var grid = params.grid.getGrid();
 	
@@ -111,9 +111,9 @@ function ${javaScript.packages}_update_windows(moduleId, moduleName, params) {
 		
 	}
 
-	var ${javaScript.packages}_create_window = new ${javaScript.packages}_save_update_form_panel_windows(${javaScript.packages}_params);
+	var ${javaScript.module}_create_window = new ${javaScript.module}_save_update_form_panel_windows(${javaScript.module}_params);
 	
-		${javaScript.packages}_create_window.load({
+		${javaScript.module}_create_window.load({
 		url : './getStaff.action?uuid=' + goodsId,
 		success : function(form, action) {
 		

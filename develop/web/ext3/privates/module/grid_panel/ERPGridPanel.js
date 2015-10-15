@@ -1,5 +1,29 @@
-// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Ext.ux.grid.RowEditor //Ext.grid.GridPanel
+Ext.data.ERPStore = Ext.extend(Ext.data.Store, {
+	remoteSort : true,
+	listeners : {
+		"beforeload" : function(store, options) {
+//
+//			// if (typeof ( store.lastOptions ) != "undefined") {
+//			// if (typeof ( store.lastOptions.params ) != "undefined") {
+//			// var o = store.lastOptions.params;
+//			// Ext.apply(o, options.params);
+//			// this.lastOptions.params = o;
+//			// } else {
+//			// this.lastOptions.params = options.params;
+//			// }
+//			// } else {
+//			// this.lastOptions = {
+//			// params : options.params
+//			// }
+//			// }
+//
+			var o = store.baseParams;
+			Ext.apply(o, options.params);
+			this.baseParams = o;
+		}
+	}
+});
+
 Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	region : 'north',
 	split : true,
@@ -129,21 +153,22 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 		Ext.grid.ERPGridPanel.superclass.initComponent.call(this);
 		// 绑定双击//
 		this.on('rowdblclick', this.onRowDblClick, this);
-		this.store.on("beforeload", function(store, options) {
-			if (typeof ( store.lastOptions ) != "undefined") {
-				if (typeof ( store.lastOptions.params ) != "undefined") {
-					var o = store.lastOptions.params;
-					Ext.apply(o, options.params);
-					this.lastOptions.params = o;
-				} else {
-					this.lastOptions.params = options.params;
-				}
-			} else {
-				this.lastOptions = {
-					params : options.params
-				}
-			}
-		});
+//		this.store.on("beforeload", function(store, options) {
+////			if (typeof ( store.lastOptions ) != "undefined") {
+////				if (typeof ( store.lastOptions.params ) != "undefined") {
+////					var o = store.lastOptions.params;
+////					Ext.apply(o, options.params);
+////					this.lastOptions.params = o;
+////				} else {
+////					this.lastOptions.params = options.params;
+////				}
+////			} else {
+////				this.lastOptions = {
+////					params : options.params
+////				}
+////			}
+//			Ext.apply(store.proxy.extraParams, options.params);
+//		});
 
 		var cmConfigs = this.colModel.config;
 		for (var j = 0; j < cmConfigs.length; j++) {
@@ -436,6 +461,8 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	load : function(loadParams) {
 		var store_ = this.store;
 		store_.removeAll();
+		store_.baseParams={
+		};
 		if (typeof ( loadParams ) === "undefined")// params is undefined
 		{
 			loadParams = {
@@ -478,26 +505,21 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 			store_.sortInfo.direction = loadParams.sortInfo.dir;
 		}
 
+		// 回调
+		// records参数表示获得的数据，
+		// options表示执行load()时传递的参数，success表示是否加载成功。
 		store_.load({
 			params : loadParams.params,
-			// 回调
-			// records参数表示获得的数据，
-			// options表示执行load()时传递的参数，success表示是否加载成功。
 			callback : function(r, options, success, action) {
-				// alert("success : "+success);
-				if (!success) {
-					// showErrorMsg("信息提示", "加载数据失败！");
+				if (success == false) {
 					if (loadParams != null) {
 						var jsonData = store_.reader.jsonData;
 						if (typeof ( loadParams.errors ) == "function") {
-							// var jsonData = store_.reader.jsonData;
-							if (typeof ( jsonData.msg ) === "undefined") {
-								// loadParams.errors(r, options,null);
+							if (typeof ( jsonData ) === "undefined" || typeof ( jsonData.msg ) === "undefined") {
 								showErrorMsg("失败", "数据请求失败【未知错误  -1 】！");
 							} else {
 								if (jsonData.msg == 1001 || jsonData.msg == '1001') {
 									Ext.MessageBox.alert('标题', '用户没有登录/用户超时，请重新登录系统！ ', function() {
-
 										window.location.href = "./";
 									});
 								} else {
@@ -507,31 +529,29 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 										showErrorMsg("失败", "数据请求失败【未知错误 -2 】！");
 									} else {
 										loadParams.errors(r, options, jsonData.msg);
-									}
+									};
 								}
-
-							}
+							};
 						} else {
-							// ////////////
-							if (jsonData.msg == 1001 || jsonData.msg == '1001') {
+							if (typeof ( jsonData ) === "undefined" || typeof ( jsonData.msg ) === "undefined") {
+								showErrorMsg("失败", "数据请求失败【未知错误  -1 】！");
+							} else if (jsonData.msg == 1001 || jsonData.msg == '1001') {
 								Ext.MessageBox.alert('标题', '用户没有登录/用户超时，请重新登录系统！ ', function() {
 									window.location.href = "./";
 								});
-							}
-							// ///////////////
-							else
+							} else {
 								Ext.MessageBox.alert("失败", "数据请求失败【系统错误 -3 】！");
-						}
+							}
+						};
 					} else {
 						showErrorMsg("失败", "数据请求失败【未知错误 -4】！");
-					}
+					};
 				} else {
 					if (typeof ( loadParams.success ) == "function") {
 						var jsonData = store_.reader.jsonData;
 						loadParams.success(r, options, jsonData);
 					}
-
-				}
+				};
 			}
 		});
 	},
@@ -549,7 +569,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 					if (loadParams != null) {
 						if (typeof ( loadParams.errors ) == "function") {
 							var jsonData = store_.reader.jsonData;
-							if (typeof ( jsonData.msg ) === "undefined") {
+							if (typeof ( jsonData ) === "undefined" || typeof ( jsonData.msg ) === "undefined") {
 								// loadParams.errors(r, options,null);
 								showErrorMsg("失败", "数据请求失败【未知错误  -1 】！");
 							} else {
