@@ -10,8 +10,8 @@ Array.prototype.del = function(index) {
 	this.length -= 1;
 };
 
-function UserPowerPanel() {
-
+function UserPowerPanel(params) {
+	var height = params.height;
 	// var powerArray = [];
 	var powerMenus = {};// 全部的权限
 	var oldUserPowerMenus = [];
@@ -42,7 +42,7 @@ function UserPowerPanel() {
 		text : "根节点",
 		loader : new Ext.tree.TreeLoader({
 			preloadChildren : false,
-			dataUrl : './filterUserPowerTree.jhtml',
+			dataUrl : './filterUserPowerTree.do',
 			listeners : {
 				load : function(thiz, node, response) {
 					powerMenus = Ext.decode(response.responseText);
@@ -68,6 +68,10 @@ function UserPowerPanel() {
 			}
 		}
 	});
+	
+		this.clearPower=function(){
+		power_manage_remove_all_node();
+	};
 
 	var root2 = new Ext.tree.AsyncTreeNode({
 		text : "根节点",
@@ -96,46 +100,59 @@ function UserPowerPanel() {
 		}
 	});
 
+	var power_check_panel = new Ext.Panel({
+		title : "已选权限",
+		region : "center",
+		layout : "fit",
+		border : false,
+		bodyBorder : false,
+		// id : "power_check_panel",
+		// bodyStyle : "background-left:#FFFFFF; padding:1px;",
+		height : height,
+		items : [{
+			autoScroll : true,
+			items : [],
+			xtype : "panel",
+			height : height,
+			border : false,
+			bodyBorder : false
+			
+		}]
+	});
+
 	// 权限设置form
 	var userPowerPanel = new Ext.Panel({
-		id : 'power_panel',
-		region : 'center',
-		layout : 'column',
+		layout : "column",
 		autoScroll : false,
-		defaults : {
-			xtype : 'panel',
-			bodyStyle : 'border-right:solid 1px #cccccc',
-			height : '100%'
-		},
+		border : false,
+		bodyBorder : false,
+		height : height,
 		items : [{
-			columnWidth : .33,
-			baseCls : 'x-plain',
+			width : 400,
 			autoScroll : false,
-			items : [{
-				title : '可选模块'
-			}, new Ext.Panel({
-				bodyStyle : 'background:#FFFFFF; padding:1px;',
-				region : 'center',
-				layout : 'column',
-				defaults : {
-					xtype : 'panel',
-					bodyStyle : 'background:#FFFFFF; padding:1px;',
-					height : 520,
-					width : 298
-				},
+			items : [new Ext.Panel({
+				region : "center",
+				layout : "fit",
+				border : false,
+				bodyBorder : false,
 				items : [{
-					baseCls : 'x-plain',
+					title : "可选模块",
 					autoScroll : true,
-					items : [left_tree]
+					items : [left_tree],
+					xtype : "panel",
+					height : height,
+					border : false,
+					bodyBorder : false
+					
+					
 				}]
 			})]
 		}, {
-			columnWidth : .2,
-			// width :150,
+			width : 50,
 			autoWidth : true,
 			baseCls : 'x-plain',
 			defaults : {
-				style : 'margin:20px 0'
+				style : 'margin:30px 0'
 			},
 			items : [{
 				xtype : 'button',
@@ -168,59 +185,28 @@ function UserPowerPanel() {
 				}
 			}]
 		}, {
-			columnWidth : .34,
-			baseCls : 'x-plain',
+			width : 400,
+			baseCls : "x-plain",
 			autoScroll : true,
-			items : [{
-				title : '已选模块'
-			}, new Ext.Panel({
-				region : 'center',
-				layout : 'column',
-				defaults : {
-					xtype : 'panel',
-					bodyStyle : 'background:#FFFFFF; padding:1px;',
-					height : 520,
-					width : 308
-				},
+			items : [new Ext.Panel({
+				region : "center",
+				layout : "fit",
+				title : "已选模块",
+				// border : false,
+				// bodyBorder : false,
 				items : [{
-					baseCls : 'x-plain',
 					autoScroll : true,
-					items : [right_tree]
+					items : [right_tree],
+					xtype : "panel",
+					height : height,
+					border : false,
+					bodyBorder : false
 				}]
 			})]
 		}, {
-			columnWidth : .27,
-			baseCls : 'x-plain',
-			bodyStyle : 'background:#FFFFFF; padding:1px;',
+			width : 242,
 			autoScroll : true,
-			items : [{
-				title : '已选权限'
-			},
-
-			new Ext.Panel({
-				region : 'center',
-				layout : 'column',
-				id : 'power_check_panel',
-				defaults : {
-					xtype : 'panel',
-					// bodyStyle : 'border-right:solid 0px #cccccc',
-					bodyStyle : 'background:#FFFFFF; padding:1px;',
-					height : 520,
-					width : 308
-				},
-				items : [{
-					baseCls : 'x-plain',
-					autoScroll : true,
-					items : []
-				}]
-			})
-
-			// {
-			// xtype : "checkbox",
-			// boxLabel : "全选",
-			// name : ""
-			// }
-			]
+			items : [power_check_panel]
 		}]
 	});
 	this.getPanel = function() {
@@ -238,7 +224,7 @@ function UserPowerPanel() {
 	}
 
 	// ////////////////////////////////////////////////////////////////////////////////////////////////////////
-//	this.setOldUserPowerMenus = setOldUserPowerMenus_;
+	// this.setOldUserPowerMenus = setOldUserPowerMenus_;
 
 	function setOldUserPowerMenus_(oldUserPowerMenus_) {
 		oldUserPowerMenus = oldUserPowerMenus_
@@ -285,13 +271,15 @@ function UserPowerPanel() {
 		if (data != null) {
 			setUserPowerJson(userPowerMenus, Ext.encode(data));
 		}
-		var powerCheckPanel = Ext.getCmp('power_check_panel');
+		var powerCheckPanel = power_check_panel;
 		powerCheckPanel.items.items[0].removeAll();
 		var data = Ext.decode(getUserPowerJson(userPowerMenus));
+
 		if (data.length > 0) {
-			powerCheckPanel.items.items[0].add({
-				id : 'power_all',
-				xtype : "checkbox",
+
+			var power_all = new Ext.form.Checkbox({
+				// id : 'power_all',
+				// xtype : "checkbox",
 				boxLabel : '全选',
 				tvalue : tmp_key,
 				handler : function(f, c) {
@@ -302,6 +290,20 @@ function UserPowerPanel() {
 					}
 				}
 			});
+			// var power_all ={
+			// // id : 'power_all',
+			// xtype : "checkbox",
+			// boxLabel : '全选',
+			// tvalue : tmp_key,
+			// handler : function(f, c) {
+			// if (isAllCheckedEnable) {
+			// isAllCheckedEnable = false;
+			// isSingleCheckedEnable = false;
+			// checkedAll(powerCheckPanel, data, c);
+			// }
+			// }
+			// };
+			powerCheckPanel.items.items[0].add(power_all);
 
 			var is_check_all = true;
 			for (var i = 0; i < data.length; i++) {
@@ -315,25 +317,43 @@ function UserPowerPanel() {
 						break;
 					}
 				}
+
 				// alert(powerCheckPanel.items.items.length );
-				powerCheckPanel.items.items[0].add({
-					id : 'power_' + i,
-					xtype : "checkbox",
-					boxLabel : data[i].label,
-					tvalue : tmp_key,
-					checked : data[i][tmp_key] == 1 ? true : false,
-					handler : function(f, c) {
-						if (isSingleCheckedEnable) {
-							isAllCheckedEnable = false;
-							isSingleCheckedEnable = false;
-							resetData(powerCheckPanel, data, f.tvalue, c);
-						}
-					}
-				});
+				powerCheckPanel.items.items[0].add(new Ext.form.Checkbox({
+							// // id : 'power_' + i,
+							xtype : "checkbox",
+							boxLabel : data[i].label,
+							tvalue : tmp_key,
+							checked : data[i][tmp_key] == 1 ? true : false,
+							handler : function(f, c) {
+								if (isSingleCheckedEnable) {
+									isAllCheckedEnable = false;
+									isSingleCheckedEnable = false;
+									resetData(powerCheckPanel, data, f.tvalue, c);
+								}
+							}
+						})
+
+				// {
+				// // id : 'power_' + i,
+				// xtype : "checkbox",
+				// boxLabel : data[i].label,
+				// tvalue : tmp_key,
+				// checked : data[i][tmp_key] == 1 ? true : false,
+				// handler : function(f, c) {
+				// if (isSingleCheckedEnable) {
+				// isAllCheckedEnable = false;
+				// isSingleCheckedEnable = false;
+				// resetData(powerCheckPanel, data, f.tvalue, c);
+				// }
+				// }
+				// }
+
+				);
 			}
 
 			if (is_check_all) {
-				Ext.getCmp('power_all').setValue(true);
+				power_all.setValue(true);
 			}
 			isAllCheckedEnable = true;
 			isSingleCheckedEnable = true;
@@ -544,7 +564,7 @@ function UserPowerPanel() {
 		userPowerMenus = {};
 		var root = right_tree.getRootNode();
 		root.removeAll(true);
-		var powerCheckPanel = Ext.getCmp('power_check_panel');
+		var powerCheckPanel = power_check_panel;
 		powerCheckPanel.items.items[0].removeAll();
 	}
 	function power_manage_add_all_module() {
@@ -571,7 +591,7 @@ function UserPowerPanel() {
 		if (right_tree_id != '') {
 			remove_right_select(userPowerMenus, right_tree_id);
 			powerMenuDraw(right_tree, right_tree.getRootNode(), userPowerMenus);
-			var powerCheckPanel = Ext.getCmp('power_check_panel');
+			var powerCheckPanel = power_check_panel;
 			powerCheckPanel.items.items[0].removeAll();
 		} else {
 			Ext.MessageBox.show({
@@ -645,7 +665,7 @@ function UserPowerPanel() {
 		userPowerMenus = {};
 		var root = right_tree.getRootNode();
 		root.removeAll(true);
-		var powerCheckPanel = Ext.getCmp('power_check_panel');
+		var powerCheckPanel = power_check_panel;
 		powerCheckPanel.items.items[0].removeAll();
 	}
 	function power_manage_add_all_module() {
@@ -670,7 +690,7 @@ function UserPowerPanel() {
 
 	function powerMenuDraw(right_tree, node, menus) {
 		node.removeAll(true);
-		
+
 		for (var i = 0; i < menus.children.length; i++) {
 			if (typeof ( menus.children[i]['id'] ) != 'undefined') {
 				var new_node = new Ext.tree.TreeNode({
@@ -826,12 +846,10 @@ function UserPowerPanel() {
 		}
 		return false;
 	}
-	
-	
 
 	function genNewUserPowerTree(powerMenuLineArr) {
 		userPowerMenus.children = cloneObj(powerMenus.children);
-		
+
 		while (true) {
 			var r = filterUserPowerMenus(userPowerMenus, powerMenuLineArr);
 			if (!r) {
@@ -841,7 +859,9 @@ function UserPowerPanel() {
 	}
 
 	function filterUserPowerMenus(myUserPowerMenus, existLinePowerMenu) {
-		//alert("myUserPowerMenus  filterUserPowerMenus  > "+myUserPowerMenus.children.length +"   existLinePowerMenu >   "+existLinePowerMenu.length);
+		// alert("myUserPowerMenus filterUserPowerMenus >
+		// "+myUserPowerMenus.children.length +" existLinePowerMenu >
+		// "+existLinePowerMenu.length);
 		for (var i = 0; i < myUserPowerMenus.children.length; i++) {
 			if (typeof ( myUserPowerMenus.children[i]['id'] ) != 'undefined') {
 				// 过滤
@@ -897,7 +917,7 @@ function UserPowerPanel() {
 	}
 
 	function userPowerMenuDraw() {
-		//alert(" userPowerMenus  >   "+userPowerMenus.children.length);
+		// alert(" userPowerMenus > "+userPowerMenus.children.length);
 		powerMenuDraw(right_tree, right_tree.getRootNode(), userPowerMenus);
 	}
 
