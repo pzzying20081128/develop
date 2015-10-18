@@ -2,15 +2,12 @@ package cn.zy.apps.tools.web ;
 
 import java.util.Map ;
 
-import java.util.Random ;
-
 import javax.servlet.http.HttpServletResponse ;
 
 import net.sf.json.JSONException ;
 import net.sf.json.JSONObject ;
 
 import org.apache.log4j.Logger ;
-
 
 import cn.zy.apps.tools.logger.Loggerfactory ;
 

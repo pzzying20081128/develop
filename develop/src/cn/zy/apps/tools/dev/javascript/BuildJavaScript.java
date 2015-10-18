@@ -4,16 +4,8 @@ import java.io.File ;
 import java.io.FileReader ;
 import java.io.FileWriter ;
 import java.io.Reader ;
-import java.util.ArrayList ;
-import java.util.Iterator ;
-import java.util.List ;
 import java.util.Map ;
-import java.util.Properties ;
 
-import org.apache.tools.ant.Project ;
-import org.apache.tools.ant.types.FileSet ;
-import org.apache.tools.ant.types.Resource ;
-import org.apache.tools.ant.types.resources.FileResource ;
 import org.apache.velocity.VelocityContext ;
 import org.apache.velocity.app.Velocity ;
 

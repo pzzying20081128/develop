@@ -5,7 +5,6 @@ import java.io.FileReader ;
 import java.io.FileWriter ;
 import java.io.Reader ;
 
-import org.apache.tools.ant.types.resources.FileResource ;
 import org.apache.velocity.VelocityContext ;
 import org.apache.velocity.app.Velocity ;
 

@@ -11,10 +11,11 @@ import org.apache.commons.beanutils.PropertyUtils ;
 import org.hibernate.collection.internal.PersistentBag ;
 
 import cn.zy.apps.tools.logger.Loggerfactory ;
+import cn.zy.apps.tools.web.SelectPage ;
 
 public abstract class AutoWritePrpertiesObjectService {
 
-    private AutoWriteObject autoWriteObject ;
+    //    private AutoWriteObject autoWriteObjects ;
 
     protected static Map<Class<?>, Map<String, PropertyDescriptor>> cacheFactory = new HashMap<Class<?>, Map<String, PropertyDescriptor>>() ;
 
@@ -30,8 +31,11 @@ public abstract class AutoWritePrpertiesObjectService {
     protected <V> V readFieldValue(String fieldName, Object result) {
         try {
             Map<String, PropertyDescriptor> propertyDescriptorsMap = searchPropertyDescriptor(result) ;
-
+            
             PropertyDescriptor propertyRead = propertyDescriptorsMap.get(fieldName) ;
+            
+            if(propertyRead == null) return null;
+             
             Method methodRead = propertyRead.getReadMethod() ;
             @SuppressWarnings("unchecked")
             V value = (V) methodRead.invoke(result) ;
@@ -72,7 +76,7 @@ public abstract class AutoWritePrpertiesObjectService {
         return propertyDescriptorsMap ;
     }
 
-    public void setPrpertiesUnits(Object result) throws Exception {
+    public void intToPrpertiesUnits(Object result) throws Exception {
         try {
             if (result == null) return ;
             if (result instanceof List<?>) {
@@ -95,7 +99,11 @@ public abstract class AutoWritePrpertiesObjectService {
         } else {
             if (regexPackage == null) return true ;
             boolean result = ToolsUnits.regex(regexPackage, clzz.getPackage().getName()) ;
-            return result ;
+            if(!result){
+                           result = clzz.getName().equals(SelectPage.class.getName());
+            }
+            return result ;  
+           
         }
     }
 
@@ -103,7 +111,7 @@ public abstract class AutoWritePrpertiesObjectService {
 
     private void simpleObject(Object result, Object parent) throws Exception {
         try {
-            if (result == null || !vpackage(result.getClass()) || result.getClass().toString().contains("_$$_jvst") || result.getClass().toString().contains("_$$_javassist_")) return ;
+            if (result == null || result.equals("serialVersionUID") || !vpackage(result.getClass()) || result.getClass().toString().contains("_$$_jvst") || result.getClass().toString().contains("_$$_javassist_")) return ;
 
             Map<String, PropertyDescriptor> propertyDescriptorsMap = searchPropertyDescriptor(result) ;
 
@@ -141,12 +149,11 @@ public abstract class AutoWritePrpertiesObjectService {
                             /////////////////////////////////////////////////////
                             Method methodRead = propertyDescriptor.getReadMethod() ;
                             Object objs = methodRead.invoke(result) ;
-                            if(parent !=null){
+                            if (parent != null) {
                                 if (!isEqualsParents(objs, parent)) {
                                     simpleObject(objs, result) ;
-                                }       
+                                }
                             }
-                         
 
                             /////////////////////////////////////////////////////
                         }
@@ -162,13 +169,18 @@ public abstract class AutoWritePrpertiesObjectService {
         }
     }
 
+    protected abstract AutoWriteObject searchAutoWriteObject() ;
+
     protected void handProperty(Object object, PropertyDescriptor popertyDescriptors) {
+
+        AutoWriteObject autoWriteObject = searchAutoWriteObject() ;
+
         autoWriteObject.handValues(object, popertyDescriptors) ;
     }
 
-    public void setAutoWriteObject(AutoWriteObject autoWriteObject) {
-        this.autoWriteObject = autoWriteObject ;
-    }
+    //    public abstract  void setAutoWriteObject(AutoWriteObject autoWriteObject) {
+    ////        this.autoWriteObject = autoWriteObject ;
+    //    }
 
     // public static void main(String[] args) {
     // String tax_rate =

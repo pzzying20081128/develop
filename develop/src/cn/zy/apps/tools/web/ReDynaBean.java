@@ -1,6 +1,6 @@
 package cn.zy.apps.tools.web;
 
-import org.apache.commons.beanutils.LazyDynaBean;
+import org.apache.commons.beanutils.LazyDynaBean ;
 
 public class ReDynaBean extends LazyDynaBean {
 

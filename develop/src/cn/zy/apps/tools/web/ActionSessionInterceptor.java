@@ -1,21 +1,17 @@
 package cn.zy.apps.tools.web;
 
-import java.util.Map;
-import java.util.Random;
+import java.util.Map ;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponse ;
 
-import net.sf.json.JSONException;
-import net.sf.json.JSONObject;
+import org.apache.log4j.Logger ;
 
-import org.apache.log4j.Logger;
+import cn.zy.apps.tools.logger.Loggerfactory ;
 
-import cn.zy.apps.tools.logger.Loggerfactory;
-
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionInvocation;
-import com.opensymphony.xwork2.inject.Inject;
-import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
+import com.opensymphony.xwork2.ActionContext ;
+import com.opensymphony.xwork2.ActionInvocation ;
+import com.opensymphony.xwork2.inject.Inject ;
+import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor ;
 
 /**
  * SessionInterceptor 判断用户是否登陆

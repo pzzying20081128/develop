@@ -1,4 +1,12 @@
 
+#foreach($record in $records)
+	      #if($$record.canShow)
+{
+			name : '$record.classfiled.$record.mapping',
+			mapping : '$record.mapping'
+		},
+		            #end
+		 #end
 
 
 #foreach($record in $records)

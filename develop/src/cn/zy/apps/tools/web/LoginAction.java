@@ -60,7 +60,7 @@ public abstract class LoginAction<V> extends GeneralAction {
         SessionUser<V>  sessionUser = isValidate(userName, userPasswd) ;
 
         if (sessionUser == null) {
-            this.msg = "用户名或密码错误" ;
+//            this.msg = "用户名或密码错误" ;
             this.success = false ;
             return login_error ;
         } else {

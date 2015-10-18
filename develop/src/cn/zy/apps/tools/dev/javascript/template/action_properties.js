@@ -20,13 +20,9 @@ var ${javaScript.module}_grid_column = {
 		            dataIndex :'$record.name',
 		            sortable :  $record.canSort,
 		            renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
-		            	if(value==null ){
-		            		return value ;
-		            	}
-		            	 else
-		            	 {
-		            	   return   $!record.rendererValueKey;
-		            	 }
+		    
+						  $!record.rendererValueKey ;
+						 
 		          }
                 },
             #end

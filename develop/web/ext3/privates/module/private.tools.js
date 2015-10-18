@@ -11,6 +11,104 @@ function showErrorMsg(title, message) {
 	});
 }
 
+function showMsg(title, messages) {
+	Ext.MessageBox.show({
+		title : title,
+		buttons : Ext.MessageBox.OK,
+		msg : message,
+		width : 500,
+		modal : true,
+		icon : Ext.Msg.INFO
+
+	});
+}
+
+function showMsgYN(params) {
+	Ext.MessageBox.confirm("消息", params.msg, function(btn) {
+		if (btn == 'yes') {
+			params.yes();
+		} else {
+			if (typeof ( params.no )=="function") {
+				params.no();
+			}
+		}
+
+		// Ext.Msg.alert("提示", "你点击了" + btn + "按钮");
+	});
+}
+
+// //////////////////////////////////////////////////////////////////////////////////////////////
+
+function ERPAjaxRequest(reqParams) {
+	var myMask = new Ext.LoadMask(Ext.getBody(), {
+		msg : '正在处理数据...'
+	});
+	// myMask.show();
+	Ext.Ajax.request({
+		timeout : timeout,
+		url : reqParams.url,
+		params : reqParams.params,
+		async : ( typeof ( reqParams.async ) == "undefined" ) ? false : reqParams.async, // ASYNC
+		// 是否异步(
+		// TRUE
+		// 异步 ,
+		// FALSE
+		// 同步)
+		// waitMsg : '正在处理数据...',
+		success : function(response, options) {
+			// myMask.hide();
+			var json = Ext.util.JSON.decode(response.responseText);
+			if (typeof ( json.success ) == "undefined") {
+				if (typeof ( reqParams.success ) == "function")
+					reqParams.success(response, options);
+			} else {
+				var success_ = json.success;
+				// alert(success_);
+				if (success_ == false) {
+					if (typeof ( json.msg ) == "undefined") {
+						if (typeof ( reqParams.errors ) == "function") {
+							reqParams.errors(response, options, null);
+						}
+					} else {
+						if (json.msg == 1001 || json.msg == '1001') {
+							Ext.MessageBox.alert('标题', '用户没有登录/用户超时，请重新登录系统！ ', function() {
+
+								window.location.href = "./";
+							});
+						} else {
+							if (json.msg == 10000 || json.msg == '10000') {
+								showErrorMsg("错误提示", "请求操作失败【系统错误】");
+							} else if (json.msg == null) {
+								showErrorMsg("错误提示", "请求操作失败【未知错误】");
+							} else {
+								if (typeof ( reqParams.errors ) == "function") {
+									reqParams.errors(response, options, json.msg);
+								} else {
+									showErrorMsg("错误提示", "请求操作失败【" + json.msg + "】");
+								}
+							}
+						}
+					}
+				} else {
+					if (typeof ( reqParams.success ) == "function")
+						reqParams.success(response, options, response.responseJSON);
+				}
+			}
+
+		},
+		failure : function(resp, opts) {// 失败
+			// myMask.hide();
+			if (typeof ( reqParams.error ) != "undefined") {
+				reqParams.error(resp, opts);
+			} else {
+				showErrorMsg("失败", "请求数据失败！");
+			}
+		}
+	});
+};
+
+// /////////////////////////////////////////////////////////////////////////////////////////////
+
 /**
  * params={ id: name: label: url: select: }
  * 
@@ -19,8 +117,8 @@ function showErrorMsg(title, message) {
  */
 function createLocalCombo(params) {
 	var xx = {
-		// itemid : params.id,
-		itemid : 'combobox_type',
+		id : params.id,
+//		itemid : 'combobox_type',
 		name : params.name,
 		hiddenName : params.name,
 		fieldLabel : params.fieldLabel,
@@ -119,3 +217,5 @@ function mainGridWindow(properties) {
 	}
 
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////

@@ -96,16 +96,21 @@ function create_${javaScript.module}_window(moduleId, moduleName) {
 		return false;
 	}
 	var selectId = selection_rows[0].id;
-	ERPAjaxRequest({
-		url : "./removeUserInfo.jhtml",
-		params : {
-			uuid : selectId
-		},
-		// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
-		success : function(response, options) {
-			mainGrid.reload();
-		}
-	});
+		showMsgYN({
+			msg : "是否要删除该条信息",
+			yes : function(YN) {
+				ERPAjaxRequest({
+					url : "./simple_ProductBrand_remove.do",
+					params : {
+						"productBrand.id" : selectId
+					},
+					// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
+					success : function(response, options) {
+						mainGrid.reload();
+					}
+				});
+			}
+		});
 }
 
 }

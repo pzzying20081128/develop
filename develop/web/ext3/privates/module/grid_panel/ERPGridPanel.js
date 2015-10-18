@@ -557,7 +557,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	},
 	reload : function(loadParams) {
 		var store = this.store;
-		store_.removeAll();
+		store.removeAll();
 		store.reload({
 			// params : loadParams.params,
 			// 回调
