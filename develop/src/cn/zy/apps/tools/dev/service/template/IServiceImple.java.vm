@@ -43,6 +43,15 @@ public class ${buildJavaCommProperties.className}ServiceImple extends  ABCommons
 				    return  i${buildJavaCommProperties.className}SearchUnits.search(optType, searchBean,
 					commSearchBean ,startLimit );
             }
+			
+			 @Override
+			public List<${buildJavaCommProperties.className} > searchList(OptType  optType ,    
+				           ${buildJavaCommProperties.className}SearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException{
+             
+			  return  i${buildJavaCommProperties.className}SearchUnits.list(optType, searchBean,
+					commSearchBean ,startLimit );
+            
+    }
             
 			@Override
             public  void   remove(OptType  optType ,   ${buildJavaCommProperties.className}   opt${buildJavaCommProperties.className})throws SystemOptServiceException{

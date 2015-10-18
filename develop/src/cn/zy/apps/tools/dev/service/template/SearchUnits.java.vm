@@ -36,9 +36,27 @@ public class ${buildJavaCommProperties.className}SearchUnits extends ABCommonsSe
         return selectPage ;
 
     }
+	
+	
+	    public List<${buildJavaCommProperties.className}> list(OptType optType,
+		                            ${buildJavaCommProperties.className}SearchBean searchBean,CommSearchBean commSearchBean ,int... startLimit) throws SystemOptServiceException {
+        SelectPage<${buildJavaCommProperties.className}> selectPage = new SelectPage<${buildJavaCommProperties.className}>() ;
+
+		Map<String, Object> value=ToolsUnits.createSearchMap();
+			
+		 String sqlWhere=createWhere(value,searchBean,commSearchBean);
+				
+        List<${buildJavaCommProperties.className}> result = list(sqlWhere,value,startLimit) ;
+
+     
+
+        return result ;
+
+    }
+	
 
 	 private  String sql ="";   
-    private List<${buildJavaCommProperties.className}> list(String sqlWhere ,Map<String, Object> value ,int... startLimit) throws SystemOptServiceException {
+    private   List<${buildJavaCommProperties.className}> list(String sqlWhere ,Map<String, Object> value ,int... startLimit) throws SystemOptServiceException {
    String sql_ =sql+ sqlWhere ;
         List<${buildJavaCommProperties.className}>  result = baseService.findByHSQL(sql_, value, startLimit);
         return result;

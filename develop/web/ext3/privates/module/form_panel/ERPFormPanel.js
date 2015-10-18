@@ -104,8 +104,24 @@ Ext.form.ERPFormPanel = Ext.extend(Ext.form.FormPanel, {
 		}
 
 		if (typeof ( properties.waitMsg ) == "undefined")
-			properties.waitMsg = '正在载入数据...';
-		this.getForm().submit({
+			properties.waitMsg = '正在提交数据...';
+
+		thisForm = this.getForm();
+		if (this.getForm().isValid()) {
+			var submitValues1 = thisForm.getValues();
+			// 对将要提交的参数进行过滤，去掉emptyText文字
+			for (var param in submitValues1) {
+				if (thisForm.findField(param) && thisForm.findField(param).emptyText == submitValues1[param]) {
+					// submitValues1[param] = '';
+					thisForm.findField(param).setValue("");
+				}
+			}
+		} else {
+			showErrorMsg("提交错误", "系统错误");
+			return;
+		}
+
+		thisForm.submit({
 			timeout : timeout,
 			url : properties.url,
 			waitMsg : properties.waitMsg,

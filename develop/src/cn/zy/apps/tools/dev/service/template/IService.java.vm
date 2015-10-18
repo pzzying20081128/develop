@@ -20,6 +20,8 @@ public interface I${buildJavaCommProperties.className}Service {
             public SelectPage<${buildJavaCommProperties.className} > search(OptType  optType ,    
 				           ${buildJavaCommProperties.className}SearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException;
             
+			public List<${buildJavaCommProperties.className} > searchList(OptType  optType ,    
+				           ${buildJavaCommProperties.className}SearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException;
             
             public  void   remove(OptType  optType ,  ${buildJavaCommProperties.className}   opt${buildJavaCommProperties.className})throws SystemOptServiceException;
             

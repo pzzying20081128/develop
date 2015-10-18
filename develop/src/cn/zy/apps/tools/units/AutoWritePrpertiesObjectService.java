@@ -30,6 +30,7 @@ public abstract class AutoWritePrpertiesObjectService {
 
     protected <V> V readFieldValue(String fieldName, Object result) {
         try {
+            if(result ==null) return null;
             Map<String, PropertyDescriptor> propertyDescriptorsMap = searchPropertyDescriptor(result) ;
             
             PropertyDescriptor propertyRead = propertyDescriptorsMap.get(fieldName) ;
@@ -149,10 +150,15 @@ public abstract class AutoWritePrpertiesObjectService {
                             /////////////////////////////////////////////////////
                             Method methodRead = propertyDescriptor.getReadMethod() ;
                             Object objs = methodRead.invoke(result) ;
-                            if (parent != null) {
-                                if (!isEqualsParents(objs, parent)) {
-                                    simpleObject(objs, result) ;
-                                }
+                            if (objs!=null) {
+                                 if(parent != null  ){
+                                     if (!isEqualsParents(objs, parent)) {
+                                         simpleObject(objs, result) ;
+                                     }
+                                 }else{
+                                     simpleObject(objs, result) ;
+                                 }
+                               
                             }
 
                             /////////////////////////////////////////////////////
@@ -190,4 +196,9 @@ public abstract class AutoWritePrpertiesObjectService {
     // System.out.println("==> " + xxx);
     //
     // }
+    
+    public static void main(String[] args) {
+        AutoWriteObject xx= null;
+        System.out.println("==>  "+xx.getClass()) ;
+    }
 }

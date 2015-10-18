@@ -44,35 +44,39 @@ public class BuildConfigs extends IBuildJavaScriptFile {
                     //                    record.setRendererValueKey("value") ;
                     record.setClassfiled(clazz.getSimpleName().toLowerCase()) ;
 
-                    if (ToolsUnits.isNOtNulll(fieldDesc.mapping())) {
+//                    if (ToolsUnits.isNOtNulll(fieldDesc.mapping())) 
+                    {
 
                         String[] mappings = fieldDesc.mapping().split("\\.") ;
 
                         System.out.println(fieldDesc.mapping() + " " + fieldDesc.mapping().split("\\.").length + "==>  " + mappings.length) ;
-
-                        if (mappings.length == 0) return ;
-
-                        mappings[0] = "value" ;
-
                         String x = " " ;
+//                        System.out.println("===? "+mappings.length ) ;
+                        if (mappings.length == 0)
 
-                        for (int i = 0; i < mappings.length; i++) {
-                            String  ii="";
-                            for(int j=0;j<=i;j++){
-                                ii= ii+ mappings[j] ;
-                                if(j <  i)ii= ii+".";
+                        {
+                            x = "return value " ;
+                        } else {
+
+                            mappings[0] = "value" ;
+
+                            for (int i = 0; i < mappings.length; i++) {
+                                String ii = "" ;
+                                for (int j = 0; j <= i; j++) {
+                                    ii = ii + mappings[j] ;
+                                    if (j < i) ii = ii + "." ;
+                                }
+
+                                x = x + "if(" + ii + "==null ||  typeof(" + ii + ") =='undefined' )   \r\n  return null   \r\n   else  \r\n" ;
+
                             }
-                          
 
-                            x = x + "if(" + ii + "==null ||  typeof(" + ii + ") =='undefined' )   \r\n  return null   \r\n   else  \r\n" ;
-
-                        }
-
-                        x = x + " return " ;
-                        for (int i = 0; i < mappings.length; i++) {
-                            if (i == mappings.length - 1) x = x + mappings[i] ;
-                            else
-                                x = x + mappings[i] + "." ;
+                            x = x + " return " ;
+                            for (int i = 0; i < mappings.length; i++) {
+                                if (i == mappings.length - 1) x = x + mappings[i] ;
+                                else
+                                    x = x + mappings[i] + "." ;
+                            }
                         }
 
                         record.setRendererValueKey(x) ;
