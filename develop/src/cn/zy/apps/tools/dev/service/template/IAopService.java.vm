@@ -1,0 +1,19 @@
+ package  ${buildJavaCommProperties.servicePackage};
+
+ 
+ 
+ import cn.zy.apps.tools.web.SelectPage ;
+import ${buildJavaCommProperties.clssPackage}.${buildJavaCommProperties.className} ; 
+import ${buildJavaCommProperties.servicePackage}.units.${buildJavaCommProperties.className}SearchBean ;
+
+public interface IAop${buildJavaCommProperties.className}Service  extends I${buildJavaCommProperties.className}Service   {
+    
+            public String name="IAop${buildJavaCommProperties.className}Service";
+            
+                
+         
+            
+       
+            
+
+}
