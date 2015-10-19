@@ -29,7 +29,7 @@ function ${javaScript.module}_update_windows(moduleId, moduleName, params) {
 		},
 	   reader : new Ext.data.JsonReader({
 			successProperty : 'success',
-			root : 'dept',
+			root : 'result',
 			totalProperty : 'totalProperty'
 		}, [{
 			name : 'dept.name',

@@ -16,15 +16,28 @@ function ${javaScript.module}_search_windows(moduleId, moduleName, params) {
 					if (!search_params.verification())
 						return;
 						grid.removeAll();
-					grid.load({
-						params : search_params.params(),
-						success : function() {
-							window.close();
+						from = form_panel.getForm();
+					if (from.isValid()) {
+						var submitValues1 = from.getValues();
+						// 对将要提交的参数进行过滤，去掉emptyText文字
+						for (var param in submitValues1) {
+							if (from.findField(param) && from.findField(param).emptyText == submitValues1[param]) {
+							    submitValues1[param] = '';
+//								thisForm.findField(param).setValue("");
+							}
 						}
-
-					});
-
-					window.close();
+                        
+						Ext.apply(submitValues1 ,search_params.params() );
+						grid.load({
+							params : submitValues1,
+							success : function() {
+								window.close();
+							}
+						});
+						window.close();
+					} else {
+						showErrorMsg("错误", "请检查查询数据的正确性");
+					}
 				}
 			}
 

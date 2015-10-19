@@ -2,21 +2,21 @@ Ext.data.ERPStore = Ext.extend(Ext.data.Store, {
 	remoteSort : true,
 	listeners : {
 		"beforeload" : function(store, options) {
-//
-//			// if (typeof ( store.lastOptions ) != "undefined") {
-//			// if (typeof ( store.lastOptions.params ) != "undefined") {
-//			// var o = store.lastOptions.params;
-//			// Ext.apply(o, options.params);
-//			// this.lastOptions.params = o;
-//			// } else {
-//			// this.lastOptions.params = options.params;
-//			// }
-//			// } else {
-//			// this.lastOptions = {
-//			// params : options.params
-//			// }
-//			// }
-//
+			//
+			// // if (typeof ( store.lastOptions ) != "undefined") {
+			// // if (typeof ( store.lastOptions.params ) != "undefined") {
+			// // var o = store.lastOptions.params;
+			// // Ext.apply(o, options.params);
+			// // this.lastOptions.params = o;
+			// // } else {
+			// // this.lastOptions.params = options.params;
+			// // }
+			// // } else {
+			// // this.lastOptions = {
+			// // params : options.params
+			// // }
+			// // }
+			//
 			var o = store.baseParams;
 			Ext.apply(o, options.params);
 			this.baseParams = o;
@@ -153,22 +153,22 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 		Ext.grid.ERPGridPanel.superclass.initComponent.call(this);
 		// 绑定双击//
 		this.on('rowdblclick', this.onRowDblClick, this);
-//		this.store.on("beforeload", function(store, options) {
-////			if (typeof ( store.lastOptions ) != "undefined") {
-////				if (typeof ( store.lastOptions.params ) != "undefined") {
-////					var o = store.lastOptions.params;
-////					Ext.apply(o, options.params);
-////					this.lastOptions.params = o;
-////				} else {
-////					this.lastOptions.params = options.params;
-////				}
-////			} else {
-////				this.lastOptions = {
-////					params : options.params
-////				}
-////			}
-//			Ext.apply(store.proxy.extraParams, options.params);
-//		});
+		// this.store.on("beforeload", function(store, options) {
+		// // if (typeof ( store.lastOptions ) != "undefined") {
+		// // if (typeof ( store.lastOptions.params ) != "undefined") {
+		// // var o = store.lastOptions.params;
+		// // Ext.apply(o, options.params);
+		// // this.lastOptions.params = o;
+		// // } else {
+		// // this.lastOptions.params = options.params;
+		// // }
+		// // } else {
+		// // this.lastOptions = {
+		// // params : options.params
+		// // }
+		// // }
+		// Ext.apply(store.proxy.extraParams, options.params);
+		// });
 
 		var cmConfigs = this.colModel.config;
 		for (var j = 0; j < cmConfigs.length; j++) {
@@ -194,8 +194,8 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 			url : selectAllParmas.url,
 			params : selectAllParmas.params,
 			// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
-			success : function(response, options) {
-				var isSelect = response.responseJSON.isSelect;
+			success : function(result) {
+				var isSelect = result.result.isSelect;
 				// setIsAllSelect(isSelect);
 				selectAllParmas.isSelect = isSelect;
 				if (isSelect == 0) {
@@ -330,8 +330,9 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 			params : {
 				moduleId : moduleId
 			},
-			success : function(response, options) {
-				var json = Ext.util.JSON.decode(response.responseText);
+			success : function(result) {
+
+				var json = result.result;
 				var powerMap = json.powerMap;
 				// var grids_ = grids[i];
 				var power = powerMap[moduleId];
@@ -461,8 +462,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	load : function(loadParams) {
 		var store_ = this.store;
 		store_.removeAll();
-		store_.baseParams={
-		};
+		store_.baseParams = {};
 		if (typeof ( loadParams ) === "undefined")// params is undefined
 		{
 			loadParams = {
@@ -528,7 +528,14 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 									} else if (jsonData.msg == null) {
 										showErrorMsg("失败", "数据请求失败【未知错误 -2 】！");
 									} else {
-										loadParams.errors(r, options, jsonData.msg);
+										// loadParams.errors(r, options,
+										// jsonData.msg);
+										loadParams.errors({
+											'r' : r,
+											"options" : options,
+											"result" : jsonData
+										});
+
 									};
 								}
 							};
@@ -549,7 +556,12 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 				} else {
 					if (typeof ( loadParams.success ) == "function") {
 						var jsonData = store_.reader.jsonData;
-						loadParams.success(r, options, jsonData);
+						// loadParams.success(r, options, jsonData);
+						loadParams.success({
+							'r' : r,
+							"options" : options,
+							"result" : jsonData
+						});
 					}
 				};
 			}
@@ -584,7 +596,13 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 									} else if (jsonData.msg == null) {
 										showErrorMsg("失败", "数据请求失败【未知错误 -2 】！");
 									} else {
-										loadParams.errors(r, options, jsonData.msg);
+										// loadParams.errors(r, options,
+										// jsonData.msg);
+										loadParams.errors({
+											'r' : r,
+											"options" : options,
+											"result" : jsonData
+										});
 									}
 								}
 
@@ -596,7 +614,13 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 				} else {
 					if (loadParams != null) {
 						if (typeof ( loadParams.success ) == "function")
-							loadParams.success(r, options);
+							// loadParams.success(r, options);
+							var jsonData = store_.reader.jsonData;
+						loadParams.success({
+							'r' : r,
+							"options" : options,
+							"result" : jsonData
+						});
 					} else {
 						// var jsonData= store_.reader.jsonData;
 						// if(typeof(jsonData.msg)=="undefined"){

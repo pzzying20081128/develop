@@ -95,6 +95,7 @@ public abstract class AutoWritePrpertiesObjectService {
     }
 
     private boolean vpackage(Class<?> clzz) {
+        
         if (clzz.getPackage() == null) {
             return false ;
         } else {
@@ -117,6 +118,7 @@ public abstract class AutoWritePrpertiesObjectService {
             Map<String, PropertyDescriptor> propertyDescriptorsMap = searchPropertyDescriptor(result) ;
 
             for (PropertyDescriptor propertyDescriptor : propertyDescriptorsMap.values()) {
+               
                 // void
                 if (propertyDescriptor.getPropertyType() == null || propertyDescriptor.getPropertyType().getPackage() == null) continue ;
 
@@ -144,6 +146,7 @@ public abstract class AutoWritePrpertiesObjectService {
 
                 } else {
                     if (vpackage(propertyDescriptor.getPropertyType())) {
+                       
                         handProperty(result, propertyDescriptor) ;
                         {
 
@@ -178,7 +181,7 @@ public abstract class AutoWritePrpertiesObjectService {
     protected abstract AutoWriteObject searchAutoWriteObject() ;
 
     protected void handProperty(Object object, PropertyDescriptor popertyDescriptors) {
-
+        
         AutoWriteObject autoWriteObject = searchAutoWriteObject() ;
 
         autoWriteObject.handValues(object, popertyDescriptors) ;

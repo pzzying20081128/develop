@@ -222,6 +222,7 @@ public class JSONWriter {
             PropertyDescriptor[] props = info.getPropertyDescriptors() ;
 
             boolean hasData = false ;
+            
             for (PropertyDescriptor prop : props) {
                 String name = prop.getName() ;
                 Method accessor = prop.getReadMethod() ;
@@ -233,7 +234,6 @@ public class JSONWriter {
                 if (baseAccessor != null) {
                     if (baseAccessor.isAnnotationPresent(JSON.class)) {
                         JSONAnnotationFinder jsonFinder = new JSONAnnotationFinder(baseAccessor).invoke() ;
-
                         if (!jsonFinder.shouldSerialize()) continue ;
                         if (jsonFinder.getName() != null) {
                             name = jsonFinder.getName() ;
@@ -254,8 +254,9 @@ public class JSONWriter {
                     }
                     // ////System.out.println("==   "+name+"=========+++++++++++++++++++++++++++++++++  =>    "+object);
                     Object value = accessor.invoke(object) ;
+//                    if(value !=null)
+//                    System.out.println("+++++++++++++++++++++++++ >  "+value.getClass().getName()) ;
                     if (value != null && value instanceof PersistentBag) {
-
                         PersistentBag persistentBag = (PersistentBag) value ;
                         if (persistentBag.wasInitialized()) {
 
@@ -346,6 +347,19 @@ public class JSONWriter {
                     baseAccessor = search(clazz_, accessor.getName(), accessor.getParameterTypes()) ;
                     // baseAccessor = clazz_.getMethod(accessor.getName(),
                     // accessor.getParameterTypes());
+                }
+
+            } catch (Exception ex) {
+                LOG.info(ex.getMessage(), ex) ;
+            }
+            baseAccessor = null ;
+        } else
+
+        if (clazz.getName().contains("_$$_")) {
+            try {
+                Class clazz_ = Class.forName(clazz.getName().substring(0, clazz.getName().indexOf("_$$_"))) ;
+                if (clazz_ != null && accessor != null) {
+                    baseAccessor = search(clazz_, accessor.getName(), accessor.getParameterTypes()) ;
                 }
 
             } catch (Exception ex) {

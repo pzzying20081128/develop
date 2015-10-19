@@ -42,12 +42,21 @@ Ext.form.ERPFormPanel = Ext.extend(Ext.form.FormPanel, {
 					if (success) {
 						if (typeof ( properties.success ) == 'function') {
 							var responseJSON = action.response.responseJSON;
-							properties.success(form, action, responseJSON);
+							properties.success({
+								'form' : form,
+								'action' : action,
+								'result' : responseJSON
+							});
 						}
 					} else {
 						var errormsg = json.msg;
 						if (typeof ( properties.errors ) == 'function')
-							properties.errors(form, action, errormsg, msgcode);
+							properties.errors({
+								'form' : form,
+								'action' : action,
+								'errormsg' : errormsg,
+								'msgcode' : msgcode
+							});
 						else
 							showErrorMsg("错误提示", errormsg);
 					}
@@ -57,7 +66,11 @@ Ext.form.ERPFormPanel = Ext.extend(Ext.form.FormPanel, {
 					if (success) {
 						if (typeof ( properties.success ) == 'function') {
 							var responseJSON = action.response.responseJSON;
-							properties.success(form, action, responseJSON);
+							properties.success({
+								'form' : form,
+								'action' : action,
+								'result' : responseJSON
+							});
 						}
 					} else {
 						showErrorMsg("错误提示", "提交请求操作失败");
@@ -80,7 +93,12 @@ Ext.form.ERPFormPanel = Ext.extend(Ext.form.FormPanel, {
 					});
 				} else {
 					if (typeof ( properties.errors ) == 'function')
-						properties.errors(form, action, errormsg);
+						properties.errors({
+							'form' : form,
+							'action' : action,
+							'errormsg' : errormsg
+							
+						});
 					else
 						showErrorMsg("错误提示", errormsg);
 				}
@@ -134,20 +152,37 @@ Ext.form.ERPFormPanel = Ext.extend(Ext.form.FormPanel, {
 					var json = Ext.decode(str);
 					if (json.success) {
 						if (typeof ( properties.success ) == 'function') {
+							properties.success({
+								'form' : form,
+								'action' : action,
+								'result' : json
+							});
 
-							properties.success(json, form, action);
+							// properties.success(json, form, action);
 						}
 					} else {
 						var errormsg = json.msg;
 						if (typeof ( properties.errors ) == 'function')
-							properties.errors(form, action, errormsg, msgcode);
+							// properties.errors(form, action, errormsg,
+							// msgcode);
+							properties.errors({
+								'form' : form,
+								'action' : action,
+								'errormsg' : errormsg,
+								'msgcode' : msgcode
+							});
 						else
 							showErrorMsg("错误提示", errormsg);
 					}
 				} else {
 					if (typeof ( properties.success ) == 'function') {
 						var json = action.response.responseJSON;
-						properties.success(json, form, action);
+						// properties.success(json, form, action);
+						properties.success({
+							'form' : form,
+							'action' : action,
+							"result" : json
+						});
 					}
 				}
 
@@ -167,7 +202,13 @@ Ext.form.ERPFormPanel = Ext.extend(Ext.form.FormPanel, {
 						showErrorMsg("错误提示", "提交请求操作失败");
 					else {
 						if (typeof ( properties.errors ) == 'function')
-							properties.errors(form, action, errormsg, msgcode);
+							// properties.errors(form, action, errormsg,
+							// msgcode);
+							properties.errors({
+								'form' : form,
+								'errormsg' : errormsg,
+								"msgcode" : msgcode
+							});
 						else
 							showErrorMsg("错误提示", errormsg);
 					}

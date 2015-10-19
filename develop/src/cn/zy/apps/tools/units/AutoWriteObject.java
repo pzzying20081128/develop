@@ -32,9 +32,9 @@ public abstract class AutoWriteObject {
     protected abstract boolean filterSetProperties(Class<?> classes) ;
 
     public void handValues(Object object, PropertyDescriptor popertyDescriptors) {
-
+      
         if (!filterSetProperties(popertyDescriptors.getPropertyType())) return ;
-
+  
         try {
 
             Class<?> clazz = object.getClass() ;

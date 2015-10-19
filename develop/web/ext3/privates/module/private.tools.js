@@ -28,7 +28,7 @@ function showMsgYN(params) {
 		if (btn == 'yes') {
 			params.yes();
 		} else {
-			if (typeof ( params.no )=="function") {
+			if (typeof ( params.no ) == "function") {
 				params.no();
 			}
 		}
@@ -67,7 +67,16 @@ function ERPAjaxRequest(reqParams) {
 				if (success_ == false) {
 					if (typeof ( json.msg ) == "undefined") {
 						if (typeof ( reqParams.errors ) == "function") {
-							reqParams.errors(response, options, null);
+
+							// reqParams.errors(response, options, null);
+
+							reqParams.errors({
+								'response' : response,
+								'options' : options,
+								"result" : null,
+								"msg" : null
+							});
+
 						}
 					} else {
 						if (json.msg == 1001 || json.msg == '1001') {
@@ -82,7 +91,15 @@ function ERPAjaxRequest(reqParams) {
 								showErrorMsg("错误提示", "请求操作失败【未知错误】");
 							} else {
 								if (typeof ( reqParams.errors ) == "function") {
-									reqParams.errors(response, options, json.msg);
+									// reqParams.errors(response, options,
+									// json.msg);
+
+									reqParams.errors({
+										'response' : response,
+										'options' : options,
+										"msg" : json.msg,
+										"result" : null,
+									});
 								} else {
 									showErrorMsg("错误提示", "请求操作失败【" + json.msg + "】");
 								}
@@ -91,7 +108,14 @@ function ERPAjaxRequest(reqParams) {
 					}
 				} else {
 					if (typeof ( reqParams.success ) == "function")
-						reqParams.success(response, options, response.responseJSON);
+						// reqParams.success(response, options,
+						// response.responseJSON);
+						reqParams.success({
+							'response' : response,
+							'options' : options,
+							"result" : response.responseJSON
+						});
+
 				}
 			}
 
@@ -100,6 +124,12 @@ function ERPAjaxRequest(reqParams) {
 			// myMask.hide();
 			if (typeof ( reqParams.error ) != "undefined") {
 				reqParams.error(resp, opts);
+				reqParams.errors({
+					'response' : resp,
+					'options' : opts,
+					"result" : null,
+					'msg' : null
+				});
 			} else {
 				showErrorMsg("失败", "请求数据失败！");
 			}
@@ -118,7 +148,7 @@ function ERPAjaxRequest(reqParams) {
 function createLocalCombo(params) {
 	var xx = {
 		id : params.id,
-//		itemid : 'combobox_type',
+		// itemid : 'combobox_type',
 		name : params.name,
 		hiddenName : params.name,
 		fieldLabel : params.fieldLabel,
@@ -218,4 +248,4 @@ function mainGridWindow(properties) {
 
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////////////////////////////////////

@@ -16,23 +16,15 @@ Ext.form.ERPComboBox = Ext.extend(Ext.form.ComboBox, {
 	// allowBlank : false,
 	forceSelection : true,
 	minChars : 1,
-//	style : 'background:#fff1a4;',
+	// style : 'background:#fff1a4;',
 	initComponent : function() {
 		var comboBox = this;
 		Ext.form.ERPComboBox.superclass.initComponent.call(this);
 		this.store.on("beforeload", function(store, options) {
 			var o = store.baseParams;
-			// o.id=comboBox.getValue();
 			Ext.apply(o, options.params);
 			this.baseParams = o;
-//			if (isNaN(comboBox.getValue())) {
-//				if ('请选择' != comboBox.getValue()) {
-//					this.baseParams.name = comboBox.getValue();
-//				}
-//			} else {
-//				if (comboBox.getValue() != null && comboBox.getValue() != "")
-//					this.baseParams.id = comboBox.getValue();
-//			}
+
 		});
 	},
 	load : function(params) {
@@ -141,7 +133,7 @@ function createERPcombo(params) {
 		// name : params.id,
 		hiddenName : params.name,
 		fieldLabel : params.fieldLabel,
-		xtype : 'ERPcombo',
+//		xtype : 'ERPcombo',
 		valueField : 'id',
 		displayField : "name",
 		width : typeof ( params.width ) == 'undefined' ? 200 : params.width,
@@ -151,7 +143,8 @@ function createERPcombo(params) {
 		store : new Ext.data.ERPComboStore({
 			autoLoad : false,
 			proxy : new Ext.data.HttpProxy({
-				url : params.url
+				url : params.url,
+				params:params.params
 			}),
 			reader : new Ext.data.JsonReader({
 				id : "id",
@@ -173,6 +166,9 @@ function createERPcombo(params) {
 			}
 		}
 	};
-	return xx;
+
+	sss = new Ext.form.ERPComboBox(xx);
+
+	return sss;
 
 }
