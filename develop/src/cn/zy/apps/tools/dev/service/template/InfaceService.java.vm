@@ -1,0 +1,33 @@
+package cn.zying.osales.infaces;
+
+import java.util.List ;
+
+import cn.zy.apps.tools.units.CommSearchBean ;
+import cn.zy.apps.tools.web.SelectPage ;
+import cn.zying.osales.OSalesConfigProperties.OptType ;
+import cn.zying.osales.pojos.ProductCategory ;
+import cn.zying.osales.service.SystemOptServiceException ;
+import cn.zying.osales.units.search.bean.ProductCategorySearchBean ;
+
+public interface Inface${buildJavaCommProperties.className}Service {
+    
+    
+       /**
+             *  增加或更新
+             */
+            public ${buildJavaCommProperties.className}   saveUpdate(OptType  optType ,   ${buildJavaCommProperties.className}   opt${buildJavaCommProperties.className} )throws SystemOptServiceException;
+            
+       	  
+            public SelectPage<${buildJavaCommProperties.className} > search(OptType  optType ,    
+				           ${buildJavaCommProperties.className}SearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException;
+            
+			public List<${buildJavaCommProperties.className} > searchList(OptType  optType ,    
+				           ${buildJavaCommProperties.className}SearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException;
+            
+            public  ${buildJavaCommProperties.className}    remove(OptType  optType ,  ${buildJavaCommProperties.className}   opt${buildJavaCommProperties.className})throws SystemOptServiceException;
+            
+            
+           public  ${buildJavaCommProperties.className} get(Integer id)throws SystemOptServiceException;
+
+
+}
