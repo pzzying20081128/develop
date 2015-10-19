@@ -30,13 +30,13 @@ public abstract class AutoWritePrpertiesObjectService {
 
     protected <V> V readFieldValue(String fieldName, Object result) {
         try {
-            if(result ==null) return null;
+            if (result == null) return null ;
             Map<String, PropertyDescriptor> propertyDescriptorsMap = searchPropertyDescriptor(result) ;
-            
+
             PropertyDescriptor propertyRead = propertyDescriptorsMap.get(fieldName) ;
-            
-            if(propertyRead == null) return null;
-             
+
+            if (propertyRead == null) return null ;
+
             Method methodRead = propertyRead.getReadMethod() ;
             @SuppressWarnings("unchecked")
             V value = (V) methodRead.invoke(result) ;
@@ -95,17 +95,17 @@ public abstract class AutoWritePrpertiesObjectService {
     }
 
     private boolean vpackage(Class<?> clzz) {
-        
+
         if (clzz.getPackage() == null) {
             return false ;
         } else {
             if (regexPackage == null) return true ;
             boolean result = ToolsUnits.regex(regexPackage, clzz.getPackage().getName()) ;
-            if(!result){
-                           result = clzz.getName().equals(SelectPage.class.getName());
+            if (!result) {
+                result = clzz.getName().equals(SelectPage.class.getName()) ;
             }
-            return result ;  
-           
+            return result ;
+
         }
     }
 
@@ -118,7 +118,7 @@ public abstract class AutoWritePrpertiesObjectService {
             Map<String, PropertyDescriptor> propertyDescriptorsMap = searchPropertyDescriptor(result) ;
 
             for (PropertyDescriptor propertyDescriptor : propertyDescriptorsMap.values()) {
-               
+
                 // void
                 if (propertyDescriptor.getPropertyType() == null || propertyDescriptor.getPropertyType().getPackage() == null) continue ;
 
@@ -146,22 +146,23 @@ public abstract class AutoWritePrpertiesObjectService {
 
                 } else {
                     if (vpackage(propertyDescriptor.getPropertyType())) {
-                       
+
                         handProperty(result, propertyDescriptor) ;
+
                         {
 
                             /////////////////////////////////////////////////////
                             Method methodRead = propertyDescriptor.getReadMethod() ;
                             Object objs = methodRead.invoke(result) ;
-                            if (objs!=null) {
-                                 if(parent != null  ){
-                                     if (!isEqualsParents(objs, parent)) {
-                                         simpleObject(objs, result) ;
-                                     }
-                                 }else{
-                                     simpleObject(objs, result) ;
-                                 }
-                               
+                            if (objs != null) {
+                                if (parent != null) {
+                                    if (!isEqualsParents(objs, parent)) {
+                                        simpleObject(objs, result) ;
+                                    }
+                                } else {
+                                    simpleObject(objs, result) ;
+                                }
+
                             }
 
                             /////////////////////////////////////////////////////
@@ -181,7 +182,7 @@ public abstract class AutoWritePrpertiesObjectService {
     protected abstract AutoWriteObject searchAutoWriteObject() ;
 
     protected void handProperty(Object object, PropertyDescriptor popertyDescriptors) {
-        
+
         AutoWriteObject autoWriteObject = searchAutoWriteObject() ;
 
         autoWriteObject.handValues(object, popertyDescriptors) ;
@@ -199,9 +200,9 @@ public abstract class AutoWritePrpertiesObjectService {
     // System.out.println("==> " + xxx);
     //
     // }
-    
+
     public static void main(String[] args) {
-        AutoWriteObject xx= null;
-        System.out.println("==>  "+xx.getClass()) ;
+        AutoWriteObject xx = null ;
+        System.out.println("==>  " + xx.getClass()) ;
     }
 }

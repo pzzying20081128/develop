@@ -78,7 +78,7 @@ public class BuildServiceFile implements IBuildServiceFile {
 
         String outFile_search =  clazz.getSimpleName() + "SearchBean.java" ;
 
-        buildServiceFile(context, vmFile_search, buildJavaCommProperties, clazz, basePath+"/units",outFile_search) ;
+        buildServiceFile(context, vmFile_search, buildJavaCommProperties, clazz, basePath+"/units/search/bean",outFile_search) ;
         }
         //
      // build   SaveUpdateUnits.java.vm
@@ -126,6 +126,17 @@ public class BuildServiceFile implements IBuildServiceFile {
             String outFile ="Aop"+clazz.getSimpleName() + "Service.java" ;
 
             buildServiceFile(context, vmFile, buildJavaCommProperties, clazz, basePath+"/web/aop",outFile) ;
+            
+        }
+        
+        
+        {
+            //RemoveUnits.java.vm
+            File vmFile= new File(templatePath + "/InfaceService.java.vm") ;
+
+            String outFile ="Inface"+clazz.getSimpleName() + "Service.java" ;
+
+            buildServiceFile(context, vmFile, buildJavaCommProperties, clazz, basePath+"/inface",outFile) ;
             
         }
         

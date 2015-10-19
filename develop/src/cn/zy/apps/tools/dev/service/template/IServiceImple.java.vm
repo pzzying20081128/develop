@@ -33,8 +33,8 @@ public class ${buildJavaCommProperties.className}ServiceImple extends  ABCommons
     private ${buildJavaCommProperties.className}RemoveUnits i${buildJavaCommProperties.className}RemoveUnits ;
 		   
 			@Override
-            public void saveUpdate(OptType  optType ,   ${buildJavaCommProperties.className}   opt${buildJavaCommProperties.className} )throws SystemOptServiceException{
-        		 i${buildJavaCommProperties.className}SaveUpdateUnits.saveUpdate(optType, opt${buildJavaCommProperties.className});
+            public ${buildJavaCommProperties.className} saveUpdate(OptType  optType ,   ${buildJavaCommProperties.className}   opt${buildJavaCommProperties.className} )throws SystemOptServiceException{
+        	     return 	 i${buildJavaCommProperties.className}SaveUpdateUnits.saveUpdate(optType, opt${buildJavaCommProperties.className});
         		}
             
        	   @Override
@@ -54,8 +54,8 @@ public class ${buildJavaCommProperties.className}ServiceImple extends  ABCommons
     }
             
 			@Override
-            public  void   remove(OptType  optType ,   ${buildJavaCommProperties.className}   opt${buildJavaCommProperties.className})throws SystemOptServiceException{
-			    i${buildJavaCommProperties.className}RemoveUnits.remove(optType, opt${buildJavaCommProperties.className});
+            public  ${buildJavaCommProperties.className}   remove(OptType  optType ,   ${buildJavaCommProperties.className}   opt${buildJavaCommProperties.className})throws SystemOptServiceException{
+			      return   i${buildJavaCommProperties.className}RemoveUnits.remove(optType, opt${buildJavaCommProperties.className});
 			  }
 			  
 			   @Override

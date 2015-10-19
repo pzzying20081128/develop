@@ -11,22 +11,7 @@ public interface I${buildJavaCommProperties.className}Service {
             public String name="I${buildJavaCommProperties.className}Service";
             
                 
-            /**
-             *  增加或更新
-             */
-            public void saveUpdate(OptType  optType ,   ${buildJavaCommProperties.className}   opt${buildJavaCommProperties.className} )throws SystemOptServiceException;
-            
-       	  
-            public SelectPage<${buildJavaCommProperties.className} > search(OptType  optType ,    
-				           ${buildJavaCommProperties.className}SearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException;
-            
-			public List<${buildJavaCommProperties.className} > searchList(OptType  optType ,    
-				           ${buildJavaCommProperties.className}SearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException;
-            
-            public  void   remove(OptType  optType ,  ${buildJavaCommProperties.className}   opt${buildJavaCommProperties.className})throws SystemOptServiceException;
-            
-            
-           public  ${buildJavaCommProperties.className} get(Integer id)throws SystemOptServiceException;
+        
             
             
             

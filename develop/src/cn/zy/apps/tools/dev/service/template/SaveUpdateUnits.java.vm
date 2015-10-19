@@ -9,14 +9,14 @@ import ${buildJavaCommProperties.clssPackage}.${buildJavaCommProperties.classNam
 @Component("${buildJavaCommProperties.className}SaveUpdateUnits")
 public class ${buildJavaCommProperties.className}SaveUpdateUnits extends ABCommonsService {
 
-    public void saveUpdate(OptType optType, ${buildJavaCommProperties.className} opt${buildJavaCommProperties.className}) throws SystemOptServiceException {
+    public ${buildJavaCommProperties.className} saveUpdate(OptType optType, ${buildJavaCommProperties.className} opt${buildJavaCommProperties.className}) throws SystemOptServiceException {
 
         switch (optType) {
         case save:
-            save(opt${buildJavaCommProperties.className}) ;
+            return   save(opt${buildJavaCommProperties.className}) ;
             break ;
         case update:
-            update(opt${buildJavaCommProperties.className}) ;
+            return update(opt${buildJavaCommProperties.className}) ;
             break ;
 
         default:
@@ -24,11 +24,11 @@ public class ${buildJavaCommProperties.className}SaveUpdateUnits extends ABCommo
         }
     }
 
-    public void save(${buildJavaCommProperties.className} opt${buildJavaCommProperties.className}) throws SystemOptServiceException {
+    public ${buildJavaCommProperties.className}  save(${buildJavaCommProperties.className} opt${buildJavaCommProperties.className}) throws SystemOptServiceException {
 
     }
 
-    public void update(${buildJavaCommProperties.className} opt${buildJavaCommProperties.className}) throws SystemOptServiceException {
+    public ${buildJavaCommProperties.className}  update(${buildJavaCommProperties.className} opt${buildJavaCommProperties.className}) throws SystemOptServiceException {
 
     }
 

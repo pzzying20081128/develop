@@ -8,12 +8,12 @@ import ${buildJavaCommProperties.clssPackage}.${buildJavaCommProperties.classNam
 @Component("${buildJavaCommProperties.className}RemoveUnits")
 public class ${buildJavaCommProperties.className}RemoveUnits extends ABCommonsService {
 
-    public void remove(OptType optType, ${buildJavaCommProperties.className}  opt${buildJavaCommProperties.className} ) throws SystemOptServiceException {
+    public ${buildJavaCommProperties.className}  remove(OptType optType, ${buildJavaCommProperties.className}  opt${buildJavaCommProperties.className} ) throws SystemOptServiceException {
         
-         Integer id =opt${buildJavaCommProperties.className}.get ;
-        ${buildJavaCommProperties.className}   remove${buildJavaCommProperties.className} =baseService.load(id, ${buildJavaCommProperties.className}.class);
+         Integer id =opt${buildJavaCommProperties.className}.getId() ;
+        ${buildJavaCommProperties.className}   remove${buildJavaCommProperties.className} =baseService.get(id, ${buildJavaCommProperties.className}.class);
         baseService.update(remove${buildJavaCommProperties.className});
-
+        return  remove${buildJavaCommProperties.className} ;
     }
 
 }

@@ -222,14 +222,14 @@ public class JSONWriter {
             PropertyDescriptor[] props = info.getPropertyDescriptors() ;
 
             boolean hasData = false ;
-            
+
             for (PropertyDescriptor prop : props) {
                 String name = prop.getName() ;
                 Method accessor = prop.getReadMethod() ;
 
                 // ////System.out.println("===============================  +.......................................    +"+((accessor
                 // != null)?accessor.getName(): ""));
-                Method baseAccessor = findBaseAccessor(clazz, accessor) ;
+                Method baseAccessor = findBaseAccessors(clazz, accessor) ;
 
                 if (baseAccessor != null) {
                     if (baseAccessor.isAnnotationPresent(JSON.class)) {
@@ -254,8 +254,8 @@ public class JSONWriter {
                     }
                     // ////System.out.println("==   "+name+"=========+++++++++++++++++++++++++++++++++  =>    "+object);
                     Object value = accessor.invoke(object) ;
-//                    if(value !=null)
-//                    System.out.println("+++++++++++++++++++++++++ >  "+value.getClass().getName()) ;
+                    //                    if(value !=null)
+                    //                    System.out.println("+++++++++++++++++++++++++ >  "+value.getClass().getName()) ;
                     if (value != null && value instanceof PersistentBag) {
                         PersistentBag persistentBag = (PersistentBag) value ;
                         if (persistentBag.wasInitialized()) {
@@ -330,41 +330,42 @@ public class JSONWriter {
         return value ;
     }
 
-    protected Method findBaseAccessor(Class clazz, Method accessor) {
+    protected Method findBaseAccessors(Class clazz, Method accessor) {
 
         Method baseAccessor = null ;
         if (clazz.getName().contains("$$EnhancerByCGLIB$$")) {
-            try {
-                baseAccessor = Thread.currentThread().getContextClassLoader().loadClass(clazz.getName().substring(0, clazz.getName().indexOf("$$"))).getMethod(accessor.getName(), accessor.getParameterTypes()) ;
-            } catch (Exception ex) {
-                LOG.info(ex.getMessage(), ex) ;
-            }
+//            try {
+//                baseAccessor = Thread.currentThread().getContextClassLoader().loadClass(clazz.getName().substring(0, clazz.getName().indexOf("$$"))).getMethod(accessor.getName(), accessor.getParameterTypes()) ;
+//            } catch (Exception ex) {
+//                LOG.info(ex.getMessage(), ex) ;
+//            }
             baseAccessor = null ;
         } else if (clazz.getName().contains("$$_javassist")) {
-            try {
-                Class clazz_ = Class.forName(clazz.getName().substring(0, clazz.getName().indexOf("_$$"))) ;
-                if (clazz_ != null && accessor != null) {
-                    baseAccessor = search(clazz_, accessor.getName(), accessor.getParameterTypes()) ;
-                    // baseAccessor = clazz_.getMethod(accessor.getName(),
-                    // accessor.getParameterTypes());
-                }
-
-            } catch (Exception ex) {
-                LOG.info(ex.getMessage(), ex) ;
-            }
+//            try {
+//                Class clazz_ = Class.forName(clazz.getName().substring(0, clazz.getName().indexOf("_$$"))) ;
+//                if (clazz_ != null && accessor != null) {
+//                    baseAccessor = search(clazz_, accessor.getName(), accessor.getParameterTypes()) ;
+//                    // baseAccessor = clazz_.getMethod(accessor.getName(),
+//                    // accessor.getParameterTypes());
+//                }
+//
+//            } catch (Exception ex) {
+//                LOG.info(ex.getMessage(), ex) ;
+//            }
             baseAccessor = null ;
         } else
 
         if (clazz.getName().contains("_$$_")) {
-            try {
-                Class clazz_ = Class.forName(clazz.getName().substring(0, clazz.getName().indexOf("_$$_"))) ;
-                if (clazz_ != null && accessor != null) {
-                    baseAccessor = search(clazz_, accessor.getName(), accessor.getParameterTypes()) ;
-                }
-
-            } catch (Exception ex) {
-                LOG.info(ex.getMessage(), ex) ;
-            }
+            //            try {
+            //                
+            //                Class clazz_ = Class.forName(clazz.getName().substring(0, clazz.getName().indexOf("_$$_"))) ;
+            //                if (clazz_ != null && accessor != null) {
+            //                    baseAccessor = search(clazz_, accessor.getName(), accessor.getParameterTypes()) ;
+            //                }
+            //
+            //            } catch (Exception ex) {
+            //                LOG.info(ex.getMessage(), ex) ;
+            //            }
             baseAccessor = null ;
         } else {
             return accessor ;

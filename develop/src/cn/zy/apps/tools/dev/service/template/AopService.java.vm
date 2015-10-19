@@ -13,9 +13,9 @@ public class Aop${buildJavaCommProperties.className}Service implements IAop${bui
     @Qualifier(I${buildJavaCommProperties.className}Service.name)
     private I${buildJavaCommProperties.className}Service i${buildJavaCommProperties.className}Service ;
 
-     public void saveUpdate(OptType  optType ,   ${buildJavaCommProperties.className}   opt${buildJavaCommProperties.className} )throws SystemOptServiceException{
+     public ${buildJavaCommProperties.className}  saveUpdate(OptType  optType ,   ${buildJavaCommProperties.className}   opt${buildJavaCommProperties.className} )throws SystemOptServiceException{
 	
-	 i${buildJavaCommProperties.className}Service.saveUpdate(  optType ,    opt${buildJavaCommProperties.className} );
+	     return  i${buildJavaCommProperties.className}Service.saveUpdate(  optType ,    opt${buildJavaCommProperties.className} );
 	 
 	 }
             
@@ -36,9 +36,9 @@ public class Aop${buildJavaCommProperties.className}Service implements IAop${bui
             
     }
             
-    public  void   remove(OptType  optType ,  ${buildJavaCommProperties.className}   opt${buildJavaCommProperties.className})throws SystemOptServiceException{
+    public  ${buildJavaCommProperties.className}    remove(OptType  optType ,  ${buildJavaCommProperties.className}   opt${buildJavaCommProperties.className})throws SystemOptServiceException{
 			
-			   i${buildJavaCommProperties.className}Service.remove(  optType ,   opt${buildJavaCommProperties.className});
+			   return  i${buildJavaCommProperties.className}Service.remove(  optType ,   opt${buildJavaCommProperties.className});
 			
 	}
             
