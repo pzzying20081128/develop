@@ -17,7 +17,8 @@ function ${javaScript.module}_save_update_form_panel_windows(params) {
 						waitMsg : '正在提交...',
 						submitEmptyText : false,
 						params : params.params,
-						success : function(json) {
+						success : function(result) {
+								json =result.result;
 							if (params.action == "save") {
 								params.grid.insertRow(json[params.pojo]);
 								form_panel.reset();

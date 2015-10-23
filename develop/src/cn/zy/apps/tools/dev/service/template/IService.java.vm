@@ -6,7 +6,7 @@
 import ${buildJavaCommProperties.clssPackage}.${buildJavaCommProperties.className} ; 
 import ${buildJavaCommProperties.servicePackage}.units.${buildJavaCommProperties.className}SearchBean ;
 
-public interface I${buildJavaCommProperties.className}Service {
+public interface I${buildJavaCommProperties.className}Service  extends Inface${buildJavaCommProperties.className}Service { 
     
             public String name="I${buildJavaCommProperties.className}Service";
             

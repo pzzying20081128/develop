@@ -39,17 +39,16 @@ public abstract class AutoWriteObject {
 
             Class<?> clazz = object.getClass() ;
 
-            Method readMethod = popertyDescriptors.getReadMethod() ;
-
-            try {
-                Object result_ = readMethod.invoke(object) ;
-                //System.out.println("----- >       "+result_.getClass().getName()+"   classs "+result_.getClass().getName().contains("_$$_") ) ;
-                if (result_ != null  &&  ! result_.getClass().getName().contains("_$$_")) {
-                    return ;
-                } 
-            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                Loggerfactory.devError(logger, e, e.getMessage() + " ex class" + e.getClass().toString() + "  clazz   " + clazz.getName()) ;
-            }
+//            Method readMethod = popertyDescriptors.getReadMethod() ;
+//            try {
+////                Object result_ = readMethod.invoke(object) ;
+//                //System.out.println("----- >       "+result_.getClass().getName()+"   classs "+result_.getClass().getName().contains("_$$_") ) ;
+////                if (result_ != null  &&  ! result_.getClass().getName().contains("_$$_")) {
+////                    return ;
+////                } 
+//            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+//                Loggerfactory.devError(logger, e, e.getMessage() + " ex class" + e.getClass().toString() + "  clazz   " + clazz.getName()) ;
+//            }
 
             String fieldName = popertyDescriptors.getName() ;
 

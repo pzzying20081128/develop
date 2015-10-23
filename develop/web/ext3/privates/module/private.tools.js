@@ -37,6 +37,33 @@ function showMsgYN(params) {
 	});
 }
 
+// /////////////////////////////////////////////////////////////////////////////////////////
+Ext.form.ERPShowTextField = Ext.extend(Ext.form.TextField, {
+	disabled : true,
+	disabledClass : 'my-disabled',
+	xtype : 'textfield',
+	blankText : '不能为空!',
+	allowBlank : false,
+	style : AllowBlankStyle,
+//	enableKeyEvents : true
+
+});
+Ext.reg('ERPShowText', Ext.form.ERPShowTextField);
+
+Ext.form.ERPShowEditText = Ext.extend(Ext.form.TextField, {
+	disabled : true,
+	disabledClass : 'my-disabled',
+	xtype : 'textfield',
+	blankText : '不能为空!',
+	allowBlank : false,
+	style : AllowBlankStyle,
+//	enableKeyEvents : true,
+	editable : true,
+	readOnly : false
+
+});
+Ext.reg('ERPShowEditText', Ext.form.ERPShowTextField);
+
 // //////////////////////////////////////////////////////////////////////////////////////////////
 
 function ERPAjaxRequest(reqParams) {
@@ -98,7 +125,8 @@ function ERPAjaxRequest(reqParams) {
 										'response' : response,
 										'options' : options,
 										"msg" : json.msg,
-										"result" : null,
+										"result" : null
+										,
 									});
 								} else {
 									showErrorMsg("错误提示", "请求操作失败【" + json.msg + "】");
@@ -249,3 +277,4 @@ function mainGridWindow(properties) {
 }
 
 // ///////////////////////////////////////////////////////////////////////////////////////////
+

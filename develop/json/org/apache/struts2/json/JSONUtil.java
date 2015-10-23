@@ -56,7 +56,7 @@ public class JSONUtil {
 
     public final static String RFC3339_FORMAT_1 = "yyyy-MM-dd HH:mm:ss" ;
 
-    public final static String RFC3339_FORMAT = "yyyy-MM-dd " ;
+    public final static String RFC3339_FORMAT = "yyyy-MM-dd" ;
 
     private static final Logger LOG = LoggerFactory.getLogger(JSONUtil.class) ;
 

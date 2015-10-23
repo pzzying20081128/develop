@@ -154,8 +154,9 @@ public abstract class AutoWritePrpertiesObjectService {
                             /////////////////////////////////////////////////////
                             Method methodRead = propertyDescriptor.getReadMethod() ;
                             Object objs = methodRead.invoke(result) ;
-                            if (objs != null) {
-                                if (parent != null) {
+               
+                            if (objs != null &&  ! objs.getClass().equals(SelectPage.class) ) {
+                                if (parent != null &&  ! parent.getClass().equals(SelectPage.class) ) {
                                     if (!isEqualsParents(objs, parent)) {
                                         simpleObject(objs, result) ;
                                     }

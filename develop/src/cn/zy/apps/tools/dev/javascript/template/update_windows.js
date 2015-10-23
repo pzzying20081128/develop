@@ -115,8 +115,8 @@ function ${javaScript.module}_update_windows(moduleId, moduleName, params) {
 	
 		${javaScript.module}_create_window.load({
 		url : './getStaff.action?uuid=' + goodsId,
-		success : function(form, action) {
-		
+		success : function(result) {
+		               json = result.result;
 		}
 	});
 

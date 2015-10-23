@@ -403,7 +403,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 			if (typeof ( Ext.getCmp(moduleId + '_checked') ) == "undefined") {
 
 				if (typeof ( prams.select ) != "undefined" && typeof ( prams.select ) == "function") {
-					prams.select(r.data.id, r.data, sm, rowIdx, r);
+					prams.select(r.id, r.json, sm, rowIdx, r);
 				}
 				return;
 			} else {
@@ -451,7 +451,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 							}
 						}
 					}
-					prams.select(r.data.id, sm, rowIdx, r);
+					prams.select(r.id, r.json, sm, rowIdx, r);
 
 				}// if(typeof(prams)!='undefined')
 

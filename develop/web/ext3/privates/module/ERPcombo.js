@@ -141,10 +141,11 @@ function createERPcombo(params) {
 		allowBlank : typeof ( params.allowBlank ) == 'undefined' ? false : params.allowBlank,
 		style : typeof ( params.allowBlank ) == 'undefined' ? NoAllowBlankStyle : ( params.allowBlank == true ? AllowBlankStyle : NoAllowBlankStyle ),
 		store : new Ext.data.ERPComboStore({
-			autoLoad : false,
+			autoLoad : typeof ( params.autoLoad ) == 'undefined' ? false :  params.autoLoad,
+			baseParams:params.params,
 			proxy : new Ext.data.HttpProxy({
 				url : params.url,
-				params:params.params
+//				params:params.params
 			}),
 			reader : new Ext.data.JsonReader({
 				id : "id",
@@ -156,6 +157,8 @@ function createERPcombo(params) {
 			}])),
 			listeners : {
 				'load' : function() {
+					if (typeof ( params.load ) != "undefined")
+					params.load();
 				}
 			}
 		}),
