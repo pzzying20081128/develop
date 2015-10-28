@@ -15,8 +15,6 @@ import cn.zy.apps.tools.web.SelectPage ;
 
 public abstract class AutoWritePrpertiesObjectService {
 
-    //    private AutoWriteObject autoWriteObjects ;
-
     protected static Map<Class<?>, Map<String, PropertyDescriptor>> cacheFactory = new HashMap<Class<?>, Map<String, PropertyDescriptor>>() ;
 
     private org.apache.log4j.Logger logger = Loggerfactory.instance(AutoWritePrpertiesObjectService.class) ;
@@ -77,6 +75,8 @@ public abstract class AutoWritePrpertiesObjectService {
         return propertyDescriptorsMap ;
     }
 
+    protected abstract PrpertiesSetValueService autoPrpertiesSetValueService() ;
+
     public void intToPrpertiesUnits(Object result) throws Exception {
         try {
             if (result == null) return ;
@@ -88,6 +88,8 @@ public abstract class AutoWritePrpertiesObjectService {
             } else {
                 simpleObject(result, null) ;
             }
+            PrpertiesSetValueService prpertiesSetValueService = autoPrpertiesSetValueService() ;
+            prpertiesSetValueService.execactionaftereturn(result) ;
         } catch (Exception e) {
             Loggerfactory.error(logger, e) ;
 
@@ -149,14 +151,17 @@ public abstract class AutoWritePrpertiesObjectService {
 
                         handProperty(result, propertyDescriptor) ;
 
-                        {
-
-                            /////////////////////////////////////////////////////
-                            Method methodRead = propertyDescriptor.getReadMethod() ;
-                            Object objs = methodRead.invoke(result) ;
-               
-                            if (objs != null &&  ! objs.getClass().equals(SelectPage.class) ) {
-                                if (parent != null &&  ! parent.getClass().equals(SelectPage.class) ) {
+                        /////////////////////////////////////////////////////
+                        Method methodRead = propertyDescriptor.getReadMethod() ;
+                        Object objs = methodRead.invoke(result) ;
+                       
+                        if (objs == null || objs.equals("serialVersionUID")  || objs.getClass().toString().contains("_$$_jvst") ||
+                                objs.getClass().toString().contains("_$$_javassist_")) {
+                            
+                        }else{
+                            
+                            if (objs != null && !objs.getClass().equals(SelectPage.class)) {
+                                if (parent != null && !parent.getClass().equals(SelectPage.class)) {
                                     if (!isEqualsParents(objs, parent)) {
                                         simpleObject(objs, result) ;
                                     }
@@ -164,10 +169,13 @@ public abstract class AutoWritePrpertiesObjectService {
                                     simpleObject(objs, result) ;
                                 }
 
-                            }
-
-                            /////////////////////////////////////////////////////
+                            }               
                         }
+
+             
+
+                        /////////////////////////////////////////////////////
+
                     }
 
                 }

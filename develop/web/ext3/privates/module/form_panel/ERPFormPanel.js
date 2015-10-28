@@ -11,6 +11,7 @@ Ext.form.ERPFormPanel = Ext.extend(Ext.form.FormPanel, {
 	sync : true,
 	fileUpload : false,
 	reset : function() {
+
 		this.getForm().reset();
 	},
 	/**
@@ -97,7 +98,7 @@ Ext.form.ERPFormPanel = Ext.extend(Ext.form.FormPanel, {
 							'form' : form,
 							'action' : action,
 							'errormsg' : errormsg
-							
+
 						});
 					else
 						showErrorMsg("错误提示", errormsg);

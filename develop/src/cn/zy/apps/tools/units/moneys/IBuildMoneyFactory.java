@@ -1,6 +1,8 @@
 package cn.zy.apps.tools.units.moneys ;
 
 public interface IBuildMoneyFactory {
+    
+    
 
     public Long precision = 10000L ;
 
@@ -21,7 +23,7 @@ public interface IBuildMoneyFactory {
      * @param inMoney
      * @return
      */
-    public Long switchRateToLongPrecision(Double rate) ;
+    public Long switchRateToLongPercent(Double rate) ;
     
     
     public <V> V switchLongPrecisionToMoney(Long moneyLong , Class<V> resultType) ;
@@ -29,6 +31,6 @@ public interface IBuildMoneyFactory {
    
     public <V> V switchLongPercentToRate(Long rateLong,Class<V> resultType) ;
 
-
+    
 
 }

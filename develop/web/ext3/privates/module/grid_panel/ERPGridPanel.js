@@ -615,7 +615,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 					if (loadParams != null) {
 						if (typeof ( loadParams.success ) == "function")
 							// loadParams.success(r, options);
-							var jsonData = store_.reader.jsonData;
+							var jsonData = store.reader.jsonData;
 						loadParams.success({
 							'r' : r,
 							"options" : options,

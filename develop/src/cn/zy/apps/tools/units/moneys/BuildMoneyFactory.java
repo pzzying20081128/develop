@@ -6,12 +6,18 @@ import cn.zy.apps.tools.units.ComputeToolsUntis ;
 
 public class BuildMoneyFactory implements IBuildMoneyFactory {
 
+    private static IBuildMoneyFactory buildMoney = new BuildMoneyFactory() ;
+
+    public static IBuildMoneyFactory getBuildMoney() {
+        return buildMoney ;
+    }
+
     public int Default_Decimal_Digit = 4 ;
 
     private DecimalFormat decimalFormat ;
 
     public BuildMoneyFactory() {
-        String decimalFormat_String = "###,###.00" ;
+        String decimalFormat_String = "######0.00" ;
 
         for (int i = 0; i < Decimal_Digit - 2; i++) {
             decimalFormat_String = decimalFormat_String + "0" ;
@@ -32,8 +38,8 @@ public class BuildMoneyFactory implements IBuildMoneyFactory {
     @SuppressWarnings("unchecked")
     @Override
     public <V> V switchLongPrecisionToMoney(Long moneyLong, Class<V> resultType) {
-        
-        if(moneyLong ==null) return null;
+
+        if (moneyLong == null) return null ;
 
         Double result = ComputeToolsUntis.computePercent(precision, moneyLong, Default_Decimal_Digit) ;
 
@@ -51,19 +57,19 @@ public class BuildMoneyFactory implements IBuildMoneyFactory {
     public static void main(String[] args) {
 
         IBuildMoneyFactory buildMoneyFactory = new BuildMoneyFactory() ;
-        
-        Long xx=4952L;
 
-        String  result = buildMoneyFactory.switchLongPercentToRate(xx,String.class);
+        Long xx = 4952L ;
 
-//        String result_ = buildMoneyFactory.switchLongPrecisionToMoney(result, String.class) ;
+        String result = buildMoneyFactory.switchLongPercentToRate(xx, String.class) ;
+
+        //        String result_ = buildMoneyFactory.switchLongPrecisionToMoney(result, String.class) ;
 
         System.out.println("==2>   " + result.toString()) ;
 
     }
 
     @Override
-    public Long switchRateToLongPrecision(Double rate) {
+    public Long switchRateToLongPercent(Double rate) {
         Long result = ComputeToolsUntis.multiplyGetLong(rate, percent, 0) ;
         return result ;
     }
@@ -71,9 +77,9 @@ public class BuildMoneyFactory implements IBuildMoneyFactory {
     @SuppressWarnings("unchecked")
     @Override
     public <V> V switchLongPercentToRate(Long rateLong, Class<V> resultType) {
-        if(rateLong ==null) return null;
+        if (rateLong == null) return null ;
         Double result = ComputeToolsUntis.computePercent(percent, rateLong, 4) ;
-        
+
         if (resultType.equals(Double.class)) {
             return (V) result ;
         }

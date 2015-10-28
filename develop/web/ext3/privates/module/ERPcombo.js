@@ -34,6 +34,10 @@ Ext.form.ERPComboBox = Ext.extend(Ext.form.ComboBox, {
 	// Ext.form.ERPComboBox.superclass.constructor.call(this);
 	// alert('ERPComboBox先构造函数启动...');
 	// },
+	
+	clear:function(){
+		this.clearValue( );
+	},
 
 	listeners : {
 		keyup : function(textField, e) {

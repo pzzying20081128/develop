@@ -32,7 +32,7 @@ public abstract class PrpertiesSetValueService {
 
     protected static Map<String, Boolean> cacheNoHaveMethodFactory = new HashMap<String, Boolean>() ;
 
-    private org.apache.log4j.Logger logger = Loggerfactory.instance(PrpertiesSetValueService.class) ;
+    protected org.apache.log4j.Logger logger = Loggerfactory.instance(PrpertiesSetValueService.class) ;
 
     private String regexPackage ;
 
@@ -60,6 +60,10 @@ public abstract class PrpertiesSetValueService {
                 simpleObject(result, null) ;
             }
         }
+    }
+
+    protected PropertyDescriptor[] searchAll(Class<?> result) {
+        return cacheFactory.get(result) ;
     }
 
     private PropertyDescriptor searchPropertyDesriptor(String fieldName, Object result) throws IntrospectionException {
@@ -95,7 +99,7 @@ public abstract class PrpertiesSetValueService {
         }
 
         for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
-          
+
             if (propertyDescriptor.getName().equals("serialVersionUID") || propertyDescriptor.getName().contains("$JAVASSIST_READ_WRITE_HANDLER") || propertyDescriptor.getName().contains("$$_javassist_") || propertyDescriptor.getName().contains("_$$_jvst")) continue ;
 
             if (propertyDescriptor.getReadMethod().getReturnType().equals(Set.class) || propertyDescriptor.getReadMethod().getReturnType().equals(List.class)) {
