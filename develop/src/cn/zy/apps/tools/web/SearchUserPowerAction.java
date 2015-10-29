@@ -19,12 +19,14 @@ public abstract class SearchUserPowerAction extends GeneralAction {
 
     protected abstract IUserPowerMdouleService getIUserMdoulePowerService() ;
 
+    private boolean isroot ;
+
     protected abstract boolean isAdmin() ;
 
-    protected String moduleId;
-    
-    protected  Map<String,  List<UserOptPower>> powerMap;
-    
+    protected String moduleId ;
+
+    protected Map<String, List<UserOptPower>> powerMap ;
+
     public String showUserPowerMeuns() throws Exception {
 
         try {
@@ -46,8 +48,6 @@ public abstract class SearchUserPowerAction extends GeneralAction {
         return SUCCESS ;
 
     }
-    
-
 
     public String filterUserPowerTree() throws Exception {
 
@@ -72,8 +72,6 @@ public abstract class SearchUserPowerAction extends GeneralAction {
         return SUCCESS ;
     }
 
-   
-    
     /**
      *      <action name="power" class="SystemUserPowerAction" method="listPowerByUser">
             <result type="json">
@@ -98,13 +96,15 @@ public abstract class SearchUserPowerAction extends GeneralAction {
 
         try {
             IUserPowerMdouleService userMdoulePowerService = getIUserMdoulePowerService() ;
-             List<UserPower<UserOptPower>> powerList = userMdoulePowerService.searchUserPower(moduleId,getLoginUserId());
-             Map<String,  List<UserOptPower>> powerMap = new HashMap<String,  List<UserOptPower>>() ;
+            List<UserPower<UserOptPower>> powerList = userMdoulePowerService.searchUserPower(moduleId, getLoginUserId()) ;
+            Map<String, List<UserOptPower>> powerMap = new HashMap<String, List<UserOptPower>>() ;
             for (UserPower<UserOptPower> systemUserPower : powerList) {
-                List<UserOptPower> x = systemUserPower.getUserOptPowers();
+                List<UserOptPower> x = systemUserPower.getUserOptPowers() ;
                 powerMap.put(systemUserPower.getModuleId(), x) ;
             }
-            this.powerMap  =  powerMap;
+            this.powerMap = powerMap ;
+            boolean isAdmin = isAdmin() ;
+            this.isroot = isAdmin ;
             this.success = true ;
         } catch (Exception e) {
             this.msg = handError(e) ;
@@ -136,6 +136,14 @@ public abstract class SearchUserPowerAction extends GeneralAction {
 
     public void setPowerMap(Map<String, List<UserOptPower>> powerMap) {
         this.powerMap = powerMap ;
+    }
+
+    public boolean isIsroot() {
+        return isroot ;
+    }
+
+    public void setIsroot(boolean isroot) {
+        this.isroot = isroot ;
     }
 
 }
