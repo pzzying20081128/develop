@@ -72,15 +72,16 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 		var items = tbar.items.items;
 		for (var i = 0; i < items.length; i++) {
 			var opt = items[i];
-			if (isOpen == true)
+			if (typeof opt.key == "undefined")
+				continue;
+			if (isOpen == true) {
 				opt.enable();
-			else
-				opt.disable();
-
+			} else
+				opt.disable()
 		}
 	},
 
-	openButton : function(isOpen) {
+	openButton : function(params) {
 		var grid = this.getGrid();
 		var isAdmin = grid.isAdmin;
 		if (isAdmin == 1) {
@@ -91,19 +92,28 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 			var items = tbar.items.items;
 			for (var i = 0; i < items.length; i++) {
 				var opt = items[i];
+				if (typeof ( opt.key ) == 'undefined')
+					continue;
 				var power = _map_.get(opt.key);
 				if (power == null) {
 					alert(opt.text + "  is set error ! ");
 				} else {
-					if (power.isUse == 1 && isOpen == true) {
-						opt.enable();
-					} else {
+					if (power.isUse != 1) {
 						opt.disable();
+					} else { // ==1
+						opt.enable();
+//						if (params.check == true) { // 审核状态
+//							if (opt.check == 'hide')
+//								opt.disable();
+//							else
+//								opt.enable();
+//						} else {
+//							opt.enable();
+//						}
 					}
 				}
 			}
 		}
-
 	},
 	// optName =moduleId+add
 	isHavePower : function(optName) {
@@ -286,7 +296,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 		var colModel_ = this.colModel;
 		var moduleId = this.moduleId;
 		if (typeof ( moduleId ) == "undefined") {
-			showErrorMsg("系统错误", "ERPGridPanel saveColModule not find moduleId ! moduleId:TREEID");
+			showErrorMsg("系统错误", "ERPGridPanel saveColModule not find moduleId !moduleId:TREEID");
 			return;
 		}
 		var cmConfigs = colModel_.config;
@@ -323,7 +333,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 				col_indexs = i;
 		}
 		Ext.Ajax.request({
-			url : 'sysuser/col_chonig_opt.action',
+			url : './col_chonig_grid.do',
 			params : {
 				module_name : moduleId,// 'SYSTEM_USER',
 				data_indexs : data_indexs,
@@ -336,24 +346,27 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 			}
 		});
 
-		for (var i = 1; i < cmConfigs.length; i++) {
-			var cmConfig = cmConfigs[i];
-			var hidden = ( cmConfig.hidden == null ) ? '0' : ( cmConfig.hidden == true ? 1 : 0 );
-			var dataIndex_ = cmConfig.dataIndex;
-			Ext.Ajax.request({
-				url : 'sysuser/col_move_opt.action',
-				params : {
-					module_name : moduleId,// 'SYSTEM_USER',
-					old_colIndex : 0,
-					new_colIndex : i,
-					dataIndex : dataIndex_,
-					col_name : cmConfig.header,
-					is_hidden : hidden
-				},
-				success : function(response, options) {
-				}
-			});
-		}
+		// for (var i = 1; i < cmConfigs.length; i++) {
+		// var cmConfig = cmConfigs[i];
+		// var hidden = ( cmConfig.hidden == null ) ? '0' : (
+		// cmConfig.hidden
+		// ==
+		// true ? 1 : 0 );
+		// var dataIndex_ = cmConfig.dataIndex;
+		// Ext.Ajax.request({
+		// url : 'sysuser/col_move_opt.action',
+		// params : {
+		// module_name : moduleId,// 'SYSTEM_USER',
+		// old_colIndex : 0,
+		// new_colIndex : i,
+		// dataIndex : dataIndex_,
+		// col_name : cmConfig.header,
+		// is_hidden : hidden
+		// },
+		// success : function(response, options) {
+		// }
+		// });
+		// }
 	},
 
 	removeOptBt : function() {
@@ -396,15 +409,41 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 					}
 
 				}
+				grid.openButton({
+					check : true
+				});
 				return json;
 			}
 		});
 
 	},
 
-	initPanel : function(prams) {
-		// this.bottomToolbar.store=this.store;
+	addSetButton : function(params) {
+		var grid = this.getGrid();
+		if (typeof ( params.addSet ) != "undefined") {
+			var toolbar = grid.getTopToolbar();
+			if (typeof ( toolbar ) != "undefined") {
+				toolbar.addButton(new Ext.Toolbar.Fill());
+				toolbar.addButton({
+					xtype : "tbbutton",
+					text : "保存设置",
+					disabled : false,
+					// keyBinding : createEditKey(),
+					handler : function(bt) {
+						if (typeof ( params.addSet.grids ) != "undefined") {
+							var grids = params.addSet.grids;
+							for (var i = 0; i < grids.length; i++) {
+								grids[i].saveColModule();
+							}
+							showMsg("信息", "保存设置成功");
+						}
+					}
+				});
+			}
+		};
+	},
 
+	initPanel : function(prams) {
 		var moduleId = this.moduleId;
 		if (typeof ( moduleId ) == "undefined") {
 			showErrorMsg("系统错误", "ERPGridPanel  initPanel not find moduleId ! moduleId:TREEID");
@@ -509,6 +548,42 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 			// }
 			// /
 		});
+		// //////////////////////////////////////////////////////////////////////////////////
+		ERPAjaxRequest({
+			url : './sysuser/fetch_hidden_col.do',
+			params : {
+				module_name : moduleId
+			},
+
+			success : function(result) {
+				var cmConfigs = colModel_.config;
+				var json = result.result;
+				var hiddenCount = 0;
+				for (var i = 0; i < json.userGridConfigs.length; i++) {
+
+					for (var j = 1; j < cmConfigs.length; j++) {
+						var cmConfig = cmConfigs[j];
+						if (cmConfig.dataIndex == json.userGridConfigs[i].colDataIndex) {
+							if (json.userGridConfigs[i].hidden == 1) {
+								colModel_.setHidden(j, true);
+								hiddenCount++;
+							} else {
+								colModel_.setHidden(j, false);
+							}
+							colModel_.moveColumn(j, json.userGridConfigs[i].colIndex);
+							colModel_.setColumnWidth(json.userGridConfigs[i].colIndex, json.userGridConfigs[i].colWidth, true);
+							break;
+						}
+					}
+					if (hiddenCount == json.userGridConfigs.length)
+						colModel_.setHidden(1, false);
+				}
+
+			}
+		});
+
+		// ///////////////////////////////////////////////////////////////////////////////////
+
 	},// end
 
 	load : function(loadParams) {

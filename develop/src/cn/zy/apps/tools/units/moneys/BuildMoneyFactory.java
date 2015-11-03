@@ -54,19 +54,19 @@ public class BuildMoneyFactory implements IBuildMoneyFactory {
         throw new RuntimeException("switchLongPrecisionToMoney   resultType  error  is  [Double   ,  String ]  ") ;
     }
 
-    public static void main(String[] args) {
-
-        IBuildMoneyFactory buildMoneyFactory = new BuildMoneyFactory() ;
-
-        Long xx = 4952L ;
-
-        String result = buildMoneyFactory.switchLongPercentToRate(xx, String.class) ;
-
-        //        String result_ = buildMoneyFactory.switchLongPrecisionToMoney(result, String.class) ;
-
-        System.out.println("==2>   " + result.toString()) ;
-
-    }
+    //    public static void main(String[] args) {
+    //
+    //        IBuildMoneyFactory buildMoneyFactory = new BuildMoneyFactory() ;
+    //
+    //        Long xx = 4952L ;
+    //
+    //        String result = buildMoneyFactory.switchLongPercentToRate(xx, String.class) ;
+    //
+    //        //        String result_ = buildMoneyFactory.switchLongPrecisionToMoney(result, String.class) ;
+    //
+    //        System.out.println("==2>   " + result.toString()) ;
+    //
+    //    }
 
     @Override
     public Long switchRateToLongPercent(Double rate) {
@@ -90,6 +90,24 @@ public class BuildMoneyFactory implements IBuildMoneyFactory {
         throw new RuntimeException("switchLongPrecisionToMoney   resultType  error  is  [Double   ,  String ]  ") ;
     }
 
+    @Override
+    public Long jsNoTaxPrice(Long taxPrice, Long rate) {
+        double s = ComputeToolsUntis.computePercent(rate, percent) ;
+
+        double xx = 1 - s ;
+
+        Long noTaxPrice = ComputeToolsUntis.multiplyGetLong(xx, taxPrice, 0) ;
+
+        return noTaxPrice ;
+    }
+
+    @Override
+    public Long jsGrossProfitRate(Long salesMoney, Long stockMomey) {
+        Double r = ComputeToolsUntis.computePercent(salesMoney, (salesMoney - stockMomey), 4) ;
+        Long x = ComputeToolsUntis.multiplyGetLong(r, IBuildMoneyFactory.precision, 0) ;
+        return x ;
+    }
+
     //    @Override
     //    public Long computeRate(Long a, Long aend) {
     //
@@ -99,4 +117,19 @@ public class BuildMoneyFactory implements IBuildMoneyFactory {
     //
     //    }
 
+    public static void main(String[] args) {
+
+//        double s = ComputeToolsUntis.computePercent(1700L, percent) ;
+//
+//        double xx = 1 - s ;
+//
+//        Long noTaxPrice = ComputeToolsUntis.multiplyGetLong(xx, 2640000L, 0) ;
+//
+//        System.out.println("==> " + noTaxPrice) ;
+        BuildMoneyFactory xx= new BuildMoneyFactory();
+        
+        Long noTaxPrice =   xx.jsNoTaxPrice(2640000L, 1700L);
+        
+        System.out.println("==> " + noTaxPrice) ;
+    }
 }

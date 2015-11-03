@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException ;
 import java.lang.reflect.Method ;
 import java.math.BigDecimal ;
 import java.util.ArrayList ;
+import java.util.Arrays ;
 import java.util.HashMap ;
 import java.util.List ;
 import java.util.Map ;
@@ -12,11 +13,34 @@ import java.util.regex.Matcher ;
 import java.util.regex.Pattern ;
 
 import org.apache.commons.beanutils.BeanUtils ;
+import org.apache.commons.beanutils.PropertyUtils ;
+import org.apache.commons.beanutils.PropertyUtilsBean ;
+import org.hamcrest.beans.PropertyUtil ;
 
 public class ToolsUnits {
-    
-    public static Map<String,Object> createSearchMap() {
-                   return new HashMap<String, Object>();
+
+    public static <V> boolean listIsNULL(List<V> value) {
+        if (value == null || value.size() == 0) return true ;
+        else
+            return false ;
+    }
+
+    public static <V> List<V> filterNULL(List<V> values) {
+        if (listIsNULL(values)) return null ;
+        boolean isNull = false ;
+        for (int i = 0; i < values.size(); i++) {
+            if (values.get(i) instanceof String) {
+                isNull = ToolsUnits.isNOtNulll((String) values.get(i)) ;
+            } else {
+                isNull = (values.get(i) == null) ;
+            }
+            if (isNull) values.remove(values.get(i)) ;
+        }
+        return values ;
+    }
+
+    public static Map<String, Object> createSearchMap() {
+        return new HashMap<String, Object>() ;
 
     }
 
@@ -33,6 +57,27 @@ public class ToolsUnits {
     }
 
     public static void copyBeanProperties(Object tagBean, Object srcBean, String... properties) throws Exception {
+
+        for (String property : properties) {
+            Object value = getValueProperties(srcBean, property) ;
+            writeValueProperties(tagBean, property, value) ;
+        }
+
+    }
+
+    public static void copyBeanFilterProperties(Object tagBean, Object srcBean, String... properties) throws Exception {
+
+        List<String> filter = Arrays.asList(properties) ;
+
+        PropertyDescriptor[] propertyDescriptors = PropertyUtils.getPropertyDescriptors(srcBean) ;
+        for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
+            String name = propertyDescriptor.getName() ;
+            if (filter.contains(name)) continue ;
+            PropertyDescriptor tagBeanPropertyDescriptor = PropertyUtils.getPropertyDescriptor(tagBean, name) ;
+            if(tagBeanPropertyDescriptor ==null) continue;
+            Object result = propertyDescriptor.getReadMethod().invoke(srcBean) ;
+            tagBeanPropertyDescriptor.getWriteMethod().invoke(tagBean, result) ;
+        }
 
         for (String property : properties) {
             Object value = getValueProperties(srcBean, property) ;

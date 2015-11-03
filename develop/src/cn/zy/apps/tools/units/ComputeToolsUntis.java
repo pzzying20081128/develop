@@ -7,6 +7,7 @@ import java.text.DecimalFormat ;
 
 public class ComputeToolsUntis {
 
+
     public static double multiply(double multiply, double multiplycand, int scale) {
 
         MathContext mc = new MathContext(scale, RoundingMode.HALF_UP) ;
@@ -22,7 +23,7 @@ public class ComputeToolsUntis {
         return Double.valueOf(xxx.toString()) ;
 
     }
-    
+
     public static double multiply(Long multiply, Long multiplycand, int scale) {
 
         MathContext mc = new MathContext(scale, RoundingMode.HALF_UP) ;
@@ -38,8 +39,8 @@ public class ComputeToolsUntis {
         return Double.valueOf(xxx.toString()) ;
 
     }
-
-    public static Long multiplyGetLong(double multiply, Long multiplycand, int scale) {
+    
+    public static Long multiplyToLong(Long multiply, Long multiplycand, int scale) {
 
         MathContext mc = new MathContext(scale, RoundingMode.HALF_UP) ;
 
@@ -50,8 +51,22 @@ public class ComputeToolsUntis {
         BigDecimal result = multiply_.multiply(multiplycand_) ;
 
         BigDecimal xxx = result.setScale(scale, BigDecimal.ROUND_HALF_UP) ;
-       
-        return xxx.longValue() ;
+        //        System.out.println("==>  " +xxx.toString() ) ;
+        return xxx.longValue();
+
+    }
+
+    public static Long multiplyGetLong(double multiply, Long multiplycand, int scale) {
+
+        BigDecimal multiply_ = new BigDecimal(multiply) ;
+
+        BigDecimal multiplycand_ = new BigDecimal(multiplycand) ;
+
+        BigDecimal result = multiply_.multiply(multiplycand_) ;
+
+//        BigDecimal xxx = result.setScale(scale, BigDecimal.ROUND_HALF_UP) ;
+//           System.out.println("==>  "+result.doubleValue()+"  "+multiplycand) ;
+        return result.longValue() ;
 
     }
 
@@ -74,6 +89,8 @@ public class ComputeToolsUntis {
 
         return result_.doubleValue() ;
     }
+    
+
 
     public static double computePercent(Long divisor, Long dividend) {
 

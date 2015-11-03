@@ -1,15 +1,14 @@
 package cn.zy.apps.tools.units.moneys ;
 
 public interface IBuildMoneyFactory {
-    
-    
 
+    //精度
     public Long precision = 10000L ;
 
-    public Long percent = 10000L / 100L ;
-    
+    public Long percent = precision / 100L ;
+
     // 小数位数
-    public int  Decimal_Digit = 0;
+    public int Decimal_Digit = 0 ;
 
     /**
      * 把 double  转换成  long 
@@ -24,13 +23,15 @@ public interface IBuildMoneyFactory {
      * @return
      */
     public Long switchRateToLongPercent(Double rate) ;
-    
-    
-    public <V> V switchLongPrecisionToMoney(Long moneyLong , Class<V> resultType) ;
-    
-   
-    public <V> V switchLongPercentToRate(Long rateLong,Class<V> resultType) ;
 
+    public <V> V switchLongPrecisionToMoney(Long moneyLong, Class<V> resultType) ;
+
+    public <V> V switchLongPercentToRate(Long rateLong, Class<V> resultType) ;
+
+    //计算不函数价格
+    public Long jsNoTaxPrice(Long taxPrice, Long rate) ;
     
+    //计算毛利率
+    public Long jsGrossProfitRate(Long salesMoney, Long stockMomey) ;
 
 }

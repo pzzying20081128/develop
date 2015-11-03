@@ -179,7 +179,7 @@ Ext.apply(Ext.form.VTypes, {
 	money : function(val, field) {
 		try {
 //			if (/^\d+(\.\d{1,4})?$/.test(val))
-           if(/^(?:[1-9]\d{0,3}|0)(?:\.\d+)?$/.test(val))
+           if (/^\d{1,10}(\.\d{1,4})?$/.test(val))
 				return true;
 			else
 				return false;

@@ -5,7 +5,7 @@ function showErrorMsg(title, message) {
 		// msg : ' <div style="width:95%,font-size: 12px;margin-left:
 		// 8px;padding-left: 8px;text-align:center">' + message + '</div>',
 		msg : message,
-		width : 350,
+		width : 400,
 		modal : true,
 		icon : Ext.Msg.ERROR
 	});
@@ -15,8 +15,8 @@ function showMsg(title, messages) {
 	Ext.MessageBox.show({
 		title : title,
 		buttons : Ext.MessageBox.OK,
-		msg : message,
-		width : 500,
+		msg : messages,
+		width : 400,
 		modal : true,
 		icon : Ext.Msg.INFO
 
@@ -45,22 +45,21 @@ Ext.form.ERPShowTextField = Ext.extend(Ext.form.TextField, {
 	blankText : '不能为空!',
 	allowBlank : false,
 	style : AllowBlankStyle
-	,
 	// enableKeyEvents : true
 
 });
 Ext.reg('ERPShowText', Ext.form.ERPShowTextField);
 
 Ext.form.ERPShowEditText = Ext.extend(Ext.form.TextField, {
-	disabled : true,
+	disabled : false,
 	disabledClass : 'my-disabled',
 	xtype : 'textfield',
 	blankText : '不能为空!',
 	allowBlank : false,
-	style : AllowBlankStyle,
+	style : showBlankStyle,
 	// enableKeyEvents : true,
-	editable : true,
-	readOnly : false
+	editable : false,
+	readOnly : true
 
 });
 Ext.reg('ERPShowEditText', Ext.form.ERPShowTextField);
@@ -218,6 +217,15 @@ function createLocalCombo(params) {
 }
 
 function mainGridWindow(properties) {
+	
+	var detailGrid =null;
+	
+	this.setDetailGrid=function(detailGrid){
+		this.detailGrid = detailGrid;
+	}
+	this.getDetailGrid=function(){
+		 return this.detailGridl
+	}
 
 	var isBbar = typeof ( properties.isBbar ) == "undefined" ? true : properties.isBbar;
 
@@ -264,6 +272,17 @@ function mainGridWindow(properties) {
 		tbar : properties.tbar
 	});
 	grid.initPanel(properties.init);
+
+	var tbar = grid.getTopToolbar();
+	var items = tbar.items.items;
+	for (var i = 0; i < items.length; i++) {
+		items[i].disable();
+	}
+	grid.addSetButton({
+		addSet : {
+			grids : (detailGrid== null) ? [grid] : [grid, detailGrid]
+		}
+	});
 
 	this.getGrid = getGrid_;
 

@@ -3,6 +3,7 @@ var erp_grid_panel_limit = 40;
 
 var  NoAllowBlankStyle ='background:#fff1a4;';
 var  AllowBlankStyle ='background:#ffffff;';
+var  showBlankStyle="background:#99FFFF;";
 
 var  NoAllowBlankColor ='#fff1a4';
 var  AllowBlankColor ='#ffffff';
