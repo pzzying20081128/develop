@@ -1,5 +1,6 @@
 package cn.zy.apps.tools.units ;
 
+import java.beans.IntrospectionException ;
 import java.beans.PropertyDescriptor ;
 import java.lang.reflect.InvocationTargetException ;
 import java.lang.reflect.Method ;
@@ -14,8 +15,6 @@ import java.util.regex.Pattern ;
 
 import org.apache.commons.beanutils.BeanUtils ;
 import org.apache.commons.beanutils.PropertyUtils ;
-import org.apache.commons.beanutils.PropertyUtilsBean ;
-import org.hamcrest.beans.PropertyUtil ;
 
 public class ToolsUnits {
 
@@ -56,7 +55,7 @@ public class ToolsUnits {
         return matcher(regex, input) ;
     }
 
-    public static void copyBeanProperties(Object tagBean, Object srcBean, String... properties) throws Exception {
+    public static void copyBeanProperties(Object tagBean, Object srcBean, String... properties) throws ToolsUnitsException {
 
         for (String property : properties) {
             Object value = getValueProperties(srcBean, property) ;
@@ -65,38 +64,49 @@ public class ToolsUnits {
 
     }
 
-    public static void copyBeanFilterProperties(Object tagBean, Object srcBean, String... properties) throws Exception {
+    public static void copyBeanFilterProperties(Object tagBean, Object srcBean, String... properties) throws ToolsUnitsException {
 
         List<String> filter = Arrays.asList(properties) ;
+        try {
+            PropertyDescriptor[] propertyDescriptors = PropertyUtils.getPropertyDescriptors(srcBean) ;
+            for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
+                String name = propertyDescriptor.getName() ;
+                if (filter.contains(name)) continue ;
+                PropertyDescriptor tagBeanPropertyDescriptor = PropertyUtils.getPropertyDescriptor(tagBean, name) ;
+                if (tagBeanPropertyDescriptor == null) continue ;
+                Object result = propertyDescriptor.getReadMethod().invoke(srcBean) ;
+                tagBeanPropertyDescriptor.getWriteMethod().invoke(tagBean, result) ;
+            }
 
-        PropertyDescriptor[] propertyDescriptors = PropertyUtils.getPropertyDescriptors(srcBean) ;
-        for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
-            String name = propertyDescriptor.getName() ;
-            if (filter.contains(name)) continue ;
-            PropertyDescriptor tagBeanPropertyDescriptor = PropertyUtils.getPropertyDescriptor(tagBean, name) ;
-            if(tagBeanPropertyDescriptor ==null) continue;
-            Object result = propertyDescriptor.getReadMethod().invoke(srcBean) ;
-            tagBeanPropertyDescriptor.getWriteMethod().invoke(tagBean, result) ;
+            for (String property : properties) {
+                Object value = getValueProperties(srcBean, property) ;
+                writeValueProperties(tagBean, property, value) ;
+            }
+
+        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            throw new ToolsUnitsException(e) ;
         }
-
-        for (String property : properties) {
-            Object value = getValueProperties(srcBean, property) ;
-            writeValueProperties(tagBean, property, value) ;
-        }
-
     }
 
     @SuppressWarnings("unchecked")
-    private static <V> V getValueProperties(Object srcBean, String property) throws Exception {
-        PropertyDescriptor propertyRead = new PropertyDescriptor(property, srcBean.getClass()) ;
-        Method read = propertyRead.getReadMethod() ;
-        return (V) read.invoke(srcBean) ;
+    private static <V> V getValueProperties(Object srcBean, String property) throws ToolsUnitsException {
+        try {
+            PropertyDescriptor propertyRead = new PropertyDescriptor(property, srcBean.getClass()) ;
+            Method read = propertyRead.getReadMethod() ;
+            return (V) read.invoke(srcBean) ;
+        } catch (IllegalAccessException | InvocationTargetException | IntrospectionException e) {
+            throw new ToolsUnitsException(e) ;
+        }
     }
 
-    private static void writeValueProperties(Object srcBean, String property, Object value) throws Exception {
-        PropertyDescriptor propertyRead = new PropertyDescriptor(property, srcBean.getClass()) ;
-        Method write = propertyRead.getWriteMethod() ;
-        write.invoke(srcBean, value) ;
+    private static void writeValueProperties(Object srcBean, String property, Object value) throws ToolsUnitsException {
+        try {
+            PropertyDescriptor propertyRead = new PropertyDescriptor(property, srcBean.getClass()) ;
+            Method write = propertyRead.getWriteMethod() ;
+            write.invoke(srcBean, value) ;
+        } catch (IllegalAccessException | InvocationTargetException | IntrospectionException e) {
+            throw new ToolsUnitsException(e) ;
+        }
     }
 
     public static <T> List<T> switchStringToIntegerList(String ins, Class<T> clazz) {

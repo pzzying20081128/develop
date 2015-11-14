@@ -44,7 +44,7 @@ Ext.form.ERPShowTextField = Ext.extend(Ext.form.TextField, {
 	xtype : 'textfield',
 	blankText : '不能为空!',
 	allowBlank : false,
-	style : AllowBlankStyle
+	style : showBlankStyle
 	// enableKeyEvents : true
 
 });
@@ -126,7 +126,6 @@ function ERPAjaxRequest(reqParams) {
 										'options' : options,
 										"msg" : json.msg,
 										"result" : null
-										,
 									});
 								} else {
 									showErrorMsg("错误提示", "请求操作失败【" + json.msg + "】");
@@ -194,14 +193,16 @@ function createLocalCombo(params) {
 			Ext.form.ComboBox.superclass.reset.call(this);
 			this.setValue(this.defaultValue);
 		},
+		disabled : typeof ( params.disabled ) == 'undefined' ? false : params.disabled,
 		allowBlank : typeof ( params.allowBlank ) == 'undefined' ? false : params.allowBlank,
 		style : typeof ( params.allowBlank ) == 'undefined' ? NoAllowBlankStyle : ( params.allowBlank == true ? AllowBlankStyle : NoAllowBlankStyle ),
 		value : typeof ( params.defaultValue ) == 'undefined' ? null : params.defaultValue,
+		listeners : params.listeners,
 		store : new Ext.data.SimpleStore({
 			fields : ['id', "value"],
 			// data : [[0, "否"], [1, "是"]]
 			data : params.storeData,
-			listeners : params.listeners
+			listeners : params.storelisteners
 		}
 
 		// combo.setValue(1);
@@ -212,19 +213,22 @@ function createLocalCombo(params) {
 		// ),
 
 	};
-	return xx;
+	var comboBox = new Ext.form.ComboBox(xx);
+	return comboBox;
 
 }
 
 function mainGridWindow(properties) {
-	
-	var detailGrid =null;
-	
-	this.setDetailGrid=function(detailGrid){
+
+	var detailGrid = null;
+
+	var isPrint = typeof ( properties.isPrint ) == "undefined" ? false : true;
+
+	this.setDetailGrid = function(detailGrid) {
 		this.detailGrid = detailGrid;
 	}
-	this.getDetailGrid=function(){
-		 return this.detailGridl
+	this.getDetailGrid = function() {
+		return this.detailGridl
 	}
 
 	var isBbar = typeof ( properties.isBbar ) == "undefined" ? true : properties.isBbar;
@@ -274,15 +278,46 @@ function mainGridWindow(properties) {
 	grid.initPanel(properties.init);
 
 	var tbar = grid.getTopToolbar();
-	var items = tbar.items.items;
-	for (var i = 0; i < items.length; i++) {
-		items[i].disable();
-	}
-	grid.addSetButton({
-		addSet : {
-			grids : (detailGrid== null) ? [grid] : [grid, detailGrid]
+
+	if (isPrint) {
+
+		if (typeof ( tbar ) != 'undefined' && typeof ( tbar.items ) != 'undefined' && typeof ( tbar.items.items ) != 'undefined') {
+
+			tbar.addButton(new Ext.Toolbar.Button({
+				xtype : "tbbutton",
+				text : "打印",
+				key : "print",
+				// keyBinding:createPrintKey(),
+				handler : function() {
+					var selection_rows = grid.getSelectionModel().getSelections();
+					if (selection_rows.length != 1) {
+						showMsg('提示信息', '请选择要打印的一行数据！');
+						return false;
+					}
+					var moduleName = moduleId;
+					var id = selection_rows[0].id;
+
+					// var url = "print/erp_print.do?id=" + id + "&modue=" +
+					// stock_order_detail_grid_panel.erpModule;
+					var url = "http://www.163.com";
+					print_panel_win(url, {
+						id : id,
+						modue : moduleId + "_detail"
+					}, grid);
+				}
+			}));
+			var items = tbar.items.items;
+			for (var i = 0; i < items.length; i++) {
+				items[i].disable();
+			}
 		}
-	});
+	}
+
+	// grid.addSetButton({
+	// addSet : {
+	// grids : ( detailGrid == null ) ? [grid] : [grid, detailGrid]
+	// }
+	// });
 
 	this.getGrid = getGrid_;
 

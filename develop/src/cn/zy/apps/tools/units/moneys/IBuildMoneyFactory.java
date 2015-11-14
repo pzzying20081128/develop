@@ -33,5 +33,7 @@ public interface IBuildMoneyFactory {
     
     //计算毛利率
     public Long jsGrossProfitRate(Long salesMoney, Long stockMomey) ;
+    
+    public Long  jsSumMoney(Long price, Integer count) ;
 
 }

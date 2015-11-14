@@ -128,8 +128,15 @@ public class BuildMoneyFactory implements IBuildMoneyFactory {
 //        System.out.println("==> " + noTaxPrice) ;
         BuildMoneyFactory xx= new BuildMoneyFactory();
         
-        Long noTaxPrice =   xx.jsNoTaxPrice(2640000L, 1700L);
+        Long noTaxPrice =   xx.jsSumMoney(264L, 100);
         
         System.out.println("==> " + noTaxPrice) ;
+    }
+
+    @Override
+    public Long jsSumMoney(Long price, Integer count) {
+        Long result = ComputeToolsUntis.multiplyGetLong(price, count.longValue(), 0) ;
+        return result ;
+     
     }
 }

@@ -1,3 +1,43 @@
+Ext.override(Ext.grid.GridView, {
+	getColumnStyle : function(colIndex, isHeader) {
+		var colModel = this.cm, colConfig = colModel.config, style = isHeader ? '' : colConfig[colIndex].css || '', align = colConfig[colIndex].align;
+
+		if (Ext.isChrome) {
+			style += String.format("width: {0};", parseInt(this.getColumnWidth(colIndex)) - 2 + 'px');
+		} else {
+			style += String.format("width: {0};", this.getColumnWidth(colIndex));
+		}
+
+		if (colModel.isHidden(colIndex)) {
+			style += 'display: none; ';
+		}
+
+		if (align) {
+			style += String.format("text-align: {0};", align);
+		}
+
+		return style;
+	}
+});
+
+Ext.grid.ColumnModel.override({
+	getTotalWidth : function(includeHidden) {
+		var off = 0;
+		if (Ext.isChrome) {
+			off = 2;
+		};
+		if (!this.totalWidth) {
+			this.totalWidth = 0;
+			for (var i = 0, len = this.config.length; i < len; i++) {
+				if (includeHidden || !this.isHidden(i)) {
+					this.totalWidth += this.getColumnWidth(i) + off;
+				};
+			};
+		};
+		return this.totalWidth;
+	}
+});
+
 Ext.data.ERPStore = Ext.extend(Ext.data.Store, {
 	remoteSort : true,
 	listeners : {
@@ -35,6 +75,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	inits : false,
 	savecol : false,
 	checkboxColumn : null,
+	detailGrid:null,
 	// 行双击 对应的是toolbbr 那个 ID
 	rowdblclickKey : null,
 	powerMap : null,
@@ -69,16 +110,20 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	openAllButton : function(isOpen) {
 		var _map_ = this.getPowerMap();
 		var tbar = this.getTopToolbar();
-		var items = tbar.items.items;
-		for (var i = 0; i < items.length; i++) {
-			var opt = items[i];
-			if (typeof opt.key == "undefined")
-				continue;
-			if (isOpen == true) {
-				opt.enable();
-			} else
-				opt.disable()
+		if (typeof ( tbar ) != 'undefined' && typeof ( tbar.items ) != 'undefined' && typeof ( tbar.items.items ) != 'undefined') {
+
+			var items = tbar.items.items;
+			for (var i = 0; i < items.length; i++) {
+				var opt = items[i];
+				if (typeof opt.key == "undefined")
+					continue;
+				if (isOpen == true) {
+					opt.enable();
+				} else
+					opt.disable()
+			}
 		}
+
 	},
 
 	openButton : function(params) {
@@ -102,14 +147,14 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 						opt.disable();
 					} else { // ==1
 						opt.enable();
-//						if (params.check == true) { // 审核状态
-//							if (opt.check == 'hide')
-//								opt.disable();
-//							else
-//								opt.enable();
-//						} else {
-//							opt.enable();
-//						}
+						// if (params.check == true) { // 审核状态
+						// if (opt.check == 'hide')
+						// opt.disable();
+						// else
+						// opt.enable();
+						// } else {
+						// opt.enable();
+						// }
 					}
 				}
 			}

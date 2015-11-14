@@ -1,5 +1,6 @@
 package cn.zy.apps.tools.web ;
 
+import cn.zy.apps.tools.jpa.ServiceException ;
 import cn.zy.apps.tools.logger.Loggerfactory ;
 
 /**
@@ -15,15 +16,21 @@ public abstract class GeneralAction extends BaseAction implements IGeneralAction
     protected String msg ;
 
     protected boolean success = true ;
-    
-    
-    protected Integer start;
-    
-    protected Integer   limit;
-    
+
+    protected Integer start ;
+
+    protected Integer limit ;
+
     protected String handError(Exception ex) {
         Loggerfactory.error(logger, ex.getMessage(), ex) ;
-        this.msg = ex.getMessage() ;
+        if (ex instanceof ServiceException) {
+            ServiceException xx = (ServiceException) ex ;
+            this.msg = xx.getMsg();
+            System.out.println("======== > ") ;
+        } else {
+            this.msg = ex.getMessage() ;
+        }
+
         return msg ;
     }
 
@@ -58,7 +65,5 @@ public abstract class GeneralAction extends BaseAction implements IGeneralAction
     public void setLimit(Integer limit) {
         this.limit = limit ;
     }
-
-   
 
 }
