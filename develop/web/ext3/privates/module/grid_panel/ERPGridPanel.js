@@ -75,7 +75,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	inits : false,
 	savecol : false,
 	checkboxColumn : null,
-//	detailGrid : null,
+	// detailGrid : null,
 	// 行双击 对应的是toolbbr 那个 ID
 	rowdblclickKey : null,
 	powerMap : null,
@@ -639,6 +639,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 		var store_ = this.store;
 		store_.removeAll();
 		store_.baseParams = {};
+
 		if (typeof ( loadParams ) === "undefined")// params is undefined
 		{
 			loadParams = {

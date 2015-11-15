@@ -238,6 +238,18 @@ function mainGridWindow(properties) {
 	var moduleId = properties.moduleId;
 	var moduleName = properties.moduleName;
 	var store = new Ext.data.ERPStore({
+		paramNames : {
+			// The parameter name which specifies the start row
+			start : 'start',
+
+			// The parameter name which specifies number of rows to return
+			limit : 'limit',
+
+			// The parameter name which specifies the column to sort on
+			sort : 'commSearchBean.sort',
+
+			dir : 'commSearchBean.dir'
+		},
 		proxy : new Ext.data.HttpProxy({
 			url : properties.url
 		}),
@@ -317,13 +329,13 @@ function mainGridWindow(properties) {
 		}
 	}
 
-//	if (isAddSet == true) {
-//		grid.addSetButton({
-//			addSet : {
-//				grids : ( detailGrid == null ) ? [grid] : [grid, detailGrid]
-//			}
-//		});
-//	}
+	// if (isAddSet == true) {
+	// grid.addSetButton({
+	// addSet : {
+	// grids : ( detailGrid == null ) ? [grid] : [grid, detailGrid]
+	// }
+	// });
+	// }
 
 	this.getGrid = getGrid_;
 
