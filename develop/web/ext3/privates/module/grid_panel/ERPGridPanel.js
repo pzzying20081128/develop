@@ -75,7 +75,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	inits : false,
 	savecol : false,
 	checkboxColumn : null,
-	detailGrid:null,
+//	detailGrid : null,
 	// 行双击 对应的是toolbbr 那个 ID
 	rowdblclickKey : null,
 	powerMap : null,
@@ -232,6 +232,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 
 		var rowdblclickKey_ = this.rowdblclickKey;
 		var moduleId = this.moduleId;
+
 		if (rowdblclickKey_ == null || typeof ( rowdblclickKey_ ) == "undefined")
 			rowdblclickKey_ = moduleId + "_edit";
 		if (!this.isHavePower(rowdblclickKey_))
@@ -340,6 +341,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	saveColModule : function() {
 		var colModel_ = this.colModel;
 		var moduleId = this.moduleId;
+		var moduleName = this.moduleName;
 		if (typeof ( moduleId ) == "undefined") {
 			showErrorMsg("系统错误", "ERPGridPanel saveColModule not find moduleId !moduleId:TREEID");
 			return;
@@ -380,7 +382,9 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 		Ext.Ajax.request({
 			url : './col_chonig_grid.do',
 			params : {
-				module_name : moduleId,// 'SYSTEM_USER',
+
+				module_name : moduleName,// 'SYSTEM_USER',
+				module_key : moduleId,
 				data_indexs : data_indexs,
 				col_names : col_names,
 				col_hiddens : col_hiddens,

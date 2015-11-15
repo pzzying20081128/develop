@@ -207,7 +207,7 @@ function createLocalCombo(params) {
 
 		// combo.setValue(1);
 		)
-		,
+
 		// store:new Ext.data.SimpleStore(
 		// params.storeValue
 		// ),
@@ -220,9 +220,11 @@ function createLocalCombo(params) {
 
 function mainGridWindow(properties) {
 
-	var detailGrid = null;
+	var detailGrid = typeof ( properties.detailGrid ) == "undefined" ? null : properties.detailGrid;
 
 	var isPrint = typeof ( properties.isPrint ) == "undefined" ? false : true;
+
+	var isAddSet = typeof ( properties.isAddSet ) == "undefined" ? false : true;
 
 	this.setDetailGrid = function(detailGrid) {
 		this.detailGrid = detailGrid;
@@ -234,6 +236,7 @@ function mainGridWindow(properties) {
 	var isBbar = typeof ( properties.isBbar ) == "undefined" ? true : properties.isBbar;
 
 	var moduleId = properties.moduleId;
+	var moduleName = properties.moduleName;
 	var store = new Ext.data.ERPStore({
 		proxy : new Ext.data.HttpProxy({
 			url : properties.url
@@ -252,6 +255,7 @@ function mainGridWindow(properties) {
 		cm : new Ext.grid.ColumnModel(properties.column),
 		store : store,
 		moduleId : moduleId,
+		moduleName : moduleName,
 		bbar : isBbar == true ? ( new Ext.PagingToolbar({
 			store : store,
 			pageSize : erp_grid_panel_limit,
@@ -313,11 +317,13 @@ function mainGridWindow(properties) {
 		}
 	}
 
-	// grid.addSetButton({
-	// addSet : {
-	// grids : ( detailGrid == null ) ? [grid] : [grid, detailGrid]
-	// }
-	// });
+//	if (isAddSet == true) {
+//		grid.addSetButton({
+//			addSet : {
+//				grids : ( detailGrid == null ) ? [grid] : [grid, detailGrid]
+//			}
+//		});
+//	}
 
 	this.getGrid = getGrid_;
 
