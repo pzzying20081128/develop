@@ -27,6 +27,8 @@ public class HibernateJpaIsolationSupportDialect extends HibernateJpaDialect {
         if (logger.isDebugEnabled()) {
             logger.debug("Transaction Info: IsolationLevel={} , PropagationBehavior={} , Timeout={} , Name={}", new Object[] { definition.getIsolationLevel(), definition.getPropagationBehavior(), definition.getTimeout(), definition.getName() }) ;
         }
+        logger.info("Transaction Info: IsolationLevel={} , PropagationBehavior={} , Timeout={} , Name={}", new Object[] { definition.getIsolationLevel(), definition.getPropagationBehavior(), definition.getTimeout(), definition.getName() }) ;
+        
         logger.info("The isolation level set on the transaction is {}", definition.getIsolationLevel()) ;
         ConnectionHandle connHandle = getJdbcConnection(entityManager, definition.isReadOnly()) ;
         Connection conn = connHandle.getConnection() ;

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="power" namespace="/" extends="struts-ajax">
+		<action name="showUserPowerMeuns" class="SearchUserPowerAction" method="showUserPowerMeuns">
+			<result type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">
+				success,msg,
+				children,
+				children\[\d+\]\.\w+,
+				children\[\d+\]\.children\[\d+\]\.\w+,
+				children\[\d+\]\.children\[\d+\]\.children\[\d+\]\.\w+
+				</param>
+			</result>
+		</action>
+	 
+		<action name="updatePassword" class="SearchUserPowerAction" method="updatePassword">
+			<result type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">
+				success,msg
+				</param>
+			</result>
+		</action>
+	
+		<action name="filterUserPowerTree" class="SearchUserPowerAction" method="filterUserPowerTree">
+			<result type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">
+					success,msg,
+					children,
+					children\[\d+\]\.\w+,
+					children\[\d+\]\.children\[\d+\]\.\w+,
+					children\[\d+\]\.children\[\d+\]\.children\[\d+\]\.\w+
+				</param>
+			</result>
+		</action>
+		
+		<action name="power" class="SearchUserPowerAction" method="listPowerByUser">
+			<result type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">
+					success,msg,
+					isroot,
+					powerMap,
+					powerMap.\w+,
+					powerMap.\w+\[\d+\]\.powerName,
+					powerMap.\w+\[\d+\]\.powerCode,
+					powerMap.\w+\[\d+\]\.isUse
+
+				</param>
+			</result>
+		</action>
+	
+
+	</package>
+</struts>

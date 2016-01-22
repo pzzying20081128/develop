@@ -32,9 +32,12 @@ function showMsgYN(params) {
 				params.no();
 			}
 		}
-
-		// Ext.Msg.alert("提示", "你点击了" + btn + "按钮");
 	});
+}
+function showMsgButtonsYN(params) {
+	Ext.MessageBox.confirm("消息", params.msg, params.buttons, function(btn) {
+		params.callback(btn)
+	})
 }
 
 // /////////////////////////////////////////////////////////////////////////////////////////
@@ -226,6 +229,10 @@ function mainGridWindow(properties) {
 
 	var isAddSet = typeof ( properties.isAddSet ) == "undefined" ? false : true;
 
+	var reader_root = typeof ( properties.reader_root ) == "undefined" ? "selectPage.result" : properties.reader_root;
+
+	var reader_totalProperty = typeof ( properties.reader_totalProperty ) == "undefined" ? "selectPage.count" : properties.reader_totalProperty;
+
 	this.setDetailGrid = function(detailGrid) {
 		this.detailGrid = detailGrid;
 	}
@@ -254,8 +261,13 @@ function mainGridWindow(properties) {
 			url : properties.url
 		}),
 		reader : new Ext.data.JsonReader({
-			totalProperty : 'selectPage.count',
-			root : 'selectPage.result'
+			// totalProperty : 'selectPage.count',
+			// root : 'selectPage.result'
+
+			totalProperty : reader_totalProperty,
+
+			root : reader_root
+
 		}, new Ext.data.Record.create(properties.record))
 	})
 
@@ -411,4 +423,49 @@ var Map = function() {
 		}
 		return -1;
 	};
+}
+
+function createERPImportWindows(params) {
+	// var importPanel= createImportProductPanel();
+	var mainGridModule = params.mainGridModule;
+	var treeid = mainGridModule.moduleId;
+	var grid = mainGridModule.getGrid();
+	var importPanel = createImportWindows({
+		treeid : treeid,
+		// url : "./importproduct.do?random_id=1",
+		url : params.url,
+		success : function(json) {
+			var load = false;
+			grid.reload();
+			importPanel.close();
+			if (!load) {
+				load = true;
+				if (json.importErrorSize > 0) {
+					showMsgButtonsYN({
+						title : "错误",
+						msg : "导入信息中有" + json.importErrorSize + "个错误/重复产品数据!",
+						buttons : {
+							cancel : '关闭',
+							no : '下载错误数据'
+						},
+						callback : function(btn) {
+							if (btn == "no") {
+								downExports(downTREEID, {
+									url : "./exportExcel.do",
+									params : {}
+								});
+							}
+						}
+					});
+				} else {
+					showMsg('提示信息', '数据导入成功');
+				}
+
+			}
+		},
+		errors : function(r, options, msg) {
+			showMsg('提示信息', "加载上传数据错误[" + msg + "]");
+		}
+	});
+
 }

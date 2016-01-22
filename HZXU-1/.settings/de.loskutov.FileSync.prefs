@@ -1,0 +1,7 @@
+WARNING=DO NOT MODIFY THIS FILE IF YOU DON'T UNDERSTAND
+defaultDestination=/media/you/MY_WORKSHOPS/server/HZJH/erp-tomcat-7.0.62/webapps/demo
+defaultVariables=
+eclipse.preferences.version=1
+includeTeamPrivateFiles=false
+map|0=web|,|,|,|,
+useCurrentDateForDestinationFiles=false

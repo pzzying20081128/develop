@@ -13,8 +13,8 @@ public abstract class AutoWriteObject {
 
     private boolean isSetNull = false ;
 
-    public AutoWriteObject() {
-        //		this.isSetNull = isSetNull;
+    public AutoWriteObject(boolean isSetNull ) {
+        		this.isSetNull = isSetNull;
     }
 
     protected org.apache.log4j.Logger logger = Loggerfactory.instance(AutoWriteObject.class) ;
@@ -32,23 +32,23 @@ public abstract class AutoWriteObject {
     protected abstract boolean filterSetProperties(Class<?> classes) ;
 
     public void handValues(Object object, PropertyDescriptor popertyDescriptors) {
-      
+
         if (!filterSetProperties(popertyDescriptors.getPropertyType())) return ;
-  
+
         try {
 
             Class<?> clazz = object.getClass() ;
 
-//            Method readMethod = popertyDescriptors.getReadMethod() ;
-//            try {
-////                Object result_ = readMethod.invoke(object) ;
-//                //System.out.println("----- >       "+result_.getClass().getName()+"   classs "+result_.getClass().getName().contains("_$$_") ) ;
-////                if (result_ != null  &&  ! result_.getClass().getName().contains("_$$_")) {
-////                    return ;
-////                } 
-//            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-//                Loggerfactory.devError(logger, e, e.getMessage() + " ex class" + e.getClass().toString() + "  clazz   " + clazz.getName()) ;
-//            }
+            //            Method readMethod = popertyDescriptors.getReadMethod() ;
+            //            try {
+            ////                Object result_ = readMethod.invoke(object) ;
+            //                //System.out.println("----- >       "+result_.getClass().getName()+"   classs "+result_.getClass().getName().contains("_$$_") ) ;
+            ////                if (result_ != null  &&  ! result_.getClass().getName().contains("_$$_")) {
+            ////                    return ;
+            ////                } 
+            //            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+            //                Loggerfactory.devError(logger, e, e.getMessage() + " ex class" + e.getClass().toString() + "  clazz   " + clazz.getName()) ;
+            //            }
 
             String fieldName = popertyDescriptors.getName() ;
 
@@ -65,11 +65,12 @@ public abstract class AutoWriteObject {
                         popertyDescriptors.getWriteMethod().invoke(object, result) ;
                     }
                     return ;
-                }
+                } else {
+                    Object value = searchCacheObject(id_, popertyDescriptors.getPropertyType()) ;
+                    if (value == null) value = popertyDescriptors.getPropertyType().newInstance() ;
+                    popertyDescriptors.getWriteMethod().invoke(object, value) ;
 
-                Object value = searchCacheObject(id_, popertyDescriptors.getPropertyType()) ;
-                if (value == null) value = popertyDescriptors.getPropertyType().newInstance() ;
-                popertyDescriptors.getWriteMethod().invoke(object, value) ;
+                }
 
             }
 
