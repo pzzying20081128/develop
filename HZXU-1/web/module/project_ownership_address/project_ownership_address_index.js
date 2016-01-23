@@ -57,19 +57,21 @@ function create_project_ownership_address_window(moduleId, moduleName) {
 						grid : mainGridModule
 					});
 				}
-			}, {
-				// id : moduleId + '_search',
-				xtype : "tbbutton",
-				text : "查询",
-				key : "search",
-				// keyBinding : createSearchKey(),
-				handler : function() {
-					var searchWindex = project_ownership_address_search_windows(moduleId, moduleName, {
-						grid : mainGridModule,
-						searchParams : project_ownership_address_search_params
-					});
-				}
-			}]
+			}, 
+//				{
+//				// id : moduleId + '_search',
+//				xtype : "tbbutton",
+//				text : "查询",
+//				key : "search",
+//				// keyBinding : createSearchKey(),
+//				handler : function() {
+//					var searchWindex = project_ownership_address_search_windows(moduleId, moduleName, {
+//						grid : mainGridModule,
+//						searchParams : project_ownership_address_search_params
+//					});
+//				}
+//			}
+			]
 
 		},
 		init : {

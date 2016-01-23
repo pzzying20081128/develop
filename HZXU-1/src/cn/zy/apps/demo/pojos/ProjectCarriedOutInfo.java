@@ -328,7 +328,7 @@ public class ProjectCarriedOutInfo extends ProjectInfo {
     }
 
     public String getBuildStartEndDate() {
-        if (buildStartEndDate != null) buildStartEndDate = DateToolsUilts.dateToString(this.buildStartDate, DateType.yyyy.toString()) ;
+        if (buildStartDate != null) buildStartEndDate = DateToolsUilts.dateToString(this.buildStartDate, DateType.yyyy.toString()) ;
         if (buildEndDate != null) buildStartEndDate = buildStartEndDate + "-" + DateToolsUilts.dateToString(this.buildEndDate, DateType.yyyy.toString()) ;
 
         return buildStartEndDate ;

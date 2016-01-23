@@ -58,30 +58,32 @@ function create_project_major_type_window(moduleId, moduleName) {
 						,
 					});
 				}
-			}, {
-				// id : moduleId + '_search',
-				xtype : "tbbutton",
-				text : "查询",
-				key : "search",
-				// keyBinding : createSearchKey(),
-				handler : function() {
-					var searchWindex = project_major_type_search_windows(moduleId, moduleName, {
-						grid : mainGridModule,
-						searchParams : project_major_type_search_params
-					});
-				}
-			}]
+			}, 
+//				{
+//				// id : moduleId + '_search',
+//				xtype : "tbbutton",
+//				text : "查询",
+//				key : "search",
+//				// keyBinding : createSearchKey(),
+//				handler : function() {
+//					var searchWindex = project_major_type_search_windows(moduleId, moduleName, {
+//						grid : mainGridModule,
+//						searchParams : project_major_type_search_params
+//					});
+//				}
+//			}
+			]
 
 		},
 		init : {
 			// 行被选择
 			select : function(rowDataId, data, sm, rowIdx, r) {
-				stockSelect(data, checkButton, detailGrid);
-				detailGrid.load({
-					params : {
-				// 'searchBean.combinedProductId' : rowDataId
-					}
-				});
+//				stockSelect(data, checkButton, detailGrid);
+//				detailGrid.load({
+//					params : {
+//				// 'searchBean.combinedProductId' : rowDataId
+//					}
+//				});
 
 			},
 			// 返回这一行的状态 1:OK -1 NO OK checkName:

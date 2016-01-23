@@ -1,7 +1,7 @@
 function project_major_type_update_windows(moduleId, moduleName, params) {
 
 	var grid = params.grid.getGrid();
-	
+
 	var selection_rows = grid.getSelectionModel().getSelections();
 
 	if (selection_rows == null) {
@@ -14,7 +14,6 @@ function project_major_type_update_windows(moduleId, moduleName, params) {
 		return false;
 	}
 	var selectId = selection_rows[0].id;
-	
 
 	var project_major_type_params = {
 		title : "编辑" + moduleName,
@@ -23,37 +22,37 @@ function project_major_type_update_windows(moduleId, moduleName, params) {
 		// 结果路径
 		pojo : "result",
 		// url
-			url : "./simple_ProjectMajorType_save.do",
+		url : "./simple_ProjectMajorType_save.do",
 		params : {
-			optType : "update"
+			optType : "update",
+			"projectmajortype.id":selectId
 		},
-	   reader : new Ext.data.JsonReader({
+		reader : new Ext.data.JsonReader({
 			successProperty : 'success',
 			root : 'result',
 			totalProperty : 'totalProperty'
 		}, [{
-			name : 'dept.name',
+			name : 'projectmajortype.name',
 			mapping : 'name'
 		}]),
 		// 字段
-		field : [
-		{// 第一排
+		field : [{// 第一排
 			layout : 'column',
 			baseCls : 'x-plain',
-			items : [{// 1-1
-				columnWidth : .34,
+			items : [{
+				columnWidth : 1,
 				layout : 'form',
 				defaultType : 'textfield',
 				baseCls : 'x-plain',
 				defaults : {
-					width : 200
+					width : 350
 				},
 				items : [{
-					id : 'goods.name',
-					name : 'goods.name',
-					fieldLabel : ' 物料名字',
+					id : 'projectmajortype.name',
+					name : 'projectmajortype.name',
+					fieldLabel : ' 项目重点分类',
 					xtype : 'textfield',
-					style : 'background:#fff1a4;',
+					style : NoAllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : false,
 					listeners : {
@@ -61,62 +60,18 @@ function project_major_type_update_windows(moduleId, moduleName, params) {
 						}
 					}
 				}]
-			}, // 1-1 end
-			{// 1-2
-				columnWidth : .33,
-				layout : 'form',
-				baseCls : 'x-plain',
-				defaultType : 'textfield',
-				defaults : {
-					width : 200
-				},
-				items : [createERPcombo({
-					id : 'goods.classification',
-					name : 'goods.classification',
-					label : "物料类别",
-					url : "./searchMatrialClassification.action",
-					allowBlank : false,
-					forceSelection : false
-					// width : 150
-				})]
-			}// 1-2end
-			, {// 1-3
-				columnWidth : .33,
-				layout : 'form',
-				defaultType : 'textfield',
-				baseCls : 'x-plain',
-				defaults : {
-					width : 200
-				},
-				items : [{
-
-					id : 'goods.serialNumber',
-					name : 'goods.serialNumber',
-					fieldLabel : ' 物料编号',
-					xtype : 'textfield',
-					style : 'background:#fff1a4;',
-					blankText : '不能为空！',
-					allowBlank : false,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-
-				}]
-			}// 1-3 end
+			} // 1-1 end
 			]
+		}]
 
-		}
-		]
-		
 	}
 
 	var project_major_type_create_window = new project_major_type_save_update_form_panel_windows(project_major_type_params);
-	
-		project_major_type_create_window.load({
-			url : "./simple_ProjectMajorType_get.do?uuid=" + selectId,
+
+	project_major_type_create_window.load({
+		url : "./simple_ProjectMajorType_get.do?uuid=" + selectId,
 		success : function(result) {
-		               json = result.result;
+			json = result.result;
 		}
 	});
 

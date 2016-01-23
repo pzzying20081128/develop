@@ -58,19 +58,21 @@ function create_project_progress_type_window(moduleId, moduleName) {
 						,
 					});
 				}
-			}, {
-				// id : moduleId + '_search',
-				xtype : "tbbutton",
-				text : "查询",
-				key : "search",
-				// keyBinding : createSearchKey(),
-				handler : function() {
-					var searchWindex = project_progress_type_search_windows(moduleId, moduleName, {
-						grid : mainGridModule,
-						searchParams : project_progress_type_search_params
-					});
-				}
-			}]
+			}, 
+//				{
+//				// id : moduleId + '_search',
+//				xtype : "tbbutton",
+//				text : "查询",
+//				key : "search",
+//				// keyBinding : createSearchKey(),
+//				handler : function() {
+//					var searchWindex = project_progress_type_search_windows(moduleId, moduleName, {
+//						grid : mainGridModule,
+//						searchParams : project_progress_type_search_params
+//					});
+//				}
+//			}
+			]
 
 		},
 		init : {
