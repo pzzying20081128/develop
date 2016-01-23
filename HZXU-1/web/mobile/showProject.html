@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+
+<link rel="stylesheet" href="frozenui/css/frozen.css">
+
+<script src="frozenui/lib/zepto.min.js"></script>
+<script src="frozenui/js/frozen.js"></script>
+</head>
+
+<body ontouchstart>
+	<header class="ui-header ui-header-positive ui-border-b"> 
+	<i class="ui-icon-return" onclick="history.back()"></i>
+	<h1>项目详情</h1>
+	<button class="ui-btn">回首页</button>
+	</header>
+	<footer class="ui-footer ui-footer-btn"> </footer>
+	<section class="ui-container"> <section id="list">
+	<div class="demo-item">
+		<p class="demo-desc">项目基本信息</p>
+		<div class="demo-block">
+			<ul class="ui-list ui-list-pure ui-border-tb">
+				<li class="ui-border-t">
+					<p>
+						<span>项目名称</span><span class="date"></span>
+					</p>
+					<h4>${projectCarriedOutInfo.name}</h4>
+				</li>
+				<li class="ui-border-t">
+					<p>
+						<span>是否开工</span><span class="date"></span>
+					</p>
+					<h4>${projectCarriedOutInfo.isKaiGong}</h4>
+				</li>
+				<li class="ui-border-t">
+					<p>
+						<span>是否投产</span><span class="date"></span>
+					</p>
+					<h4>${projectCarriedOutInfo.isProduction}</h4>
+				</li>
+				<li class="ui-border-t">
+					<p>
+						<span>总投资</span><span class="date"></span>
+					</p>
+					<h4>${projectCarriedOutInfo.totalInvestment}万元</h4>
+				</li>
+
+				<li class="ui-border-t">
+					<p>
+						<span>建设内容</span><span class="date"></span>
+					</p>
+					<h4>${projectCarriedOutInfo.constructionContent}</h4>
+				</li>
+
+				<li class="ui-border-t">
+					<p>
+						<span>项目地址</span><span class="date"></span>
+					</p>
+					<h4>${projectCarriedOutInfo.projectAddress}</h4>
+				</li>
+
+				<li class="ui-border-t">
+					<p>
+						<span>项目归属地</span><span class="date"></span>
+					</p>
+					<h4>${projectCarriedOutInfo.projectOwnershipAddress.address}</h4>
+				</li>
+
+				<li class="ui-border-t">
+					<p>
+						<span>项目进展类型</span><span class="date"></span>
+					</p>
+					<h4>${projectCarriedOutInfo.projectProgressType.typeName}</h4>
+				</li>
+
+				<li class="ui-border-t">
+					<p>
+						<span>项目重点分类</span><span class="date"></span>
+					</p>
+					<h4>${projectCarriedOutInfo.projectMajorType.name}</h4>
+				</li>
+
+				<li class="ui-border-t">
+					<p>
+						<span>开工时间</span><span class="date"></span>
+					</p>
+					<h4>${projectCarriedOutInfo.kaiGongDateString}</h4>
+				</li>
+
+				<li class="ui-border-t">
+					<p>
+						<span>建设起始结束时间</span><span class="date"></span>
+					</p>
+					<h4>${projectCarriedOutInfo.buildStartEndDate}</h4>
+				</li>
+			</ul>
+		</div>
+		<!-- 项目实施-->
+		<div class="demo-item">
+			<p class="demo-desc">项目实施</p>
+			<div class="demo-block">
+				<ul class="ui-list ui-list-pure ui-border-tb">
+					<li class="ui-border-t">
+						<p>
+							<span>项目实施单位</span><span class="date"></span>
+						</p>
+						<h4>${projectCarriedOutInfo.implementationUnit}</h4>
+					</li>
+					<li class="ui-border-t">
+						<p>
+							<span>项目实施负责人</span><span class="date"></span>
+						</p>
+						<h4>${projectCarriedOutInfo.implementationUnitPerson}</h4>
+					</li>
+					<li class="ui-border-t">
+						<p>
+							<span>项目实施负责人手机号</span><span class="date"></span>
+						</p>
+						<h4>${projectCarriedOutInfo.implementationUnitPhoto}</h4>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--   end  -->
+
+		<!-- 项目实施-->
+		<div class="demo-item">
+			<p class="demo-desc">项目责任</p>
+			<div class="demo-block">
+				<ul class="ui-list ui-list-pure ui-border-tb">
+					<li class="ui-border-t">
+						<p>
+							<span>项目责任单位</span><span class="date"></span>
+						</p>
+						<h4>${projectCarriedOutInfo.responsibilityUnit}</h4>
+					</li>
+					<li class="ui-border-t">
+						<p>
+							<span>项目责任单位负责人</span><span class="date"></span>
+						</p>
+						<h4>${projectCarriedOutInfo.responsibilityUnitPerson}</h4>
+					</li>
+					<li class="ui-border-t">
+						<p>
+							<span>项目责任单位负责人手机号</span><span class="date"></span>
+						</p>
+						<h4>${projectCarriedOutInfo.responsibilityUnitPhoto}</h4>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--   end  -->
+
+		<!-- 项目实施-->
+		<div class="demo-item">
+			<p class="demo-desc">分管副秘书长</p>
+			<div class="demo-block">
+				<ul class="ui-list ui-list-pure ui-border-tb">
+					<li class="ui-border-t">
+						<p>
+							<span>分管副秘书长</span><span class="date"></span>
+						</p>
+						<h4>${projectCarriedOutInfo.fenGuanMiShuZhang}</h4>
+					</li>
+					<li class="ui-border-t">
+						<p>
+							<span>分管副秘书长手机号</span><span class="date"></span>
+						</p>
+						<h4>${projectCarriedOutInfo.fenGuanMiShuZhangPhoto}</h4>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+		<!--   end  -->
+
+		<!-- 项目实施-->
+		<div class="demo-item">
+			<p class="demo-desc">分管副市长</p>
+			<div class="demo-block">
+				<ul class="ui-list ui-list-pure ui-border-tb">
+					<li class="ui-border-t">
+						<p>
+							<span>分管副市长</span><span class="date"></span>
+						</p>
+						<h4>${projectCarriedOutInfo.fenGuanHuShiZhang}</h4>
+					</li>
+					<li class="ui-border-t">
+						<p>
+							<span>分管副市长手机号</span><span class="date"></span>
+						</p>
+						<h4>${projectCarriedOutInfo.fenGuanHuShiZhangPhoto}</h4>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+		<!--   end  -->
+		
+			<!-- 项目实施-->
+		<div class="demo-item">
+			
+        <p class="demo-desc">年投资计划</p>
+        <div class="demo-block">
+            <ul class="ui-list ui-list-link ui-border-tb">
+             #foreach(  $projectYearInvestmentPlan  in $projectYearInvestmentPlans)
+                <li class="ui-border-t" data-href="./mobile_get_month_investmentPlans.do?uuid=${projectYearInvestmentPlan.id}">
+                    <div class="ui-list-info">
+				          <p class="ui-nowrap"><span>年度 : </span><span class="date">${projectYearInvestmentPlan.yearString}</span></p>                       
+				           <h4 class="ui-nowrap">${projectYearInvestmentPlan.investmentPlan}</h4>
+                        </div>
+                </li>
+                #end              
+            </ul>          
+        </div>
+    </div>
+		</div>
+		<!--   end  -->
+</div>
+
+	</section> </section>
+	<!-- /.ui-container-->
+	<script>
+		$('.ui-list li,.ui-tiled li').click(function() {
+			
+			if ($(this).data('href')) {
+				location.href = $(this).data('href');
+			}
+		});
+		$('.ui-header .ui-btn').click(function() {
+			location.href = 'index.html';
+		});
+	</script>
+</body>
+</html>

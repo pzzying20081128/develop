@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+
+<link rel="stylesheet" href="frozenui/css/frozen.css">
+
+<script src="frozenui/lib/zepto.min.js"></script>
+<script src="frozenui/js/frozen.js"></script>
+</head>
+
+<body ontouchstart>
+	<header class="ui-header ui-header-positive ui-border-b"> 
+	<i class="ui-icon-return" onclick="history.back()"></i>
+	<h1>重点项目</h1>
+	<button class="ui-btn">回首页</button>
+	</header>
+	<footer class="ui-footer ui-footer-btn">
+	
+	</footer>
+	<section class="ui-container"> 
+	   <section id="list">
+	<div class="demo-item">
+		<p class="demo-desc"></p>
+		<div class="demo-block">
+			<ul class="ui-list ui-list-pure ui-border-tb">
+			  #foreach(  $projectCarriedOutInfo  in $projectCarriedOutInfos)
+				<li class="ui-border-t" data-href="./mobile_get_key_project.do?uuid=${projectCarriedOutInfo.id}">
+					 <!--
+					  <p>
+						<span>1.faycheng </span><span class="date"> 2月12日</span>
+					</p>
+					  -->
+					
+					<h4>$projectCarriedOutInfo.name</h4>
+				</li>
+				#end
+			</ul>
+		</div>
+	</div>
+	
+      </section> 
+   </section>
+	<!-- /.ui-container-->
+	<script>
+		$('.ui-list li,.ui-tiled li').click(function() {
+			if ($(this).data('href')) {
+				location.href = $(this).data('href');
+			}
+		});
+		$('.ui-header .ui-btn').click(function() {
+			location.href = 'index.html';
+		});
+	</script>
+</body>
+</html>
