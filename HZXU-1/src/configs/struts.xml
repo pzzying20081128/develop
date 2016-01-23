@@ -18,6 +18,9 @@
 	<include file="configs/struts/struts_sys_staff.xml"></include>
 	<include file="configs/struts/struts_tools.xml"></include>
 	<include file="configs/struts/struts_base_info.xml"></include>
+	<include file="configs/struts/struts_mobile.xml"></include>
+	
+	
 
 
 	<package name="init" namespace="/" extends="struts-appframe">

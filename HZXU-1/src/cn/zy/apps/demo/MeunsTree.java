@@ -20,7 +20,7 @@ public class MeunsTree {
 
     private static String p102[] = { "project_carried_out_info", "重点项目", "true", "", "project_manage", "0", "[{add:1,label:'增加'},{edit:1,label:'编辑'},{delete:1,label:'删除'}]" } ;
 
-    private static String[][] treeData = { p1, p2, p3, p4, p5,p6, p100, p101,p102 } ;
+    private static String[][] treeData = { p1, p2 , p4, p5,p6, p100, p101,p102 } ;
 
     public static String[][] initTreeData() {
         return treeData ;

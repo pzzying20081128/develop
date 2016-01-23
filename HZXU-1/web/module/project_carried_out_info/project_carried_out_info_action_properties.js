@@ -123,7 +123,7 @@ var project_carried_out_info_grid_column = {
 
 		}
 	}, {
-		header : '是否开工',
+		header : '是否投产',
 		width : 200,
 		dataIndex : 'isProduction',
 		sortable : true,

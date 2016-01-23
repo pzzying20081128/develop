@@ -8,8 +8,11 @@ import javax.persistence.FetchType ;
 import javax.persistence.JoinColumn ;
 import javax.persistence.ManyToOne ;
 import javax.persistence.Table ;
+import javax.persistence.Transient ;
 
 import cn.zy.apps.tools.jpa.FieldDesc ;
+import cn.zy.apps.tools.units.DateToolsUilts ;
+import cn.zy.apps.tools.units.DateToolsUilts.DateType ;
 
 /**
  * 进行中的项目
@@ -22,7 +25,7 @@ public class ProjectCarriedOutInfo extends ProjectInfo {
 
     //总投资
     @Column(name = "total_investment")
-    @FieldDesc(name = "估算总投资")
+    @FieldDesc(name = "总投资")
     private Double totalInvestment ;
 
     @Column(name = "construction_content")
@@ -34,7 +37,7 @@ public class ProjectCarriedOutInfo extends ProjectInfo {
     private String isKaiGong ;
 
     @Column(name = "is_production")
-    @FieldDesc(name = "是否开工")
+    @FieldDesc(name = "是否投产")
     private String isProduction ;
 
     @Column(name = "project_address")
@@ -72,6 +75,9 @@ public class ProjectCarriedOutInfo extends ProjectInfo {
     @FieldDesc(name = "开工时间")
     private Date kaiGongDate ;
 
+    @Transient
+    private String kaiGongDateString ;
+
     @Column(name = "build_start_date")
     @FieldDesc(name = "建设开始时间")
     private Date buildStartDate ;
@@ -79,6 +85,9 @@ public class ProjectCarriedOutInfo extends ProjectInfo {
     @Column(name = "build_end_date")
     @FieldDesc(name = "建设结束时间")
     private Date buildEndDate ;
+
+    @Transient
+    private String buildStartEndDate ;
 
     @Column(name = "implementation_unit")
     @FieldDesc(name = "项目实施单位")
@@ -110,7 +119,7 @@ public class ProjectCarriedOutInfo extends ProjectInfo {
     private String fenGuanMiShuZhang ;
 
     @Column(name = "fen_guan_mi_shu_zhang_photo")
-    @FieldDesc(name = "项目责任单位负责人手机号")
+    @FieldDesc(name = "分管副秘书长手机号")
     private String fenGuanMiShuZhangPhoto ;
 
     @Column(name = "fen_guan_hu_shi_zhang")
@@ -311,6 +320,18 @@ public class ProjectCarriedOutInfo extends ProjectInfo {
 
     public void setFenGuanHuShiZhangPhoto(String fenGuanHuShiZhangPhoto) {
         this.fenGuanHuShiZhangPhoto = fenGuanHuShiZhangPhoto ;
+    }
+
+    public String getKaiGongDateString() {
+        if (kaiGongDate != null) kaiGongDateString = DateToolsUilts.dateToString(kaiGongDate, DateType.yyyy.toString()) ;
+        return kaiGongDateString ;
+    }
+
+    public String getBuildStartEndDate() {
+        if (buildStartEndDate != null) buildStartEndDate = DateToolsUilts.dateToString(this.buildStartDate, DateType.yyyy.toString()) ;
+        if (buildEndDate != null) buildStartEndDate = buildStartEndDate + "-" + DateToolsUilts.dateToString(this.buildEndDate, DateType.yyyy.toString()) ;
+
+        return buildStartEndDate ;
     }
 
 }

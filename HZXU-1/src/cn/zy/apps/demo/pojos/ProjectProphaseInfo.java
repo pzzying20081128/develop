@@ -39,7 +39,7 @@ public class ProjectProphaseInfo extends ProjectInfo {
 
     //估算总投资
     @Column(name = "estimated_total_investment")
-    @FieldDesc(name = "估算总投资")
+    @FieldDesc(name = "总投资")
     private Double estimatedTotalInvestment ;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "projectProphaseInfo",cascade=CascadeType.ALL)

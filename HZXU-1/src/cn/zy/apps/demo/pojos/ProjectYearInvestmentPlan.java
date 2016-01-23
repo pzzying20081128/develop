@@ -9,8 +9,10 @@ import javax.persistence.FetchType ;
 import javax.persistence.JoinColumn ;
 import javax.persistence.ManyToOne ;
 import javax.persistence.Table ;
+import javax.persistence.Transient ;
 
 import cn.zy.apps.tools.jpa.FieldDesc ;
+import cn.zy.apps.tools.units.DateToolsUilts ;
 import cn.zy.apps.tools.units.powers.CommBean ;
 
 /**
@@ -26,6 +28,9 @@ public class ProjectYearInvestmentPlan extends CommBean {
     @Column(name = "year")
     @FieldDesc(name = "年")
     private Date year ;
+    
+    @Transient
+    private String  yearString ;
 
     @Column(name = "investment_plan")
     @FieldDesc(name = "投资计划")
@@ -67,6 +72,12 @@ public class ProjectYearInvestmentPlan extends CommBean {
 
     public void setProjectCarriedOutInfoId(Integer projectCarriedOutInfoId) {
         this.projectCarriedOutInfoId = projectCarriedOutInfoId ;
+    }
+
+    public String getYearString() {
+        if(year!=null )
+        yearString =DateToolsUilts.dateToString(year, DateToolsUilts.DateType.yyyy.toString());
+        return yearString ;
     }
 
 }
