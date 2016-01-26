@@ -56,6 +56,21 @@ function project_carried_out_info_update_windows(moduleId, moduleName, params) {
 			"searchBean.ac_" : -1
 		}
 	});
+	
+	var projectTypeId =  createERPcombo({
+					id : 'projectcarriedoutinfo.projectTypeId',
+					name : 'projectcarriedoutinfo.projectTypeId',
+					fieldLabel : ' 项目类型',
+					url : "./ProjectType_combo.do?searchBean.status=有效",
+					allowBlank : false,
+					forceSelection : false
+				})
+				
+					projectTypeId.load({
+		params : {
+			"searchBean.ac_" : -1
+		}
+	});
 
 	var project_carried_out_info_params = {
 		title : "编辑" + moduleName,
@@ -157,7 +172,13 @@ function project_carried_out_info_update_windows(moduleId, moduleName, params) {
 		}, {
 			name : 'projectcarriedoutinfo.projectDate',
 			mapping : 'projectDate'
-		}]),
+		}
+		,{
+			name : 'projectcarriedoutinfo.projectTypeId',
+			mapping : 'projectTypeId'
+			
+		}
+		]),
 		// 字段
 		field : [{// 第一排
 			layout : 'column',
@@ -389,21 +410,9 @@ function project_carried_out_info_update_windows(moduleId, moduleName, params) {
 				// defaultType : 'textfield',
 				baseCls : 'x-plain',
 				defaults : {
-					width : 150
+					width : 130
 				},
-				items : [{
-				// id : 'projectcarriedoutinfo.projectMajorType',
-				// name : 'projectcarriedoutinfo.projectMajorType',
-				// fieldLabel : ' 项目重点分类',
-				// xtype : 'textfield',
-				// style : NoAllowBlankStyle,
-				// blankText : '不能为空！',
-				// allowBlank : false,
-				// listeners : {
-				// 'specialkey' : function(field, e) {
-				// }
-				// }
-				}]
+				items : [projectTypeId]
 			}]
 		},
 		// /////////////////////////////////////////////////////////////////////

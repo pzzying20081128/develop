@@ -8,6 +8,7 @@ import cn.zy.apps.demo.pojos.ProjectCarriedOutInfo ;
 import cn.zy.apps.demo.pojos.ProjectMajorType ;
 import cn.zy.apps.demo.pojos.ProjectOwnershipAddress ;
 import cn.zy.apps.demo.pojos.ProjectProgressType ;
+import cn.zy.apps.demo.pojos.ProjectType ;
 import cn.zy.apps.demo.service.ABCommonsService ;
 import cn.zy.apps.demo.service.SystemOptServiceException ;
 import cn.zy.apps.tools.units.ToolsUnits ;
@@ -75,6 +76,10 @@ public class ProjectCarriedOutInfoSaveUpdateUnits extends ABCommonsService {
         Integer getProjectMajorTypeId = optProjectCarriedOutInfo.getProjectMajorTypeId() ;
 
         optProjectCarriedOutInfo.setProjectMajorType(baseService.load(getProjectMajorTypeId, ProjectMajorType.class)) ;
+        
+        Integer getProjectTypeId = optProjectCarriedOutInfo.getProjectTypeId();
+
+        optProjectCarriedOutInfo.setProjectType(baseService.load(getProjectTypeId, ProjectType.class)) ;
 
     }
 

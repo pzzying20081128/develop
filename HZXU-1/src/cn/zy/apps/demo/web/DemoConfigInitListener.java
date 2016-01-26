@@ -8,14 +8,17 @@ import cn.zy.apps.demo.pojos.DemoUser ;
 import cn.zy.apps.demo.pojos.ProjectMajorType ;
 import cn.zy.apps.demo.pojos.ProjectOwnershipAddress ;
 import cn.zy.apps.demo.pojos.ProjectProgressType ;
+import cn.zy.apps.demo.pojos.ProjectType ;
 import cn.zy.apps.demo.service.IDemoUserService ;
 import cn.zy.apps.demo.service.IProjectMajorTypeService ;
 import cn.zy.apps.demo.service.IProjectOwnershipAddressService ;
 import cn.zy.apps.demo.service.IProjectProgressTypeService ;
+import cn.zy.apps.demo.service.IProjectTypeService ;
 import cn.zy.apps.demo.units.search.bean.DemoUserSearchBean ;
 import cn.zy.apps.demo.units.search.bean.ProjectMajorTypeSearchBean ;
 import cn.zy.apps.demo.units.search.bean.ProjectOwnershipAddressSearchBean ;
 import cn.zy.apps.demo.units.search.bean.ProjectProgressTypeSearchBean ;
+import cn.zy.apps.demo.units.search.bean.ProjectTypeSearchBean ;
 import cn.zy.apps.tools.units.ToolsUnits.OptType ;
 import cn.zy.apps.tools.web.ABConfigInitListener ;
 
@@ -58,6 +61,16 @@ public class DemoConfigInitListener extends ABConfigInitListener {
         List<ProjectMajorType> results = service.searchList(OptType.search, searchBean, null) ;
         System.out.println("==============  loadProjectMajorType  >   "+results.size()) ;
         for (ProjectMajorType result : results) {
+            writeObjectService.searchAutoWriteObject().cacheObject(result.getId().toString(), result) ;
+        }
+        
+        IProjectTypeService iProjectTypeService = (IProjectTypeService) springContext.getBean(IProjectTypeService.name) ;
+
+        ProjectTypeSearchBean searchProjectTypeSearchBeanBean = new ProjectTypeSearchBean() ;
+
+        List<ProjectType> projectTypes = iProjectTypeService.searchList(OptType.search, searchProjectTypeSearchBeanBean, null) ;
+        System.out.println("==============  loadProjectMajorType  >   "+results.size()) ;
+        for (ProjectType result : projectTypes) {
             writeObjectService.searchAutoWriteObject().cacheObject(result.getId().toString(), result) ;
         }
 

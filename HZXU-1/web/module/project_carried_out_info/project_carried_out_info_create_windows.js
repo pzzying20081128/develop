@@ -267,21 +267,16 @@ function project_carried_out_info_create_windows(moduleId, moduleName, params) {
 				// defaultType : 'textfield',
 				baseCls : 'x-plain',
 				defaults : {
-					width : 150
+					width : 130
 				},
-				items : [{
-				// id : 'projectcarriedoutinfo.projectMajorType',
-				// name : 'projectcarriedoutinfo.projectMajorType',
-				// fieldLabel : ' 项目重点分类',
-				// xtype : 'textfield',
-				// style : NoAllowBlankStyle,
-				// blankText : '不能为空！',
-				// allowBlank : false,
-				// listeners : {
-				// 'specialkey' : function(field, e) {
-				// }
-				// }
-				}]
+				items : [createERPcombo({
+					id : 'projectcarriedoutinfo.projectTypeId',
+					name : 'projectcarriedoutinfo.projectTypeId',
+					fieldLabel : ' 项目类型',
+					url : "./ProjectType_combo.do?searchBean.status=有效",
+					allowBlank : false,
+					forceSelection : false
+				})]
 			}]
 		},
 		// /////////////////////////////////////////////////////////////////////

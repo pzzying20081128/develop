@@ -17,6 +17,9 @@
 			<result name="success"  type="velocity">project_month_investment_plan.html</result>
 		</action>
 		
+		<action name="createAccessQRCode" class="MobileProjectAction" method="createAccessQRCode">
+		</action>
+		
 		
 		
 	</package>

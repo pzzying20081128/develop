@@ -70,6 +70,17 @@ public class ProjectCarriedOutInfo extends ProjectInfo {
     @Column(name = "project_major_id", insertable = false, updatable = false)
     @FieldDesc(name = "项目重点分类")
     private Integer projectMajorTypeId ;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_type_id")
+    @FieldDesc(name = "项目类型", mapping = "projectType.name")
+    private ProjectType projectType ;
+
+    @Column(name = "project_type_id", insertable = false, updatable = false)
+    @FieldDesc(name = "项目类型")
+    private Integer projectTypeId ;
+    
+    
 
     @Column(name = "kai_gong_date")
     @FieldDesc(name = "开工时间")
@@ -332,6 +343,22 @@ public class ProjectCarriedOutInfo extends ProjectInfo {
         if (buildEndDate != null) buildStartEndDate = buildStartEndDate + "-" + DateToolsUilts.dateToString(this.buildEndDate, DateType.yyyy.toString()) ;
 
         return buildStartEndDate ;
+    }
+
+    public ProjectType getProjectType() {
+        return projectType ;
+    }
+
+    public void setProjectType(ProjectType projectType) {
+        this.projectType = projectType ;
+    }
+
+    public Integer getProjectTypeId() {
+        return projectTypeId ;
+    }
+
+    public void setProjectTypeId(Integer projectTypeId) {
+        this.projectTypeId = projectTypeId ;
     }
 
 }
