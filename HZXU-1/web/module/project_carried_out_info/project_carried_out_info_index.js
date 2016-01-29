@@ -19,7 +19,7 @@ function create_project_carried_out_info_window(moduleId, moduleName) {
 		// grid_column.column
 		column : project_carried_out_info_grid_column.column,
 		tbar : {
-			// plugins : new Ext.ux.ToolbarKeyMap(),
+//			 plugins : new Ext.ux.ToolbarKeyMap(),
 			items : [{
 				// id : moduleId + '_add',
 				key : "add",
@@ -34,7 +34,7 @@ function create_project_carried_out_info_window(moduleId, moduleName) {
 					});
 				}
 			}, {
-				// id : moduleId + '_edit',
+				 id : moduleId + '_edit',
 				xtype : "tbbutton",
 				text : "编辑",
 				key : "edit",

@@ -44,7 +44,7 @@
 	</filter-mapping>
 
 	<welcome-file-list>
-		<welcome-file>/index.html</welcome-file>
+		<welcome-file>/showpc/index.html</welcome-file>
 	</welcome-file-list>
 	<session-config>
 		<session-timeout>20</session-timeout>

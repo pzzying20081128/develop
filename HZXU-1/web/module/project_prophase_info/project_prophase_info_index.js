@@ -24,7 +24,7 @@ function create_project_prophase_info_window(moduleId, moduleName) {
 					});
 				}
 			}, {
-				// id : moduleId + '_edit',
+				 id : moduleId + '_edit',
 				xtype : "tbbutton",
 				text : "编辑",
 				key : "edit",

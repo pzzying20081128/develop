@@ -4,6 +4,7 @@ function project_carried_out_info_create_windows(moduleId, moduleName, params) {
 
 	var project_carried_out_info_params = {
 		title : "新增" + moduleName,
+		moduleId:moduleId,
 		action : "save",
 		grid : grid,
 		// 结果路径

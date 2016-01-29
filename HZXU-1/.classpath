@@ -74,5 +74,8 @@
 	<classpathentry kind="lib" path="/DevModule/H4libs/velocity-tools-view-2.0.jar"/>
 	<classpathentry kind="lib" path="/DevModule/H4libs/xwork-core-2.3.20.jar"/>
 	<classpathentry kind="lib" path="/DevModule/H4libs/build/servlet/servlet-api.jar"/>
+	<classpathentry kind="lib" path="/DevModule/H4libs/zxing_core-3.0.0.jar"/>
+	<classpathentry kind="lib" path="H4libs/apps_base_json.jar"/>
+	<classpathentry kind="lib" path="H4libs/apps_base_tools.jar"/>
 	<classpathentry kind="output" path="web/WEB-INF/classes"/>
 </classpath>

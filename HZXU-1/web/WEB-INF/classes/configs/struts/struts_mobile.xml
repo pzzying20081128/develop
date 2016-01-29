@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<package name="mobile" namespace="/mobile" extends="struts-default">
+
+		<action name="mobile_list_key_project" class="MobileProjectAction" method="mobile_list_key_project">
+			<result name="success"  type="velocity">list.html</result>
+		</action>
+		
+		
+		<action name="mobile_get_key_project" class="MobileProjectAction" method="mobile_get_key_project">
+			<result name="success"  type="velocity">showProject.html</result>
+		</action>
+		
+		<action name="mobile_get_month_investmentPlans" class="MobileProjectAction" method="mobile_get_month_investmentPlans">
+			<result name="success"  type="velocity">project_month_investment_plan.html</result>
+		</action>
+		
+		<action name="createAccessQRCode" class="MobileProjectAction" method="createAccessQRCode">
+		</action>
+		
+		
+		
+	</package>
+</struts>

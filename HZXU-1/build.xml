@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="project" default="default">
+
+	<import file="build.js.xml" />
+
+	<target name="default">
+
+	</target>
+
+	<target name="build.comp.private.js.tools" depends="build.comp.js">
+		<comp_js buildoutfile="${release}" buildbasepath="./tools/web/ext3/privates/module" time="0000-00-00" buildType="merge" buildOutFileName="private.js">
+
+		</comp_js>
+	</target>
+
+
+
+	<target name="erp.build.web.js">
+
+		<taskdef name="comp_js" classname="cn.zy.apps.tools.dev.compjs.CompileJavaScriptBuildTask" classpathref="build.erp.ant.libs" classpath="${release.class}" />
+
+		<comp_js buildoutfile="${release.web.js}" buildbasepath="${build.path.svn.project.webContent}" time="${build_js_time}">
+			<fileset dir="${build.path.svn.project.webContent}">
+				<exclude name="ext3/**/*.js" />
+				<exclude name="js/**/*.js" />
+				<exclude name="js/index_module.js" />
+				<exclude name="reports/**/*.js" />
+				<exclude name="jquery/**/*.js" />
+				<exclude name="WEB-INF/**/*.js" />
+				<exclude name="ext3.bak.1/**/*.js" />
+				<exclude name="flex/**/*.js" />
+				<exclude name="print/**/*.js" />
+				<exclude name="css/**/*.js" />
+			</fileset>
+		</comp_js>
+
+		<comp_js buildoutfile="${release.web.js}/web" buildbasepath="web/mobile" time="0000-00-00">
+
+		</comp_js>
+
+		
+		
+	</target>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</project>

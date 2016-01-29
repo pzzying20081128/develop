@@ -13,7 +13,7 @@ Ext.apply(Ext.form.VTypes, {
 			return false;
 		return true
 	},
-	chineseText : "请输入中文", 
+	chineseText : "请输入中文",
 	age : function(val, field) {
 		try {
 			if (parseInt(val) >= 18 && parseInt(val) <= 100)
@@ -402,7 +402,7 @@ function mainGridWindow(properties) {
 				})
 			}
 		}) : null,
-		rowdblclickKey : this.moduleId + "_edit",
+		rowdblclickKey : moduleId + "_edit",
 		tbar : properties.tbar
 	});
 	grid.initPanel(properties.init);
@@ -2589,7 +2589,7 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 		var moduleId = this.moduleId;
 		if (rowdblclickKey_ == null || typeof rowdblclickKey_ == "undefined")
 			rowdblclickKey_ = moduleId + "_edit";
-		if (!this.isHavePower(rowdblclickKey_))
+		if (!this.isHavePower(rowdblclickKey_) && this.getisAdmin() != 1)
 			return;
 		var toolbar = this.getTopToolbar();
 		var edittoolbar = toolbar.getComponent(rowdblclickKey_);
