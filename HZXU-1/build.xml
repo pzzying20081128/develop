@@ -16,31 +16,29 @@
 
 
 
-	<target name="erp.build.web.js">
+	<target name="project.build.modile.js">
 
 		<taskdef name="comp_js" classname="cn.zy.apps.tools.dev.compjs.CompileJavaScriptBuildTask" classpathref="build.erp.ant.libs" classpath="${release.class}" />
 
-		<comp_js buildoutfile="${release.web.js}" buildbasepath="${build.path.svn.project.webContent}" time="${build_js_time}">
-			<fileset dir="${build.path.svn.project.webContent}">
-				<exclude name="ext3/**/*.js" />
-				<exclude name="js/**/*.js" />
-				<exclude name="js/index_module.js" />
-				<exclude name="reports/**/*.js" />
-				<exclude name="jquery/**/*.js" />
-				<exclude name="WEB-INF/**/*.js" />
-				<exclude name="ext3.bak.1/**/*.js" />
-				<exclude name="flex/**/*.js" />
-				<exclude name="print/**/*.js" />
-				<exclude name="css/**/*.js" />
+
+		<comp_js buildoutfile="${release.web.js}/web" buildbasepath="web/module" time="0000-00-00" buildType="dir">
+
+		</comp_js>
+
+        <mkdir dir="${release.web.js}/web/extjs/extjs_tools"/>
+		<copy todir="${release.web.js}/web/extjs/extjs_tools">
+			<fileset dir="web/ext3" id="id">
+				   <include name="my-ext-all-debug.min.js"/>
+				   <include name="ext-basex-debug.min.js"/>
 			</fileset>
-		</comp_js>
-
-		<comp_js buildoutfile="${release.web.js}/web" buildbasepath="web/mobile" time="0000-00-00">
-
-		</comp_js>
-
+		</copy>
 		
-		
+		<comp_js buildoutfile="${release.web.js}/web" buildbasepath="${release.web.js}/web/" time="0000-00-00" buildType="dir">
+
+			</comp_js>
+
+
+
 	</target>
 
 

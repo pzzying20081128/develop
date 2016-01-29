@@ -3,8 +3,8 @@
 <head>
 　　<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 　　<title>系统</title>
-    <script type="text/javascript" src="./showpc/js/echarts.simple.min.js"></script>
-	<script type="text/javascript" src="./showpc/js/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="/demo/showpc/js/echarts.simple.min.js"></script>
+	<script type="text/javascript" src="/demo/showpc/js/js/jquery-1.12.0.min.js"></script>
 　　<style>
 
 body {
@@ -33,27 +33,28 @@ body {
 								     首页
 								  </td >
 								  <td style="width:13%;">
-								     项目信息录入
+								    <a href="/demo/showpc/xmxxrr.html"> 项目信息录入 </a>
 								  </td >
 								  <td style="width:13%;">
-								     项目信息查询
+								     <a href="/demo/showpc/pclist_key_project.do?searchBean.status=有效">项目信息查询</a>
 								  </td >
 								  <td style="width:13%;">
-								     生成报表
+								      <a href="/demo/showpc/scbb.html">生成报表</a>
 								  </td >
 								  <td style="width:13%;">
-								    项目分析
+								    <a href="/demo/showpc/xmfx.html">项目分析</a>
 								  </td >
 								  <td style="width:13%;">
-								  <a href="./index.html">后台管理</a>
+								  <a href="/demo//index.html">后台管理</a>
 								  
 								  </td >
 								  <td style="width:13%;">
-								    权限及联系人
+								    <a href="/demo/showpc/qxjlxr.html">权限及联系人</a>
 								  </td >
 		  </tr>
 		  </table>
 	 </div>
+	 <br/>
      
 	      <div style="width:100%; height:auto">
 	 
@@ -65,9 +66,9 @@ body {
 								      <table style="width:100%; height:300px " border="0">
 									             <tr>
 													  <td style="width:50%" align="left"   valign="top"  >
-													        <table style="width:90%; height:290px " border="1">
+													        <table style="width:390px; height:290px " border="1">
 															   <tr>
-															      <td width="100px">
+															      <td width="130px">
 																  重点项目
 																  </td>
 																  <td>
@@ -76,7 +77,7 @@ body {
 															   </tr>
 															    <tr>
 															      <td>
-																  已完成(红色)
+																 <a href="./showpc/pclist_key_project.do?searchBean.status=有效"> 已完成计划(绿色) </a>
 																  </td>
 																  <td>
 																    335
@@ -84,7 +85,7 @@ body {
 															   </tr>
 															    <tr>
 															      <td>
-																  末完成(绿色)
+																   <a href="./showpc/pclist_key_project.do?searchBean.status=有效">  末完成计划(红色)</a>
 																  </td>
 																  <td>
 																  310
@@ -108,7 +109,7 @@ body {
 									             <tr>
 													  
 													   <td style="width:100%" align="left"   valign="top">
-													      <div id="main3" style="height:290px; width:680px" class="divcss5">
+													      <div id="main3" style="height:290px; width:500px" class="divcss5">
 															 
 														  </div>
 		 
@@ -131,9 +132,9 @@ body {
 								      <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:300px ">
 									             <tr>
 													  <td style="width:50%" align="left"   valign="top"  >
-													        <table style="width:90%; height:290px; margin-top:5px " border="1">
+													        <table style="width:400px; height:290px; margin-top:5px " border="1">
 															   <tr>
-															      <td width="100px">
+															      <td width="130px">
 																  所有项目
 																  </td>
 																  <td>
@@ -142,7 +143,7 @@ body {
 															   </tr>
 															    <tr>
 															      <td>
-																  已完成(红色)
+																<a href="./showpc/pclist_key_project.do?searchBean.status=有效"> 已完成计划(绿色) </a>
 																  </td>
 																  <td>
 																    835
@@ -150,7 +151,7 @@ body {
 															   </tr>
 															    <tr>
 															      <td>
-																  末完成(蓝色)
+																 <a href="./showpc/pclist_key_project.do?searchBean.status=有效"> 末完成计划(红色) </a>
 																  </td>
 																  <td>
 																  310
@@ -227,31 +228,72 @@ body {
 		 
 		 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main'));
         
-        // 指定图表的配置项和数据
-           option = {
-		   calculable : true,
-			series : [
-				{
-					name:'访问来源',
-					type:'pie',
-					color : ['red', '#666666'],
-					startAngle : 250,
-					radius : '65%',
-					center: ['50%', '50%'],
-					data:[
-						{value:335, name:'已完成'},
-						{value:310, name:'末完成'}
-					]
-				}
-			]
-};
+        
+        /**
+        function main(){
+        	   jQuery.ajax({ //一个Ajax过程
+                   type: "post", //以post方式与后台沟通
+                   url : "login.php", //与此php页面沟通
+                   dataType:'json',//从php返回的值以 JSON方式 解释
+                   data: 'username='+username+'&password='+password, //发给php的数据有两项，分别是上面传来的u和p
+                   success: function(json){//如果调用php成功
+                       var myChart = echarts.init(document.getElementById('main'));
+                       // 指定图表的配置项和数据
+                          option = {
+               		   calculable : true,
+               			series : [
+               				{
+               					name:'访问来源',
+               					type:'pie',
+               					color : ['#666666','red'],
+               					startAngle : 250,
+               					radius : '60%',
+               					center: ['50%', '50%'],
+               					data:[
+               						{value:335, name:'已完成计划'},
+               						{value:310, name:'末完成计划'}
+               					]
+               				}
+               			]
+                              };
+                          myChart.setOption(option);
+                   }
+               });
+        }
+        
+**/
 
         // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
+        
+         var myChart = echarts.init(document.getElementById('main'));
+                       // 指定图表的配置项和数据
+                          option = {
+               		   calculable : true,
+               			series : [
+               				{
+               					name:'访问来源',
+               					type:'pie',
+               					color : ['#666666','red'],
+               					startAngle : 250,
+               					radius : '60%',
+               					center: ['50%', '50%'],
+               					data:[
+               						{value:335, name:'已完成计划'},
+               						{value:310, name:'末完成计划'}
+               					]
+               				}
+               			]
+                              };
+                          myChart.setOption(option);
+  
 		
 		/////////////////////////////////////////////////////////////////
+		
+		
+		
+		
+		
 		var myChart1 = echarts.init(document.getElementById('main1'));
         
         // 指定图表的配置项和数据
@@ -261,13 +303,13 @@ body {
 				{
 					name:'访问来源',
 					type:'pie',
-					color : ['red', '#9A32CD'],
+					color : ['#666666','red'],
 					startAngle : 250,
-					radius : '65%',
+					radius : '55%',
 					center: ['50%', '50%'],
 					data:[
-						{value:835, name:'已完成'},
-						{value:310, name:'末完成'}
+						{value:835, name:'已完成计划'},
+						{value:310, name:'末完成计划'}
 					]
 				}
 			]
@@ -278,29 +320,41 @@ body {
 		
 		/////////////////////////////////////////////////////////////////
 		
-			var myChart1 = echarts.init(document.getElementById('main1'));
-        
-        // 指定图表的配置项和数据
-           option1 = {
-		   calculable : true,
-			series : [
-				{
-					name:'访问来源',
-					type:'pie',
-					color : ['red', '#9A32CD'],
-					startAngle : 250,
-					radius : '65%',
-					center: ['50%', '50%'],
-					data:[
-						{value:835, name:'已完成'},
-						{value:310, name:'末完成'}
-					]
-				}
-			]
-};
+		
+		 function main1(){
+        	   jQuery.ajax({ //一个Ajax过程
+                   type: "post", //以post方式与后台沟通
+                   url : "login.php", //与此php页面沟通
+                   dataType:'json',//从php返回的值以 JSON方式 解释
+                   data: 'username='+username+'&password='+password, //发给php的数据有两项，分别是上面传来的u和p
+                   success: function(json){//如果调用php成功
+           			var myChart1 = echarts.init(document.getElementById('main1'));       
+           	        // 指定图表的配置项和数据
+           	           option1 = {
+           			   calculable : true,
+           				series : [
+           					{
+           						name:'访问来源',
+           						type:'pie',
+           						color : ['#666666','red'],
+           						startAngle : 250,
+           						radius : '55%',
+           						center: ['50%', '50%'],
+           						data:[
+           							{value:835, name:'已完成计划'},
+           							{value:310, name:'末完成计划'}
+           						]
+           					}
+           				]
+           	};
 
-        // 使用刚指定的配置项和数据显示图表。
-        myChart1.setOption(option1);
+           	        // 使用刚指定的配置项和数据显示图表。
+           	        myChart1.setOption(option1);
+                   }
+               });
+        }
+		
+
 		
 		
 		
@@ -400,6 +454,8 @@ body {
 scroll('list', 2000, 1, 20 );//停留时间，相对速度（越小越快）,每次滚动多少，最好和Li的Line-height一致。   
 		
 		
+		
+	
 		
 		
     </script>

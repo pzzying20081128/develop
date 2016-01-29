@@ -17,6 +17,19 @@
 			<include name="**/*.jar" />
 		</fileset>
 	</path>
+	
+	<path id="build.erp.ant.libs">
+				<fileset dir="${project.lib}/build/ant_1.9.2/">
+					<include name="ant.jar" />
+				</fileset>
+				<fileset dir="${project.lib}/build/js/">
+					<include name="*.jar" />
+				</fileset>
+				<fileset dir="${project.lib}/">
+
+					<include name="*.jar" />
+				</fileset>
+			</path>
 
 	<target name="build.java">
 		<javac encoding="UTF-8" executable="javac" includeantruntime='flase' fork="true" srcdir="${release.src}" destdir="${release.class}" classpathref="build.lib" debug="on" />

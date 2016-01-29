@@ -19,13 +19,13 @@
 	<include file="configs/struts/struts_tools.xml"></include>
 	<include file="configs/struts/struts_base_info.xml"></include>
 	<include file="configs/struts/struts_mobile.xml"></include>
+	<include file="configs/struts/struts_pc.xml"></include>
 	
 	
-
 
 	<package name="init" namespace="/" extends="struts-appframe">
 		<action name="exit" class="UserLoginAction" method="exit">
-			<result name="success">index.html</result>
+			<result name="success">exit.html</result>
 		</action>
 
 		<action name="intoMain" class="UserLoginAction" method="mainPage">
