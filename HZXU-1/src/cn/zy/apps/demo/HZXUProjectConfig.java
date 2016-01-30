@@ -10,4 +10,9 @@ public class HZXUProjectConfig {
     public static enum Status{
         有效,删除
     }
+    
+    public static enum Complete{
+        已完成,末完成,进度延期
+    }
+    
 }

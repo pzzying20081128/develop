@@ -3,6 +3,9 @@ var project_month_investment_plan_grid_column = {
 		name : 'month',
 		mapping : 'month'
 	}, {
+		name : 'complete',
+		mapping : 'complete'
+	}, {
 		name : 'investmentPlan',
 		mapping : 'investmentPlan'
 	}, {
@@ -31,6 +34,21 @@ var project_month_investment_plan_grid_column = {
 
 		}
 	}, {
+		header : '是否完成',
+		width : 100,
+		dataIndex : 'complete',
+		sortable : true,
+		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
+
+			if (value == null || typeof ( value ) == 'undefined')
+				return null
+			else
+				return value;
+
+		}
+	},
+
+	{
 		header : '月投资计划',
 		width : 300,
 		dataIndex : 'investmentPlan',

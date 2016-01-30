@@ -2,6 +2,20 @@ function create_project_month_investment_plan_window(moduleId, moduleName, param
 
 	var yearGrid = params.mainGrid;
 
+	var complete = new Ext.Toolbar.Button({
+		// id : moduleId + '_search',
+		xtype : "tbbutton",
+		text : "完成",
+		key : "complete",
+		// keyBinding : createSearchKey(),
+		handler : function() {
+			project_month_investment_plan_complete_windows(moduleId, moduleName, {
+				grid : mainGridModule
+
+			});
+		}
+	});
+
 	var mainGridModule = new mainGridWindow({
 		moduleId : moduleId,
 		height : 200,
@@ -71,23 +85,9 @@ function create_project_month_investment_plan_window(moduleId, moduleName, param
 
 					});
 				}
-			}
+			},
 
-			// {
-			// // id : moduleId + '_search',
-			// xtype : "tbbutton",
-			// text : "查询",
-			// key : "search",
-			// // keyBinding : createSearchKey(),
-			// handler : function() {
-			// var searchWindex =
-			// project_month_investment_plan_search_windows(moduleId,
-			// moduleName, {
-			// grid : mainGridModule,
-			// searchParams : project_month_investment_plan_search_params
-			// });
-			// }
-			// }
+			complete
 
 			]
 
@@ -95,6 +95,9 @@ function create_project_month_investment_plan_window(moduleId, moduleName, param
 		init : {
 			// 行被选择
 			select : function(rowDataId, data, sm, rowIdx, r) {
+				
+				var shwocomplete =  (data.complete == '已完成' ? "取消完成" : "已完成");
+				complete.setText(shwocomplete);
 				// stockSelect(data, checkButton, detailGrid);
 				// detailGrid.load({
 				// params : {
@@ -111,6 +114,40 @@ function create_project_month_investment_plan_window(moduleId, moduleName, param
 	});
 
 	var mainGrid = mainGridModule.getGrid();
+
+	function project_month_investment_plan_complete_windows(moduleId, moduleName, params) {
+		var mainGridModule = params.grid;
+		var mainGrid = mainGridModule.getGrid();
+		var selection_rows = mainGrid.getSelectionModel().getSelections();
+
+		if (selection_rows == null) {
+			showErrorMsg('提示信息', '请选择要操作的数据记录');
+			return false;
+		}
+
+		if (selection_rows.length != 1) {
+			showErrorMsg('提示信息', '只能选择一行数据记录');
+			return false;
+		}
+		var selectId = selection_rows[0].id;
+		var complete = selection_rows[0].data.complete;
+		var shwocomplete = complete == '已完成' ? "是否要取消已完成状态" : "是否要更改成已完成状态";
+		showMsgYN({
+			msg : shwocomplete,
+			yes : function(YN) {
+				ERPAjaxRequest({
+					url : "./simple_ProjectMonthInvestmentPlan_complete.do",
+					params : {
+						"uuid" : selectId
+					},
+					// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
+					success : function(response, options) {
+						mainGrid.reload();
+					}
+				});
+			}
+		});
+	};
 
 	function project_month_investment_plan_delete_windows(moduleId, moduleName, params) {
 		var mainGridModule = params.grid;

@@ -59,7 +59,23 @@ public class ProjectMonthInvestmentPlanAction extends ABDemoSystemAction<Project
 
         return SUCCESS ;
     }
+    
+    public String complete() throws Exception {
+        try {
+            this.result = service.complete(uuid) ;
+            writeObjectService.intToPrpertiesUnits(this.result) ;
 
+        } catch (Exception e) {
+            this.success = false ;
+            this.msg = handError(e) ;
+        }
+
+        return SUCCESS ;
+    }
+
+    
+    
+    
     public String list() throws Exception {
         try {
             SelectPage<ProjectMonthInvestmentPlan> selectPage = service.search(optType, searchBean, commSearchBean, start, limit) ;

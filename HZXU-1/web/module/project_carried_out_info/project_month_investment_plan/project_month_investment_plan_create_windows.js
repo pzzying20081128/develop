@@ -28,19 +28,19 @@ function project_month_investment_plan_create_windows(moduleId, moduleName, para
 				defaults : {
 					width : 200
 				},
-				items : [{
-					id : 'projectmonthinvestmentplan.month',
+				items : [
+					createLocalCombo({
+				    id : 'projectmonthinvestmentplan.month',
 					name : 'projectmonthinvestmentplan.month',
 					fieldLabel : ' 月份',
-					xtype : 'textfield',
-					style : NoAllowBlankStyle,
-					blankText : '不能为空！',
-					allowBlank : false,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-				}]
+					storeData : [['一月', "一月"], ['二月', '二月'], ['三月', '三月'], ['四月', '四月']
+					, ['四月', '四月'], ['五月', '五月'], ['六月', '六月'], ['七月', '七月'], ['八月', '八月'], ['九月', '九月']
+					, ['十月', '十月'], ['十一月', '十一月'], ['十二月', '十二月']
+					],
+					defaultValue : null,
+					allowBlank : false
+				})
+				]
 			} // 1-1 en
 			]
 		}, {// 第二排
@@ -60,9 +60,9 @@ function project_month_investment_plan_create_windows(moduleId, moduleName, para
 					fieldLabel : ' 月投资计划',
 					xtype : 'textarea',
 					height : 50,
-					style : NoAllowBlankStyle,
+					style : AllowBlankStyle,
 					blankText : '不能为空！',
-					allowBlank : false,
+					allowBlank : true,
 					listeners : {
 						'specialkey' : function(field, e) {
 						}
@@ -88,9 +88,9 @@ function project_month_investment_plan_create_windows(moduleId, moduleName, para
 					fieldLabel : ' 主要建设内容',
 					xtype : 'textarea',
 					height : 50,
-					style : NoAllowBlankStyle,
+					style : AllowBlankStyle,
 					blankText : '不能为空！',
-					allowBlank : false,
+					allowBlank : true,
 					listeners : {
 						'specialkey' : function(field, e) {
 						}
@@ -117,9 +117,9 @@ function project_month_investment_plan_create_windows(moduleId, moduleName, para
 					fieldLabel : ' 存在问题',
 					xtype : 'textarea',
 					height : 50,
-					style : NoAllowBlankStyle,
+					style : AllowBlankStyle,
 					blankText : '不能为空！',
-					allowBlank : false,
+					allowBlank : true,
 					listeners : {
 						'specialkey' : function(field, e) {
 						}
@@ -147,9 +147,9 @@ function project_month_investment_plan_create_windows(moduleId, moduleName, para
 					fieldLabel : ' 形象进度',
 					xtype : 'textarea',
 					height : 50,
-					style : NoAllowBlankStyle,
+					style : AllowBlankStyle,
 					blankText : '不能为空！',
-					allowBlank : false,
+					allowBlank : true,
 					listeners : {
 						'specialkey' : function(field, e) {
 						}

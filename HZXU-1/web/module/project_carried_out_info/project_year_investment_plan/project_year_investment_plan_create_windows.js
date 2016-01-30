@@ -1,10 +1,10 @@
 function project_year_investment_plan_create_windows(moduleId, moduleName, params) {
 
 	var grid = params.grid.getGrid();
-	
-	var projectGrid= params.projectGrid;
-	
-	var projectGridId =projectGrid.projectGrid_id;
+
+	var projectGrid = params.projectGrid;
+
+	var projectGridId = projectGrid.projectGrid_id;
 
 	var project_year_investment_plan_params = {
 		title : "新增" + moduleName,
@@ -16,7 +16,7 @@ function project_year_investment_plan_create_windows(moduleId, moduleName, param
 		url : "./simple_ProjectYearInvestmentPlan_save.do",
 		params : {
 			optType : "save",
-			"projectyearinvestmentplan.projectCarriedOutInfoId":projectGridId
+			"projectyearinvestmentplan.projectCarriedOutInfoId" : projectGridId
 		},
 		// 字段
 		field : [{// 第一排
@@ -30,21 +30,16 @@ function project_year_investment_plan_create_windows(moduleId, moduleName, param
 				defaults : {
 					width : 200
 				},
-				items : [{
+				items : [createLocalCombo({
 					id : 'projectyearinvestmentplan.year',
 					name : 'projectyearinvestmentplan.year',
 					fieldLabel : ' 年',
-					xtype : 'datefield',
+					storeData : [['2016', "2016"], ['2017', '2017'], ['2018', '2018'], ['2019', '2019']],
+					defaultValue : new Date().getFullYear(),
 					style : NoAllowBlankStyle,
-					blankText : '不能为空！',
-					format : 'Y-m-d',
-					// value : new Date(),
-					allowBlank : false,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-				}]
+					allowBlank : true
+				})
+				]
 			}, // 1-1 end
 			]
 		}, {// 第二排

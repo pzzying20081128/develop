@@ -27,7 +27,7 @@ public class ProjectYearInvestmentPlan extends CommBean {
 
     @Column(name = "year")
     @FieldDesc(name = "年")
-    private Date year ;
+    private String year ;
     
     @Transient
     private String  yearString ;
@@ -42,13 +42,7 @@ public class ProjectYearInvestmentPlan extends CommBean {
     @Column(name = "project_carried_out_info_id" ,insertable=false,updatable=false)
     private Integer  projectCarriedOutInfoId;
 
-    public Date getYear() {
-        return year ;
-    }
-
-    public void setYear(Date year) {
-        this.year = year ;
-    }
+    
 
     public String getInvestmentPlan() {
         return investmentPlan ;
@@ -76,8 +70,16 @@ public class ProjectYearInvestmentPlan extends CommBean {
 
     public String getYearString() {
         if(year!=null )
-        yearString =DateToolsUilts.dateToString(year, DateToolsUilts.DateType.yyyy.toString());
+        yearString =year;
         return yearString ;
+    }
+
+    public String getYear() {
+        return year ;
+    }
+
+    public void setYear(String year) {
+        this.year = year ;
     }
 
 }

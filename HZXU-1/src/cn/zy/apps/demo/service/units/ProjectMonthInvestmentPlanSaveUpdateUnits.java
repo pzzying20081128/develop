@@ -2,6 +2,7 @@ package cn.zy.apps.demo.service.units ;
 
 import org.springframework.stereotype.Component ;
 
+import cn.zy.apps.demo.HZXUProjectConfig ;
 import cn.zy.apps.demo.pojos.ProjectMonthInvestmentPlan ;
 import cn.zy.apps.demo.pojos.ProjectYearInvestmentPlan ;
 import cn.zy.apps.demo.service.ABCommonsService ;
@@ -31,7 +32,7 @@ public class ProjectMonthInvestmentPlanSaveUpdateUnits extends ABCommonsService 
         ProjectYearInvestmentPlan projectYearInvestmentPlan = baseService.get(ProjectYearInvestmentPlan.class, optProjectMonthInvestmentPlan.getProjectYearInvestmentPlanId()) ;
 
         optProjectMonthInvestmentPlan.setProjectYearInvestmentPlan(projectYearInvestmentPlan) ;
-
+        optProjectMonthInvestmentPlan.setComplete(HZXUProjectConfig.Complete.末完成);
         baseService.save(optProjectMonthInvestmentPlan) ;
         return optProjectMonthInvestmentPlan ;
     }

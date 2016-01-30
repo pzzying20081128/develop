@@ -50,21 +50,16 @@ function project_year_investment_plan_update_windows(moduleId, moduleName, param
 				defaults : {
 					width : 200
 				},
-				items : [{
+				items : [createLocalCombo({
 					id : 'projectyearinvestmentplan.year',
 					name : 'projectyearinvestmentplan.year',
 					fieldLabel : ' 年',
-					xtype : 'datefield',
+					storeData : [['2016', "2016"], ['2017', '2017'],['2018', '2018'], ['2019', '2019']],
+					defaultValue : null,
 					style : NoAllowBlankStyle,
-					blankText : '不能为空！',
-					format : 'Y-m-d',
-					// value : new Date(),
-					allowBlank : false,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-				}]
+					allowBlank : false
+				})
+				]
 			}, // 1-1 end
 			]
 		}, {// 第二排

@@ -31,6 +31,11 @@ public interface IProjectMonthInvestmentPlanService   {
             
             
            public  ProjectMonthInvestmentPlan get(Integer id)throws SystemOptServiceException;
+           
+           
+           public  ProjectMonthInvestmentPlan complete(Integer id)throws SystemOptServiceException;
+           
+           
             
                 
         
