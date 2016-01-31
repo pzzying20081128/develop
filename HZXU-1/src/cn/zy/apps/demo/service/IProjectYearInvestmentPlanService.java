@@ -26,6 +26,10 @@ public interface IProjectYearInvestmentPlanService   {
             
 			public List<ProjectYearInvestmentPlan > searchList(OptType  optType ,    
 				           ProjectYearInvestmentPlanSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException;
+			
+			public List<ProjectYearInvestmentPlan > searchListJoinMonth(OptType  optType ,    
+                    ProjectYearInvestmentPlanSearchBean  searchBean,CommSearchBean  commSearchBean ,int... startLimit )throws SystemOptServiceException;
+			
             
             public  ProjectYearInvestmentPlan    remove(OptType  optType ,  ProjectYearInvestmentPlan   optProjectYearInvestmentPlan)throws SystemOptServiceException;
             

@@ -1,465 +1,452 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-　　<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-　　<title>系统</title>
-    <script type="text/javascript" src="/demo/showpc/js/echarts.simple.min.js"></script>
-	<script type="text/javascript" src="/demo/showpc/js/js/jquery-1.12.0.min.js"></script>
-　　<style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>系统</title>
+<script type="text/javascript" src="/demo/showpc/js/echarts.simple.min.js"></script>
+<script type="text/javascript" src="/demo/showpc/js/jquery-1.12.0.min.js"></script>
 
-body {
-    padding:0;  /*去除内边距*/
-    border:0;   /*去除边框*/
-    margin:0;   /*去除外边距*/
+<script type="text/javascript">
+	function init() {
+		main();
 	}
-	.divcss5{border:0px solid #F00} 
-	    ul,li{margin:0;padding:0;font-size:18px;color:#000000;}  
-		ul{height:200px;overflow:hidden;}  
-		ul li{line-height:20px;height:20px;} 
-　　</style>
-　　</head>
-　　<body>
-     
-	 <div style="width:100%; height:50px"> 
-	      <table border="1" cellpadding="0" cellspacing="0" style="width:100%; height:50px ">
-		    <tr>
-								  <td style="width:100%" colspan="7" align="center">
-								     XXX系统
-								  </td >
-								
-		  </tr>
-		  <tr align="center">
-								  <td style="width:13%;">
-								     首页
-								  </td >
-								  <td style="width:13%;">
-								    <a href="/demo/showpc/xmxxrr.html"> 项目信息录入 </a>
-								  </td >
-								  <td style="width:13%;">
-								     <a href="/demo/showpc/pclist_key_project.do?searchBean.status=有效">项目信息查询</a>
-								  </td >
-								  <td style="width:13%;">
-								      <a href="/demo/showpc/scbb.html">生成报表</a>
-								  </td >
-								  <td style="width:13%;">
-								    <a href="/demo/showpc/xmfx.html">项目分析</a>
-								  </td >
-								  <td style="width:13%;">
-								  <a href="/demo//index.html">后台管理</a>
-								  
-								  </td >
-								  <td style="width:13%;">
-								    <a href="/demo/showpc/qxjlxr.html">权限及联系人</a>
-								  </td >
-		  </tr>
-		  </table>
-	 </div>
-	 <br/>
-     
-	      <div style="width:100%; height:auto">
-	 
-					<div  style=" height:300px" class="divcss5">
-					  
-							 <table border="1" cellpadding="0" cellspacing="0" style="width:100%; height:300px ">
-							    <tr>
-								  <td style="width:50%;">
-								      <table style="width:100%; height:300px " border="0">
-									             <tr>
-													  <td style="width:50%" align="left"   valign="top"  >
-													        <table style="width:320px; height:290px " border="1">
-															   <tr>
-															      <td width="130px">
-																  重点项目
-																  </td>
-																  <td>
-																   645
-																  </td>
-															   </tr>
-															    <tr>
-															      <td>
-																 <a href="./showpc/pclist_key_project.do?searchBean.status=有效"> 已完成计划(绿色) </a>
-																  </td>
-																  <td>
-																    335
-																  </td>
-															   </tr>
-															    <tr>
-															      <td>
-																   <a href="./showpc/pclist_key_project.do?searchBean.status=有效">  末完成计划(红色)</a>
-																  </td>
-																  <td>
-																  310
-																  </td>
-															   </tr>
-															</table>
-													  </td>
-													   <td style="width:50%" align="left"   valign="top">
-													      <div id="main" style="height:290px; width:340px" class="divcss5">
-															 
-														 </div>
-		 
-													  </td>
-											    </tr>
-									  
-									  </table>
-								   
-								  </td>
-								  <td style="width:50%;">
-								             <table style="width:100%; height:300px " border="0">
-									             <tr>
-													  
-													   <td style="width:100%" align="left"   valign="top">
-													      <div id="main3" style="height:290px; width:500px" class="divcss5">
-															 
-														  </div>
-		 
-													  </td>
-											    </tr>
-									  
-									  </table>
-								   
-								  </td>
-								 
-								</tr>
-					  </table>
-					
-					
-					</div>
-					 <div  style="  height:300px" class="divcss5">
-					           <table border="1" cellpadding="0" cellspacing="0" style="width:100%; height:300px ">
-							    <tr>
-								  <td style="width:50%;">
-								      <table border="0" cellpadding="0" cellspacing="0" style="width:100%; height:300px ">
-									             <tr>
-													  <td style="width:50%" align="left"   valign="top"  >
-													        <table style="width:330px; height:290px; margin-top:5px " border="1">
-															   <tr>
-															      <td width="130px">
-																  所有项目
-																  </td>
-																  <td>
-																   645
-																  </td>
-															   </tr>
-															    <tr>
-															      <td>
-																<a href="./showpc/pclist_key_project.do?searchBean.status=有效"> 已完成计划(绿色) </a>
-																  </td>
-																  <td>
-																    835
-																  </td>
-															   </tr>
-															    <tr>
-															      <td>
-																 <a href="./showpc/pclist_key_project.do?searchBean.status=有效"> 末完成计划(红色) </a>
-																  </td>
-																  <td>
-																  310
-																  </td>
-															   </tr>
-															</table>
-													  </td>
-													   <td style="width:50%" align="left"   valign="top">
-													      <div id="main1" style="height:290px; width:340px" class="divcss5">
-															 
-														 </div>
-		 
-													  </td>
-											    </tr>
-									  
-								    </table>
-								   
-								  </td>
-								  <td style="width:50%;">
-								      <table style="width:100%; height:300px " border="0">
-									             <tr>
-													  <td style="width:50%" align="left"   valign="top"  >
-													      <ul id="list">  
-																<li>多层房屋建筑工程小区</li>  
-																<li>单体建筑面积10000平方米以上的房屋建筑</li>  
-																<li>总投资达1个亿以上的项目</li>  
-															  
-																<li>政府保障用房、校安工程等公共建筑</li>  
-																<li>居住建筑、公共建筑、工业建筑、以及易爆易爆场所</li>  
-																<li>多层房屋建筑工程小区1</li>  
-																<li>单体建筑面积10000平方米以上的房屋建筑2</li>  
-																<li>总投资达1个亿以上的项目2</li>  
-															  
-																<li>政府保障用房、校安工程等公共建筑2</li>  
-																<li>居住建筑、公共建筑、工业建筑、以及易爆易爆场所2</li>  
-																<li>多层房屋建筑工程小区</li>  
-																<li>单体建筑面积10000平方米以上的房屋建筑</li>  
-																<li>总投资达1个亿以上的项目</li>  
-															  
-																<li>政府保障用房、校安工程等公共建筑</li>  
-																<li>居住建筑、公共建筑、工业建筑、以及易爆易爆场所</li>  
-																<li>多层房屋建筑工程小区1</li>  
-																<li>单体建筑面积10000平方米以上的房屋建筑2</li>  
-																<li>总投资达1个亿以上的项目2</li>  
-															  
-																<li>政府保障用房、校安工程等公共建筑2</li>  
-																<li>居住建筑、公共建筑、工业建筑、以及易爆易爆场所2</li>  
-																<li>多层房屋建筑工程小区</li>  
-																<li>单体建筑面积10000平方米以上的房屋建筑</li>  
-																<li>总投资达1个亿以上的项目</li>  
-															  
-																<li>政府保障用房、校安工程等公共建筑</li>  
-																<li>居住建筑、公共建筑、工业建筑、以及易爆易爆场所</li>  
-																<li>多层房屋建筑工程小区1</li>  
-																<li>单体建筑面积10000平方米以上的房屋建筑2</li>  
-																<li>总投资达1个亿以上的项目2</li>  
-															  
-																<li>政府保障用房、校安工程等公共建筑2</li>  
-																<li>居住建筑、公共建筑、工业建筑、以及易爆易爆场所4</li>  
-																
-                                                          </ul> 
-													  </td>
-											    </tr>
-									  
-									  </table>
-								   
-								  </td>
-								 
-								</tr>
-					   </table>
-					</div>
-	 
-	     </div>
-		 
-		 <script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        
-        
-        /**
-        function main(){
-        	   jQuery.ajax({ //一个Ajax过程
-                   type: "post", //以post方式与后台沟通
-                   url : "login.php", //与此php页面沟通
-                   dataType:'json',//从php返回的值以 JSON方式 解释
-                   data: 'username='+username+'&password='+password, //发给php的数据有两项，分别是上面传来的u和p
-                   success: function(json){//如果调用php成功
-                       var myChart = echarts.init(document.getElementById('main'));
-                       // 指定图表的配置项和数据
-                          option = {
-               		   calculable : true,
-               			series : [
-               				{
-               					name:'访问来源',
-               					type:'pie',
-               					color : ['#666666','red'],
-               					startAngle : 250,
-               					radius : '60%',
-               					center: ['50%', '50%'],
-               					data:[
-               						{value:335, name:'已完成计划'},
-               						{value:310, name:'末完成计划'}
-               					]
-               				}
-               			]
-                              };
-                          myChart.setOption(option);
-                   }
-               });
-        }
-        
-**/
 
-        // 使用刚指定的配置项和数据显示图表。
-        
-         var myChart = echarts.init(document.getElementById('main'));
-                       // 指定图表的配置项和数据
-                          option = {
-               		   calculable : true,
-               			series : [
-               				{
-               					name:'访问来源',
-               					type:'pie',
-               					color : ['#666666','red'],
-               					startAngle : 250,
-               					radius : '60%',
-               					center: ['50%', '50%'],
-               					data:[
-               						{value:335, name:'已完成计划'},
-               						{value:310, name:'末完成计划'}
-               					]
-               				}
-               			]
-                              };
-                          myChart.setOption(option);
-  
-		
-		/////////////////////////////////////////////////////////////////
-		
-		
-		
-		
-		
-		var myChart1 = echarts.init(document.getElementById('main1'));
-        
-        // 指定图表的配置项和数据
-           option1 = {
-		   calculable : true,
-			series : [
-				{
-					name:'访问来源',
-					type:'pie',
-					color : ['#666666','red'],
-					startAngle : 250,
-					radius : '55%',
-					center: ['50%', '50%'],
-					data:[
-						{value:835, name:'已完成计划'},
-						{value:310, name:'末完成计划'}
+	function main() {
+		jQuery.ajax({ //一个Ajax过程
+			type : "post", //以post方式与后台沟通
+			url : "/demo/showpc/homeKeyStatisticsSum.do", //与此php页面沟通
+			dataType : 'json',//从php返回的值以 JSON方式 解释
+			//data: 'username='+username+'&password='+password, //发给php的数据有两项，分别是上面传来的u和p
+			success : function(json) {//如果调用php成功
+				var success = json.success;
+			    if(success ==false){
+			    	jQuery('#main').text("数据加载失败");
+			    	return;
+			    }
+			    var keyPCHomeSumBean = json.keyPCHomeSumBean;
+			    jQuery('#mainSum').text(keyPCHomeSumBean.projectSum);
+			    jQuery('#maincompleteSum').text(keyPCHomeSumBean.completeSum);
+			    jQuery('#mainnoCompleteSum').text(keyPCHomeSumBean.noCompleteSum);
+			    jQuery('#mainmonthCompleteSum').text(keyPCHomeSumBean.monthCompleteSum);
+			    jQuery('#mainmonthNoCompleteSum').text(keyPCHomeSumBean.monthNoCompleteSum);
+			    jQuery('#mainmonthNoPlanSum').text(keyPCHomeSumBean.monthNoPlanSum);
+			    
+			    
+			
+				var myChart = echarts.init(document.getElementById('main'));
+				// 指定图表的配置项和数据
+				   option = {
+				   calculable : true,
+					series : [
+						{
+							name:'访问来源',
+							type:'pie',
+							color : ['#666666','red','#EE5C42'],
+							startAngle : 250,
+							radius : '60%',
+							center: ['50%', '50%'],
+							data:[
+								{value:keyPCHomeSumBean.monthCompleteSum, name:'已完成月度计划'},
+								{value:keyPCHomeSumBean.monthNoCompleteSum, name:'末完成月度计划'},
+								{value:keyPCHomeSumBean.monthNoPlanSum, name:'无月度计划'}
+							]
+						}
 					]
-				}
-			]
-};
+				       };
+				   myChart.setOption(option);
+			
+			}
 
-        // 使用刚指定的配置项和数据显示图表。
-        myChart1.setOption(option1);
-		
-		/////////////////////////////////////////////////////////////////
-		
-		
-		 function main1(){
-        	   jQuery.ajax({ //一个Ajax过程
-                   type: "post", //以post方式与后台沟通
-                   url : "login.php", //与此php页面沟通
-                   dataType:'json',//从php返回的值以 JSON方式 解释
-                   data: 'username='+username+'&password='+password, //发给php的数据有两项，分别是上面传来的u和p
-                   success: function(json){//如果调用php成功
-           			var myChart1 = echarts.init(document.getElementById('main1'));       
-           	        // 指定图表的配置项和数据
-           	           option1 = {
-           			   calculable : true,
-           				series : [
-           					{
-           						name:'访问来源',
-           						type:'pie',
-           						color : ['#666666','red'],
-           						startAngle : 250,
-           						radius : '55%',
-           						center: ['50%', '50%'],
-           						data:[
-           							{value:835, name:'已完成计划'},
-           							{value:310, name:'末完成计划'}
-           						]
-           					}
-           				]
-           	};
+		});
+	}
+</script>
 
-           	        // 使用刚指定的配置项和数据显示图表。
-           	        myChart1.setOption(option1);
-                   }
-               });
-        }
-		
+<style>
+body {
+	padding: 0; /*去除内边距*/
+	border: 0; /*去除边框*/
+	margin: 0; /*去除外边距*/
+}
 
-		
-		
-		
-		//////////////////////////////////////////////////////////////////////////
-		
-		
-		var myChart3 = echarts.init(document.getElementById('main3'));
-		
-		option3 = {
-				 
-			 calculable : true,
-			    legend: {
-			    	padding: [35,20,0,10],     
-			        data:['项目总数','完成情况']
-			    },
+.divcss5 {
+	border: 0px solid #F00
+}
 
-   
-    xAxis : [
-        {
-            type : 'category',
-            data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
-        }
-    ],
-    yAxis : [
-        {
-            type : 'value',
-            name : '项目总数',
-            axisLabel : {
-                formatter: '{value}个'
-            }
-        },
-    ],
-    series : [
+ul,li {
+	margin: 0;
+	padding: 0;
+	font-size: 18px;
+	color: #000000;
+}
 
-        {
-            name:'项目总数',
-            type:'bar',
-            data:[12.0, 34.9, 67.0, 123.2, 25.6, 76.7, 135.6, 162.2, 312.6, 220.0,26.4, 223.3]
-        },
-        {
-            name:'完成情况',
-            type:'line',
-          lineStyle: {  
-  
-                        color:'red'  
-  
-                    }  ,
-            data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 75.6, 82.2, 48.7, 18.8, 6.0, 2.3]
-        },
-       
-    ]
-};
-		
-		 myChart3.setOption(option3);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		function scroll(element, delay, speed, lineHeight) {  
-    var numpergroup = 5;  
-    var slideBox = (typeof element == 'string')?document.getElementById(element):element;  
-    var delay = delay||1000;  
-    var speed=speed||20;  
-    var lineHeight = lineHeight||20;  
-    var tid = null, pause = false;  
-    var liLength = slideBox.getElementsByTagName('li').length;  
-    var lack = numpergroup-liLength%numpergroup;  
-    for(i=0;i<lack;i++){  
-    slideBox.appendChild(document.createElement("li"));  
-    }  
-    var start = function() {  
-         tid=setInterval(slide, speed);  
-    }  
-    var slide = function() {  
-         if (pause) return;  
-         slideBox.scrollTop += 2;  
-         if ( slideBox.scrollTop % lineHeight == 0 ) {  
-                clearInterval(tid);  
-                for(i=0;i<numpergroup;i++){  
-                    slideBox.appendChild(slideBox.getElementsByTagName('li')[0]);  
-                }  
-                slideBox.scrollTop = 0;  
-                setTimeout(start, delay);  
-         }  
-    }  
-    slideBox.onmouseover=function(){pause=true;}  
-    slideBox.onmouseout=function(){pause=false;}  
-    setTimeout(start, delay);  
-}  
-scroll('list', 2000, 1, 20 );//停留时间，相对速度（越小越快）,每次滚动多少，最好和Li的Line-height一致。   
-		
-		
-		
-	
-		
-		
-    </script>
-	 
+ul {
+	height: 200px;
+	overflow: hidden;
+}
+
+ul li {
+	line-height: 20px;
+	height: 20px;
+}
 　　
-　　</body>
+</style>
+</head>
+<body onload=" init()">
+
+	<div style="width: 100%; height: 50px">
+		<table border="1" cellpadding="0" cellspacing="0" style="width: 100%; height: 50px">
+			<tr>
+				<td style="width: 100%" colspan="7" align="center">XXX系统</td>
+
+			</tr>
+			<tr align="center">
+				<td style="width: 13%;">首页</td>
+				<td style="width: 13%;"><a href="/demo/showpc/xmxxrr.html"> 项目信息录入 </a></td>
+				<td style="width: 13%;"><a href="/demo/showpc/pclist_key_project.do?searchBean.status=有效">项目信息查询</a></td>
+				<td style="width: 13%;"><a href="/demo/showpc/scbb.html">生成报表</a></td>
+				<td style="width: 13%;"><a href="/demo/showpc/xmfx.html">项目分析</a></td>
+				<td style="width: 13%;"><a href="/demo//index.html">后台管理</a></td>
+				<td style="width: 13%;"><a href="/demo/showpc/qxjlxr.html">权限及联系人</a></td>
+			</tr>
+		</table>
+	</div>
+	<br />
+
+	<div style="width: 100%; height: auto">
+
+		<div style="height: 300px" class="divcss5">
+
+			<table border="1" cellpadding="0" cellspacing="0" style="width: 100%; height: 300px">
+				<tr>
+					<td style="width: 50%;">
+						<table style="width: 100%; height: 300px" border="0">
+							<tr>
+								<td style="width: 50%" align="left" valign="top">
+									<table style="width: 246px; height: 290px" border="1">
+										<tr>
+											<td width="170px">重点项目</td>
+											<td id="mainSum"></td>
+										</tr>
+										<!--
+										<tr>
+											<td><a href="./showpc/pclist_key_project.do?searchBean.status=有效"> 已完成计划(绿色) </a></td>
+											<td id="maincompleteSum"></td>
+										</tr>
+										<tr>
+											<td><a href="./showpc/pclist_key_project.do?searchBean.status=有效"> 末完成计划(红色)</a></td>
+											<td id="mainnoCompleteSum"></td>
+										</tr>
+										  -->
+										<tr>
+											<td><a href="./showpc/pclist_key_project.do?searchBean.status=有效"> 已完成月度计划(绿色) </a></td>
+											<td id="mainmonthCompleteSum"></td>
+										</tr>
+										<tr>
+											<td><a href="./showpc/pclist_key_project.do?searchBean.status=有效"> 末完成月度计划(红色)</a></td>
+											<td id="mainmonthNoCompleteSum"></td>
+										</tr>
+										<tr>
+											<td><a href="./showpc/pclist_key_project.do?searchBean.status=有效"> 无月度计划</a></td>
+											<td id="mainmonthNoPlanSum"></td>
+										</tr>
+									</table>
+								</td>
+								<td style="width: 50%" align="left" valign="top">
+									<div id="main" style="height: 290px; width: 415px" class="divcss5"></div>
+
+								</td>
+							</tr>
+
+						</table>
+
+					</td>
+					<td style="width: 50%;">
+						<table style="width: 100%; height: 300px" border="0">
+							<tr>
+
+								<td style="width: 100%" align="left" valign="top">
+									<div id="main3" style="height: 290px; width: 500px" class="divcss5"></div>
+
+								</td>
+							</tr>
+
+						</table>
+
+					</td>
+
+				</tr>
+			</table>
+
+
+		</div>
+		<div style="height: 300px" class="divcss5">
+			<table border="1" cellpadding="0" cellspacing="0" style="width: 100%; height: 300px">
+				<tr>
+					<td style="width: 50%;">
+						<table border="0" cellpadding="0" cellspacing="0" style="width: 100%; height: 300px">
+							<tr>
+								<td style="width: 50%" align="left" valign="top">
+									<table style="width: 250px; height: 290px; margin-top: 5px" border="1">
+										<tr>
+											<td width="170px">所有项目</td>
+											<td>645</td>
+										</tr>
+										<tr>
+											<td><a href="./showpc/pclist_key_project.do?searchBean.status=有效"> 已完成计划(绿色) </a></td>
+											<td>835</td>
+										</tr>
+										<tr>
+											<td><a href="./showpc/pclist_key_project.do?searchBean.status=有效"> 末完成计划(红色) </a></td>
+											<td>310</td>
+										</tr>
+									</table>
+								</td>
+								<td style="width: 50%" align="left" valign="top">
+									<div id="main1" style="height: 290px; width: 420px" class="divcss5"></div>
+
+								</td>
+							</tr>
+
+						</table>
+
+					</td>
+					<td style="width: 50%;">
+						<table style="width: 100%; height: 300px" border="0">
+							<tr>
+								<td style="width: 50%" align="left" valign="top">
+									<ul id="list">
+										<li>多层房屋建筑工程小区</li>
+										<li>单体建筑面积10000平方米以上的房屋建筑</li>
+										<li>总投资达1个亿以上的项目</li>
+
+										<li>政府保障用房、校安工程等公共建筑</li>
+										<li>居住建筑、公共建筑、工业建筑、以及易爆易爆场所</li>
+										<li>多层房屋建筑工程小区1</li>
+										<li>单体建筑面积10000平方米以上的房屋建筑2</li>
+										<li>总投资达1个亿以上的项目2</li>
+
+										<li>政府保障用房、校安工程等公共建筑2</li>
+										<li>居住建筑、公共建筑、工业建筑、以及易爆易爆场所2</li>
+										<li>多层房屋建筑工程小区</li>
+										<li>单体建筑面积10000平方米以上的房屋建筑</li>
+										<li>总投资达1个亿以上的项目</li>
+
+										<li>政府保障用房、校安工程等公共建筑</li>
+										<li>居住建筑、公共建筑、工业建筑、以及易爆易爆场所</li>
+										<li>多层房屋建筑工程小区1</li>
+										<li>单体建筑面积10000平方米以上的房屋建筑2</li>
+										<li>总投资达1个亿以上的项目2</li>
+
+										<li>政府保障用房、校安工程等公共建筑2</li>
+										<li>居住建筑、公共建筑、工业建筑、以及易爆易爆场所2</li>
+										<li>多层房屋建筑工程小区</li>
+										<li>单体建筑面积10000平方米以上的房屋建筑</li>
+										<li>总投资达1个亿以上的项目</li>
+
+										<li>政府保障用房、校安工程等公共建筑</li>
+										<li>居住建筑、公共建筑、工业建筑、以及易爆易爆场所</li>
+										<li>多层房屋建筑工程小区1</li>
+										<li>单体建筑面积10000平方米以上的房屋建筑2</li>
+										<li>总投资达1个亿以上的项目2</li>
+
+										<li>政府保障用房、校安工程等公共建筑2</li>
+										<li>居住建筑、公共建筑、工业建筑、以及易爆易爆场所4</li>
+
+									</ul>
+								</td>
+							</tr>
+
+						</table>
+
+					</td>
+
+				</tr>
+			</table>
+		</div>
+
+	</div>
+
+	<script type="text/javascript">
+		// 基于准备好的dom，初始化echarts实例
+
+		// 使用刚指定的配置项和数据显示图表。
+		/**
+		 var myChart = echarts.init(document.getElementById('main'));
+		               // 指定图表的配置项和数据
+		                  option = {
+		       		   calculable : true,
+		       			series : [
+		       				{
+		       					name:'访问来源',
+		       					type:'pie',
+		       					color : ['#666666','red'],
+		       					startAngle : 250,
+		       					radius : '60%',
+		       					center: ['50%', '50%'],
+		       					data:[
+		       						{value:335, name:'已完成计划'},
+		       						{value:310, name:'末完成计划'}
+		       					]
+		       				}
+		       			]
+		                      };
+		                  myChart.setOption(option);
+		 **/
+
+		/////////////////////////////////////////////////////////////////
+
+		var myChart1 = echarts.init(document.getElementById('main1'));
+
+		// 指定图表的配置项和数据
+		option1 = {
+			calculable : true,
+			series : [ {
+				name : '访问来源',
+				type : 'pie',
+				color : [ '#666666', 'red' ],
+				startAngle : 250,
+				radius : '55%',
+				center : [ '50%', '50%' ],
+				data : [ {
+					value : 835,
+					name : '已完成计划'
+				}, {
+					value : 310,
+					name : '末完成计划'
+				} ]
+			} ]
+		};
+
+		// 使用刚指定的配置项和数据显示图表。
+		myChart1.setOption(option1);
+
+		/////////////////////////////////////////////////////////////////
+
+		function main1() {
+			jQuery.ajax({ //一个Ajax过程
+				type : "post", //以post方式与后台沟通
+				url : "login.php", //与此php页面沟通
+				dataType : 'json',//从php返回的值以 JSON方式 解释
+				data : 'username=' + username + '&password=' + password, //发给php的数据有两项，分别是上面传来的u和p
+				success : function(json) {//如果调用php成功
+					var myChart1 = echarts.init(document
+							.getElementById('main1'));
+					// 指定图表的配置项和数据
+					option1 = {
+						calculable : true,
+						series : [ {
+							name : '访问来源',
+							type : 'pie',
+							color : [ '#666666', 'red' ],
+							startAngle : 250,
+							radius : '55%',
+							center : [ '50%', '50%' ],
+							data : [ {
+								value : 835,
+								name : '已完成计划'
+							}, {
+								value : 310,
+								name : '末完成计划'
+							} ]
+						} ]
+					};
+
+					// 使用刚指定的配置项和数据显示图表。
+					myChart1.setOption(option1);
+				}
+			});
+		}
+
+		//////////////////////////////////////////////////////////////////////////
+
+		var myChart3 = echarts.init(document.getElementById('main3'));
+
+		option3 = {
+
+			calculable : true,
+			legend : {
+				padding : [ 35, 20, 0, 10 ],
+				data : [ '项目总数', '完成情况' ]
+			},
+
+			xAxis : [ {
+				type : 'category',
+				data : [ '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月',
+						'10月', '11月', '12月' ]
+			} ],
+			yAxis : [ {
+				type : 'value',
+				name : '项目总数',
+				axisLabel : {
+					formatter : '{value}个'
+				}
+			}, ],
+			series : [
+
+					{
+						name : '项目总数',
+						type : 'bar',
+						data : [ 12.0, 34.9, 67.0, 123.2, 25.6, 76.7, 135.6,
+								162.2, 312.6, 220.0, 26.4, 223.3 ]
+					},
+					{
+						name : '完成情况',
+						type : 'line',
+						lineStyle : {
+
+							color : 'red'
+
+						},
+						data : [ 2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 75.6, 82.2,
+								48.7, 18.8, 6.0, 2.3 ]
+					},
+
+			]
+		};
+
+		myChart3.setOption(option3);
+
+		function scroll(element, delay, speed, lineHeight) {
+			var numpergroup = 5;
+			var slideBox = (typeof element == 'string') ? document
+					.getElementById(element) : element;
+			var delay = delay || 1000;
+			var speed = speed || 20;
+			var lineHeight = lineHeight || 20;
+			var tid = null, pause = false;
+			var liLength = slideBox.getElementsByTagName('li').length;
+			var lack = numpergroup - liLength % numpergroup;
+			for (i = 0; i < lack; i++) {
+				slideBox.appendChild(document.createElement("li"));
+			}
+			var start = function() {
+				tid = setInterval(slide, speed);
+			}
+			var slide = function() {
+				if (pause)
+					return;
+				slideBox.scrollTop += 2;
+				if (slideBox.scrollTop % lineHeight == 0) {
+					clearInterval(tid);
+					for (i = 0; i < numpergroup; i++) {
+						slideBox.appendChild(slideBox
+								.getElementsByTagName('li')[0]);
+					}
+					slideBox.scrollTop = 0;
+					setTimeout(start, delay);
+				}
+			}
+			slideBox.onmouseover = function() {
+				pause = true;
+			}
+			slideBox.onmouseout = function() {
+				pause = false;
+			}
+			setTimeout(start, delay);
+		}
+		scroll('list', 2000, 1, 20);//停留时间，相对速度（越小越快）,每次滚动多少，最好和Li的Line-height一致。
+	</script>
+
+
+</body>
 </html>

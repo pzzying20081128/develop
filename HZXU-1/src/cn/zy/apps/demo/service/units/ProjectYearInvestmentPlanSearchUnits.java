@@ -35,6 +35,19 @@ public class ProjectYearInvestmentPlanSearchUnits extends ABCommonsService {
         return selectPage ;
 
     }
+    
+    public List<ProjectYearInvestmentPlan> searchListJoinMonth(OptType optType, ProjectYearInvestmentPlanSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
+        Map<String, Object> value = ToolsUnits.createSearchMap() ;
+
+        String sqlWhere = createWhere(value, searchBean, commSearchBean) ;
+        String sql1 = "select  distinct  projectYearInvestmentPlan  from  ProjectYearInvestmentPlan  as  projectYearInvestmentPlan   " +
+        		"  left join fetch  projectYearInvestmentPlan.projectMonthInvestmentPlans   " ;
+        String sql_ = sql1 + sqlWhere ;
+        List<ProjectYearInvestmentPlan> result = baseService.findByHSQL(sql_, value, startLimit) ;
+        return result ;
+        
+       
+    }
 
     public List<ProjectYearInvestmentPlan> list(OptType optType, ProjectYearInvestmentPlanSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
         //SelectPage<ProjectYearInvestmentPlan> selectPage = new SelectPage<ProjectYearInvestmentPlan>() ;

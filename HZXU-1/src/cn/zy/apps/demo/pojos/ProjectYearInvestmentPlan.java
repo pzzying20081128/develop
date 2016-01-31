@@ -1,6 +1,7 @@
 package cn.zy.apps.demo.pojos ;
 
 import java.util.Date ;
+import java.util.List ;
 
 import javax.persistence.CascadeType ;
 import javax.persistence.Column ;
@@ -8,6 +9,7 @@ import javax.persistence.Entity ;
 import javax.persistence.FetchType ;
 import javax.persistence.JoinColumn ;
 import javax.persistence.ManyToOne ;
+import javax.persistence.OneToMany ;
 import javax.persistence.Table ;
 import javax.persistence.Transient ;
 
@@ -41,6 +43,9 @@ public class ProjectYearInvestmentPlan extends CommBean {
     private ProjectCarriedOutInfo projectCarriedOutInfo;
     @Column(name = "project_carried_out_info_id" ,insertable=false,updatable=false)
     private Integer  projectCarriedOutInfoId;
+    
+    @OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL,mappedBy="projectYearInvestmentPlan")
+    private List<ProjectMonthInvestmentPlan> projectMonthInvestmentPlans;
 
     
 
@@ -80,6 +85,14 @@ public class ProjectYearInvestmentPlan extends CommBean {
 
     public void setYear(String year) {
         this.year = year ;
+    }
+
+    public List<ProjectMonthInvestmentPlan> getProjectMonthInvestmentPlans() {
+        return projectMonthInvestmentPlans ;
+    }
+
+    public void setProjectMonthInvestmentPlans(List<ProjectMonthInvestmentPlan> projectMonthInvestmentPlans) {
+        this.projectMonthInvestmentPlans = projectMonthInvestmentPlans ;
     }
 
 }

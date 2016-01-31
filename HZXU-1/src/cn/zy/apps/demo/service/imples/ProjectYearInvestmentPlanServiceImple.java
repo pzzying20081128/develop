@@ -69,6 +69,12 @@ public class ProjectYearInvestmentPlanServiceImple extends  ABCommonsService  im
                 
                 return baseService.get(id, ProjectYearInvestmentPlan.class) ;
             }
+
+            @Override
+            public List<ProjectYearInvestmentPlan> searchListJoinMonth(OptType optType, ProjectYearInvestmentPlanSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
+                return  iProjectYearInvestmentPlanSearchUnits.searchListJoinMonth(optType, searchBean,
+                        commSearchBean ,startLimit );
+            }
             
             
 }

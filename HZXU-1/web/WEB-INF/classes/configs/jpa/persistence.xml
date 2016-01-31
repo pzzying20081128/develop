@@ -6,6 +6,7 @@
 		<persistence:mapping-file>configs/orm/ormx_sys_user.xml</persistence:mapping-file>
 		<persistence:mapping-file>configs/orm/ormx_stock_order.xml</persistence:mapping-file>
                  -->
+                 <persistence:mapping-file>configs/jpa/ormx_home.xml</persistence:mapping-file>
 		<persistence:properties>
 			<persistence:property name="hibernate.ejb.cfgfile" value="configs/jpa/hibernates.cfg.xml" />
 		</persistence:properties>
