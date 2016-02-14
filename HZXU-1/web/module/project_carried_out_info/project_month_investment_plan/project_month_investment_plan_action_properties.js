@@ -17,7 +17,19 @@ var project_month_investment_plan_grid_column = {
 	}, {
 		name : 'imageProgress',
 		mapping : 'imageProgress'
-	},],
+	},
+	{
+		name : 'imageProgress',
+		mapping : 'imageProgress'
+	},{
+		name : 'truthInvestment',
+		mapping : 'truthInvestment'
+	},{
+		name : 'truthCompletionStatus',
+		mapping : 'truthCompletionStatus'
+	}
+	
+	],
 
 	// ///////////////////////////////////////////////////////////////////////////////////////////
 	column : [new Ext.grid.ERPRowNumberer(), {
@@ -37,6 +49,32 @@ var project_month_investment_plan_grid_column = {
 		header : '是否完成',
 		width : 100,
 		dataIndex : 'complete',
+		sortable : true,
+		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
+
+			if (value == null || typeof ( value ) == 'undefined')
+				return null
+			else
+				return value;
+
+		}
+	},{
+		header : '实际投资金额',
+		width : 100,
+		dataIndex : 'truthInvestment',
+		sortable : true,
+		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
+
+			if (value == null || typeof ( value ) == 'undefined')
+				return null
+			else
+				return value;
+
+		}
+	},{
+		header : '实际完成情况',
+		width : 100,
+		dataIndex : 'truthCompletionStatus',
 		sortable : true,
 		renderer : function(value, cellmeta, record, rowIndex, columnIndex, store) {
 

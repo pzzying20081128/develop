@@ -46,7 +46,15 @@ function project_month_investment_plan_update_windows(moduleId, moduleName, para
 		}, {
 			name : 'projectmonthinvestmentplan.imageProgress',
 			mapping : 'imageProgress'
-		}]),
+		},
+		{
+			name : 'projectmonthinvestmentplan.truthInvestment',
+			mapping : 'truthInvestment'
+		},{
+			name : 'projectmonthinvestmentplan.truthCompletionStatus',
+			mapping : 'truthCompletionStatus'
+		}
+		]),
 		// 字段
 		field : [{// 第一排
 			layout : 'column',
@@ -73,8 +81,61 @@ function project_month_investment_plan_update_windows(moduleId, moduleName, para
 				})
 				]
 			} // 1-1 en
+			,{
+				columnWidth : .5,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 200
+				},
+				items : [{
+					id : 'projectmonthinvestmentplan.truthInvestment',
+					name : 'projectmonthinvestmentplan.truthInvestment',
+					fieldLabel : ' 实际投资金额',
+					xtype : 'textfield',
+					vtype:"money",
+					style : AllowBlankStyle,
+					blankText : '不能为空！',
+					allowBlank : true,
+					listeners : {
+						'specialkey' : function(field, e) {
+						}
+					}
+				}]
+			}
 			]
-		}, {// 第二排
+		}, 
+		{// 第二排
+			layout : 'column',
+			baseCls : 'x-plain',
+			items : [{
+				columnWidth : 1,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 760
+				},
+				items : [{
+					id : 'projectmonthinvestmentplan.truthCompletionStatus',
+					name : 'projectmonthinvestmentplan.truthCompletionStatus',
+					fieldLabel : ' 实际完成情况',
+					xtype : 'textarea',
+					height : 50,
+					style : AllowBlankStyle,
+					blankText : '不能为空！',
+					allowBlank : true,
+					listeners : {
+						'specialkey' : function(field, e) {
+						}
+					}
+				}]
+			} // 1-1 end
+
+			]
+		},
+				{// 第二排
 			layout : 'column',
 			baseCls : 'x-plain',
 			items : [{

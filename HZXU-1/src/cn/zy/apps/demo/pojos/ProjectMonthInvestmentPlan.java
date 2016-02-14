@@ -26,6 +26,15 @@ public class ProjectMonthInvestmentPlan extends CommBean {
     @Column(name = "investment_plan")
     @FieldDesc(name = "月投资计划")
     private String investmentPlan ;
+    
+    @Column(name = "truth_investment")
+    @FieldDesc(name = "实际投资金额")
+    private Double  truthInvestment;
+    
+    
+    @Column(name = "truth_completion_status")
+    @FieldDesc(name = "实际完成情况")
+    private String  truthCompletionStatus;
 
     @Column(name = "construction_content")
     @FieldDesc(name = "主要建设内容")
@@ -112,6 +121,22 @@ public class ProjectMonthInvestmentPlan extends CommBean {
 
     public void setComplete(Complete complete) {
         this.complete = complete ;
+    }
+
+    public Double getTruthInvestment() {
+        return truthInvestment ;
+    }
+
+    public void setTruthInvestment(Double truthInvestment) {
+        this.truthInvestment = truthInvestment ;
+    }
+
+    public String getTruthCompletionStatus() {
+        return truthCompletionStatus ;
+    }
+
+    public void setTruthCompletionStatus(String truthCompletionStatus) {
+        this.truthCompletionStatus = truthCompletionStatus ;
     }
 
     

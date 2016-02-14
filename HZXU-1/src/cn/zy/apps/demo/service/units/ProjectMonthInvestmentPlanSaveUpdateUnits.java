@@ -40,7 +40,9 @@ public class ProjectMonthInvestmentPlanSaveUpdateUnits extends ABCommonsService 
     public ProjectMonthInvestmentPlan update(ProjectMonthInvestmentPlan optProjectMonthInvestmentPlan) throws SystemOptServiceException {
         ProjectMonthInvestmentPlan projectMonthInvestmentPlan = baseService.get(ProjectMonthInvestmentPlan.class, optProjectMonthInvestmentPlan.getId()) ;
 
-        ToolsUnits.copyBeanProperties(projectMonthInvestmentPlan, optProjectMonthInvestmentPlan, "month", "investmentPlan", "constructionContent", "existingProblems", "imageProgress") ;
+        ToolsUnits.copyBeanProperties(projectMonthInvestmentPlan, optProjectMonthInvestmentPlan, "month", "investmentPlan", 
+                    "constructionContent", "existingProblems",
+                         "imageProgress","truthInvestment","truthCompletionStatus"  ) ;
         baseService.update(projectMonthInvestmentPlan) ;
         return projectMonthInvestmentPlan ;
     }
