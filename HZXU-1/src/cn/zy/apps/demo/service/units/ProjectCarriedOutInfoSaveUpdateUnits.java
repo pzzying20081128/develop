@@ -33,8 +33,16 @@ public class ProjectCarriedOutInfoSaveUpdateUnits extends ABCommonsService {
 
     public ProjectCarriedOutInfo save(ProjectCarriedOutInfo optProjectCarriedOutInfo) throws SystemOptServiceException {
 
+        String sql = "select  projectCarriedOutInfo    from   ProjectCarriedOutInfo  as  projectCarriedOutInfo    where   projectCarriedOutInfo.name ='" + optProjectCarriedOutInfo.getName() + "'  " ;
+
+        ProjectCarriedOutInfo optProjectCarriedOutInfo_ = baseService.findSinglenessByHSQL(sql) ;
+
+        if (optProjectCarriedOutInfo_ != null) {
+            throw new SystemOptServiceException("项目名已经存在") ;
+        }
+
         setProperties(optProjectCarriedOutInfo) ;
-        optProjectCarriedOutInfo.setStatus(Status.有效);
+        optProjectCarriedOutInfo.setStatus(Status.有效) ;
         optProjectCarriedOutInfo.setProjectStauts(ProjectStauts.建设中) ;
 
         baseService.save(optProjectCarriedOutInfo) ;
@@ -43,24 +51,33 @@ public class ProjectCarriedOutInfoSaveUpdateUnits extends ABCommonsService {
     }
 
     public ProjectCarriedOutInfo update(ProjectCarriedOutInfo optProjectCarriedOutInfo) throws SystemOptServiceException {
-        
+
+        String sql = "select  projectCarriedOutInfo    from   ProjectCarriedOutInfo  as  projectCarriedOutInfo    where   projectCarriedOutInfo.name ='" + optProjectCarriedOutInfo.getName() + "'  " +
+
+        "   and    projectCarriedOutInfo.id !=" + optProjectCarriedOutInfo.getId() ;
+
+        ProjectCarriedOutInfo optProjectCarriedOutInfo_ = baseService.findSinglenessByHSQL(sql) ;
+
+        if (optProjectCarriedOutInfo_ != null) {
+            throw new SystemOptServiceException("项目名已经存在") ;
+        }
+
         setProperties(optProjectCarriedOutInfo) ;
-        
-        
-        ProjectCarriedOutInfo  projectCarriedOutInfo  =baseService.get(ProjectCarriedOutInfo.class, optProjectCarriedOutInfo.getId());
-        
-        ToolsUnits.copyBeanProperties(projectCarriedOutInfo, optProjectCarriedOutInfo, 
-                
-                "totalInvestment","constructionContent","isKaiGong","isProduction","projectAddress","projectOwnershipAddress",
-                
-                "projectOwnershipAddressId","projectProgressType","projectProgressTypeId","projectMajorType",
-                
-                "projectMajorTypeId","kaiGongDate","buildStartDate","buildEndDate","implementationUnit","implementationUnitPerson","implementationUnitPhoto","name",
-                
-                "responsibilityUnit","responsibilityUnitPerson","responsibilityUnitPhoto","fenGuanMiShuZhang","fenGuanMiShuZhangPhoto","fenGuanHuShiZhang","fenGuanHuShiZhangPhoto"
-                
-                );
-        
+
+        ProjectCarriedOutInfo projectCarriedOutInfo = baseService.get(ProjectCarriedOutInfo.class, optProjectCarriedOutInfo.getId()) ;
+
+        ToolsUnits.copyBeanProperties(projectCarriedOutInfo, optProjectCarriedOutInfo,
+
+        "totalInvestment", "constructionContent", "isKaiGong", "isProduction", "projectAddress", "projectOwnershipAddress",
+
+        "projectOwnershipAddressId", "projectProgressType", "projectProgressTypeId", "projectMajorType",
+
+        "projectMajorTypeId", "kaiGongDate", "buildStartDate", "buildEndDate", "implementationUnit", "implementationUnitPerson", "implementationUnitPhoto", "name",
+
+        "responsibilityUnit", "responsibilityUnitPerson", "responsibilityUnitPhoto", "fenGuanMiShuZhang", "fenGuanMiShuZhangPhoto", "fenGuanHuShiZhang", "fenGuanHuShiZhangPhoto"
+
+        ) ;
+
         return projectCarriedOutInfo ;
     }
 
@@ -76,8 +93,8 @@ public class ProjectCarriedOutInfoSaveUpdateUnits extends ABCommonsService {
         Integer getProjectMajorTypeId = optProjectCarriedOutInfo.getProjectMajorTypeId() ;
 
         optProjectCarriedOutInfo.setProjectMajorType(baseService.load(getProjectMajorTypeId, ProjectMajorType.class)) ;
-        
-        Integer getProjectTypeId = optProjectCarriedOutInfo.getProjectTypeId();
+
+        Integer getProjectTypeId = optProjectCarriedOutInfo.getProjectTypeId() ;
 
         optProjectCarriedOutInfo.setProjectType(baseService.load(getProjectTypeId, ProjectType.class)) ;
 

@@ -63,4 +63,22 @@ public class ProjectCarriedOutInfoServiceImple extends ABCommonsService implemen
         return baseService.get(id, ProjectCarriedOutInfo.class) ;
     }
 
+    @Override
+    public List<String> haveProjectMonth(Integer projectId) throws SystemOptServiceException {
+        String sql = "select  projectMonthInvestmentPlan.month   from  ProjectMonthInvestmentPlan  as  projectMonthInvestmentPlan   " +
+
+        "  inner join   projectMonthInvestmentPlan.projectYearInvestmentPlan as  projectYearInvestmentPlan    " +
+
+        "  where  projectYearInvestmentPlan.projectCarriedOutInfoId =  " + projectId ;
+
+        return baseService.findByHSQL(sql) ;
+    }
+
+    @Override
+    public List<ProjectCarriedOutInfo> searchCombo(OptType optType, ProjectCarriedOutInfoSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException {
+        // TODO Auto-generated method stub
+     
+        return iProjectCarriedOutInfoSearchUnits.searchCombo(optType, searchBean, commSearchBean, startLimit) ;
+    }
+
 }

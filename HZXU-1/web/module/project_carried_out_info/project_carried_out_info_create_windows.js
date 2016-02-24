@@ -2,9 +2,174 @@ function project_carried_out_info_create_windows(moduleId, moduleName, params) {
 
 	var grid = params.grid.getGrid();
 
+	var responsibilityUnitPerson = createERPcombo({
+		id : 'projectcarriedoutinfo.responsibilityUnitPerson',
+		name : 'projectcarriedoutinfo.responsibilityUnitPerson',
+		fieldLabel : ' 项目责任单位负责人',
+		url : "./ProjectProperties_combo.do?selecttype=zrdwglr",
+		allowBlank : false,
+		disable : true,
+		forceSelection : false,
+		select : function(result) {
+			responsibilityUnitPhoto.setDisabled(false);
+			var json = result.record.json;
+			var photo = json.result.responsibilityUnitPhoto;
+			responsibilityUnitPhoto.setValue(photo);
+		}
+	});
+
+	responsibilityUnitPerson.setDisabled(true);
+
+	var responsibilityUnit = createERPcombo({
+		id : 'projectcarriedoutinfo.responsibilityUnit',
+		name : 'projectcarriedoutinfo.responsibilityUnit',
+		fieldLabel : ' 项目责任单位',
+		url : "./ProjectProperties_combo.do?selecttype=zrdw",
+		allowBlank : false,
+		forceSelection : false,
+		select : function(result) {
+			var record = result.record;
+			var json = record.json;
+			var responsibilityUnit = json.name;
+			responsibilityUnitPerson.load({
+				params : {
+					"zrdw" : responsibilityUnit
+				},
+				success : function() {
+					responsibilityUnitPerson.setDisabled(false);
+				}
+			});
+		}
+	});
+
+	var responsibilityUnitPhoto = new Ext.form.TextField({
+		id : 'projectcarriedoutinfo.responsibilityUnitPhoto',
+		name : 'projectcarriedoutinfo.responsibilityUnitPhoto',
+		fieldLabel : ' 责任单位负责人手机号',
+		xtype : 'textfield',
+		style : NoAllowBlankStyle,
+		blankText : '不能为空！',
+		allowBlank : false,
+		listeners : {
+			'specialkey' : function(field, e) {
+			}
+		}
+
+	});
+
+	responsibilityUnitPhoto.setDisabled(true);
+
+	var fenGuanMiShuZhang = createERPcombo({
+		id : 'projectcarriedoutinfo.fenGuanMiShuZhang',
+		name : 'projectcarriedoutinfo.fenGuanMiShuZhang',
+		fieldLabel : ' 分管副秘书长',
+		url : "./ProjectProperties_combo.do?selecttype=msz",
+		allowBlank : false,
+		forceSelection : false,
+		select : function(result) {
+			fenGuanMiShuZhangPhoto.setDisabled(false);
+			var json = result.record.json;
+			var photo = json.result.fenGuanMiShuZhangPhoto;
+			fenGuanMiShuZhangPhoto.setValue(photo);
+
+		}
+	});
+
+	var fenGuanMiShuZhangPhoto = new Ext.form.TextField({
+		id : 'projectcarriedoutinfo.fenGuanMiShuZhangPhoto',
+		name : 'projectcarriedoutinfo.fenGuanMiShuZhangPhoto',
+		fieldLabel : ' 分管副秘书长手机号',
+		xtype : 'textfield',
+		style : NoAllowBlankStyle,
+		blankText : '不能为空！',
+		allowBlank : false,
+		listeners : {
+			'specialkey' : function(field, e) {
+			}
+		}
+	});
+
+	fenGuanMiShuZhangPhoto.setDisabled(true);
+
+	var fenGuanHuShiZhang = createERPcombo({
+		id : 'projectcarriedoutinfo.fenGuanHuShiZhang',
+		name : 'projectcarriedoutinfo.fenGuanHuShiZhang',
+		fieldLabel : ' 分管副市长',
+		url : "./ProjectProperties_combo.do?selecttype=fsz",
+		allowBlank : false,
+		forceSelection : false,
+		select : function(result) {
+			fenGuanHuShiZhangPhoto.setDisabled(false);
+			var json = result.record.json;
+			var photo = json.result.fenGuanHuShiZhangPhoto;
+			fenGuanHuShiZhangPhoto.setValue(photo);
+
+		}
+	});
+
+	var fenGuanHuShiZhangPhoto = new Ext.form.TextField({
+		id : 'projectcarriedoutinfo.fenGuanHuShiZhangPhoto',
+		name : 'projectcarriedoutinfo.fenGuanHuShiZhangPhoto',
+		fieldLabel : ' 分管副市长手机号',
+		xtype : 'textfield',
+		style : NoAllowBlankStyle,
+		blankText : '不能为空！',
+		allowBlank : false,
+		listeners : {
+			'specialkey' : function(field, e) {
+			}
+		}
+	});
+
+	fenGuanHuShiZhangPhoto.setDisabled(true);
+
+	function reset() {
+		responsibilityUnitPhoto.setValue(null);
+		responsibilityUnitPerson.clear();
+		responsibilityUnitPhoto.setDisabled(true);
+		responsibilityUnitPerson.setDisabled(true);
+
+		fenGuanHuShiZhangPhoto.setValue(null);
+		fenGuanHuShiZhang.clear();
+		fenGuanHuShiZhangPhoto.setDisabled(true);
+
+		fenGuanMiShuZhangPhoto.setValue(null);
+		fenGuanMiShuZhang.clear();
+		fenGuanMiShuZhangPhoto.setDisabled(true);
+
+	}
+
+	function v() {
+		if (responsibilityUnit.getValue() != null || responsibilityUnit.getValue() == "") {
+			if (responsibilityUnitPerson.getValue() == null || responsibilityUnitPerson.getValue() == "" || responsibilityUnitPhoto.getValue() == null || responsibilityUnitPhoto.getValue() == "") {
+				showErrorMsg("错误", '项目责任单位的负责人及手机号不能为空');
+				return false;
+			}
+
+		}
+
+		if (fenGuanMiShuZhang.getValue() != null || fenGuanMiShuZhang.getValue() == "") {
+			if (fenGuanMiShuZhangPhoto.getValue() == null || fenGuanMiShuZhangPhoto.getValue() == "") {
+				showErrorMsg("错误", '分管副秘书长手机号不能为空');
+				return false;
+			}
+
+		}
+		if (fenGuanHuShiZhang.getValue() != null || fenGuanHuShiZhang.getValue() == "") {
+			if (fenGuanHuShiZhangPhoto.getValue() == null || fenGuanHuShiZhangPhoto.getValue() == "") {
+				showErrorMsg("错误", '分管副市长手机号不能为空');
+				return false;
+			}
+
+		}
+		return true;
+	}
+
 	var project_carried_out_info_params = {
+		verification : v,
+		reset : reset,
 		title : "新增" + moduleName,
-		moduleId:moduleId,
+		moduleId : moduleId,
 		action : "save",
 		grid : grid,
 		// 结果路径
@@ -251,8 +416,9 @@ function project_carried_out_info_create_windows(moduleId, moduleName, params) {
 					id : 'projectcarriedoutinfo.totalInvestment',
 					name : 'projectcarriedoutinfo.totalInvestment',
 					fieldLabel : ' 总投资',
-					xtype : 'textfield',
-					vtype : "money",
+					// xtype : 'textfield',
+					// vtype : "money",
+					xtype : 'custnumberfield',
 					style : NoAllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : false,
@@ -367,19 +533,7 @@ function project_carried_out_info_create_windows(moduleId, moduleName, params) {
 				defaults : {
 					width : 373
 				},
-				items : [{
-					id : 'projectcarriedoutinfo.responsibilityUnit',
-					name : 'projectcarriedoutinfo.responsibilityUnit',
-					fieldLabel : ' 项目责任单位',
-					xtype : 'textfield',
-					style : NoAllowBlankStyle,
-					blankText : '不能为空！',
-					allowBlank : false,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-				}]
+				items : [responsibilityUnit]
 			}, // 1-1 end
 			{
 				columnWidth : .25,
@@ -389,19 +543,7 @@ function project_carried_out_info_create_windows(moduleId, moduleName, params) {
 				defaults : {
 					width : 130
 				},
-				items : [{
-					id : 'projectcarriedoutinfo.responsibilityUnitPerson',
-					name : 'projectcarriedoutinfo.responsibilityUnitPerson',
-					fieldLabel : ' 项目责任单位负责人',
-					xtype : 'textfield',
-					style : NoAllowBlankStyle,
-					blankText : '不能为空！',
-					allowBlank : false,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-				}]
+				items : [responsibilityUnitPerson]
 			}// 1-2end
 			, {
 				columnWidth : .25,
@@ -411,19 +553,7 @@ function project_carried_out_info_create_windows(moduleId, moduleName, params) {
 				defaults : {
 					width : 130
 				},
-				items : [{
-					id : 'projectcarriedoutinfo.responsibilityUnitPhoto',
-					name : 'projectcarriedoutinfo.responsibilityUnitPhoto',
-					fieldLabel : ' 责任单位负责人手机号',
-					xtype : 'textfield',
-					style : NoAllowBlankStyle,
-					blankText : '不能为空！',
-					allowBlank : false,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-				}]
+				items : [responsibilityUnitPhoto]
 			}// 1-3 en
 			]
 
@@ -442,19 +572,7 @@ function project_carried_out_info_create_windows(moduleId, moduleName, params) {
 				defaults : {
 					width : 130
 				},
-				items : [{
-					id : 'projectcarriedoutinfo.fenGuanMiShuZhang',
-					name : 'projectcarriedoutinfo.fenGuanMiShuZhang',
-					fieldLabel : ' 分管副秘书长',
-					xtype : 'textfield',
-					style : NoAllowBlankStyle,
-					blankText : '不能为空！',
-					allowBlank : false,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-				}]
+				items : [fenGuanMiShuZhang]
 			}// 1-2end
 			, {
 				columnWidth : .25,
@@ -464,19 +582,7 @@ function project_carried_out_info_create_windows(moduleId, moduleName, params) {
 				defaults : {
 					width : 130
 				},
-				items : [{
-					id : 'projectcarriedoutinfo.fenGuanMiShuZhangPhoto',
-					name : 'projectcarriedoutinfo.fenGuanMiShuZhangPhoto',
-					fieldLabel : ' 分管副秘书长手机号',
-					xtype : 'textfield',
-					style : NoAllowBlankStyle,
-					blankText : '不能为空！',
-					allowBlank : false,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-				}]
+				items : [fenGuanMiShuZhangPhoto]
 			}// 1-3 en
 
 			, {
@@ -487,19 +593,7 @@ function project_carried_out_info_create_windows(moduleId, moduleName, params) {
 				defaults : {
 					width : 130
 				},
-				items : [{
-					id : 'projectcarriedoutinfo.fenGuanHuShiZhang',
-					name : 'projectcarriedoutinfo.fenGuanHuShiZhang',
-					fieldLabel : ' 分管副市长',
-					xtype : 'textfield',
-					style : NoAllowBlankStyle,
-					blankText : '不能为空！',
-					allowBlank : false,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-				}]
+				items : [fenGuanHuShiZhang]
 			}// 1-2end
 			, {
 				columnWidth : .25,
@@ -509,19 +603,7 @@ function project_carried_out_info_create_windows(moduleId, moduleName, params) {
 				defaults : {
 					width : 130
 				},
-				items : [{
-					id : 'projectcarriedoutinfo.fenGuanHuShiZhangPhoto',
-					name : 'projectcarriedoutinfo.fenGuanHuShiZhangPhoto',
-					fieldLabel : ' 分管副市长手机号',
-					xtype : 'textfield',
-					style : NoAllowBlankStyle,
-					blankText : '不能为空！',
-					allowBlank : false,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-				}]
+				items : [fenGuanHuShiZhangPhoto]
 			}// 1-3 en
 
 			]

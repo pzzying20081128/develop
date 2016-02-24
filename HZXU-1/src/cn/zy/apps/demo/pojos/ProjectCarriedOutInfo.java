@@ -1,12 +1,15 @@
 package cn.zy.apps.demo.pojos ;
 
 import java.util.Date ;
+import java.util.List ;
 
+import javax.persistence.CascadeType ;
 import javax.persistence.Column ;
 import javax.persistence.Entity ;
 import javax.persistence.FetchType ;
 import javax.persistence.JoinColumn ;
 import javax.persistence.ManyToOne ;
+import javax.persistence.OneToMany ;
 import javax.persistence.Table ;
 import javax.persistence.Transient ;
 
@@ -22,6 +25,22 @@ import cn.zy.apps.tools.units.DateToolsUilts.DateType ;
 @Entity
 @Table(name = "project_carried_out_info")
 public class ProjectCarriedOutInfo extends ProjectInfo {
+
+    public ProjectCarriedOutInfo(String responsibilityUnit, String responsibilityUnitPerson, String responsibilityUnitPhoto,
+            String fenGuanMiShuZhang, String fenGuanMiShuZhangPhoto, String fenGuanHuShiZhang, String fenGuanHuShiZhangPhoto) {
+        super() ;
+        this.responsibilityUnit = responsibilityUnit ;
+        this.responsibilityUnitPerson = responsibilityUnitPerson ;
+        this.responsibilityUnitPhoto = responsibilityUnitPhoto ;
+        this.fenGuanMiShuZhang = fenGuanMiShuZhang ;
+        this.fenGuanMiShuZhangPhoto = fenGuanMiShuZhangPhoto ;
+        this.fenGuanHuShiZhang = fenGuanHuShiZhang ;
+        this.fenGuanHuShiZhangPhoto = fenGuanHuShiZhangPhoto ;
+    }
+
+    public ProjectCarriedOutInfo() {
+
+    }
 
     //总投资
     @Column(name = "total_investment")
@@ -70,7 +89,7 @@ public class ProjectCarriedOutInfo extends ProjectInfo {
     @Column(name = "project_major_id", insertable = false, updatable = false)
     @FieldDesc(name = "项目重点分类")
     private Integer projectMajorTypeId ;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_type_id")
     @FieldDesc(name = "项目类型", mapping = "projectType.name")
@@ -79,8 +98,9 @@ public class ProjectCarriedOutInfo extends ProjectInfo {
     @Column(name = "project_type_id", insertable = false, updatable = false)
     @FieldDesc(name = "项目类型")
     private Integer projectTypeId ;
-    
-    
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "projectCarriedOutInfo")
+    private List<ProjectYearInvestmentPlan> projectYearInvestmentPlans ;
 
     @Column(name = "kai_gong_date")
     @FieldDesc(name = "开工时间")
@@ -359,6 +379,22 @@ public class ProjectCarriedOutInfo extends ProjectInfo {
 
     public void setProjectTypeId(Integer projectTypeId) {
         this.projectTypeId = projectTypeId ;
+    }
+
+    public List<ProjectYearInvestmentPlan> getProjectYearInvestmentPlans() {
+        return projectYearInvestmentPlans ;
+    }
+
+    public void setProjectYearInvestmentPlans(List<ProjectYearInvestmentPlan> projectYearInvestmentPlans) {
+        this.projectYearInvestmentPlans = projectYearInvestmentPlans ;
+    }
+
+    public void setKaiGongDateString(String kaiGongDateString) {
+        this.kaiGongDateString = kaiGongDateString ;
+    }
+
+    public void setBuildStartEndDate(String buildStartEndDate) {
+        this.buildStartEndDate = buildStartEndDate ;
     }
 
 }

@@ -1,5 +1,6 @@
 function project_carried_out_info_save_update_form_panel_windows(params) {
 
+	var reset= params.reset;
 	var form_panel = new Ext.form.ERPFormPanel({
 		labelWidth : 80,
 		frame : true,
@@ -12,16 +13,23 @@ function project_carried_out_info_save_update_form_panel_windows(params) {
 			text : '提交',
 			listeners : {
 				'click' : function() {
+					
+					var v= params.verification;
+					if(v()==false)return;
+					
+					
+					
 					form_panel.submit({
 						url : params.url,
 						waitMsg : '正在提交...',
 						submitEmptyText : false,
 						params : params.params,
 						success : function(result) {
-								json =result.result;
+							json = result.result;
 							if (params.action == "save") {
 								params.grid.insertRow(json[params.pojo]);
 								form_panel.reset();
+								reset();
 							} else {
 								params.grid.updateRow(json[params.pojo]);
 								window.close();

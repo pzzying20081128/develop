@@ -1,6 +1,10 @@
 function create_project_month_investment_plan_window(moduleId, moduleName, params) {
 
 	var yearGrid = params.mainGrid;
+	
+	var projectGrid =  params.projectGrid;
+	
+	var projectGrid  =projectGrid.projectGrid_id;
 
 	var complete = new Ext.Toolbar.Button({
 		// id : moduleId + '_search',
@@ -48,7 +52,8 @@ function create_project_month_investment_plan_window(moduleId, moduleName, param
 
 					project_month_investment_plan_create_windows(moduleId, moduleName, {
 						grid : mainGridModule,
-						YearGrid_selection_rows_selectId : YearGrid_selection_rows_selectId
+						YearGrid_selection_rows_selectId : YearGrid_selection_rows_selectId,
+						projectGrid:projectGrid
 
 					});
 				}

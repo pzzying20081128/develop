@@ -1,11 +1,27 @@
 function project_month_investment_plan_create_windows(moduleId, moduleName, params) {
 
 	var grid = params.grid.getGrid();
+	
+	var projectGrid=  params.projectGrid;
 
 	var YearGrid_selection_rows_selectId = params.YearGrid_selection_rows_selectId;
+	
+	var monthSelect =
+				createERPcombo({
+					id : 'projectmonthinvestmentplan.month',
+					name : 'projectmonthinvestmentplan.month',
+					fieldLabel : ' 月份',
+					url : "./ProjectMonth_combo.do?projectId="+projectGrid,
+					allowBlank : false,
+					forceSelection : false
+				});
+				
+				
+				
 
 	var project_month_investment_plan_params = {
 		title : "新增" + moduleName,
+		monthSelect:monthSelect,
 		action : "save",
 		grid : grid,
 		// 结果路径
@@ -28,29 +44,24 @@ function project_month_investment_plan_create_windows(moduleId, moduleName, para
 				defaults : {
 					width : 200
 				},
-				items : [createLocalCombo({
-					id : 'projectmonthinvestmentplan.month',
-					name : 'projectmonthinvestmentplan.month',
-					fieldLabel : ' 月份',
-					storeData : [['一月', "一月"], ['二月', '二月'], ['三月', '三月'], ['四月', '四月'], ['四月', '四月'], ['五月', '五月'], ['六月', '六月'], ['七月', '七月'], ['八月', '八月'], ['九月', '九月'], ['十月', '十月'], ['十一月', '十一月'], ['十二月', '十二月']],
-					defaultValue : null,
-					allowBlank : false
-				})]
-			} // 1-1 en
-			, {
+				items : [monthSelect]
+			},// 1-1 en
+			{
 				columnWidth : .5,
 				layout : 'form',
 				defaultType : 'textfield',
 				baseCls : 'x-plain',
+				labelWidth : 120,
 				defaults : {
-					width : 200
+					width : 285
 				},
 				items : [{
 					id : 'projectmonthinvestmentplan.truthInvestment',
 					name : 'projectmonthinvestmentplan.truthInvestment',
-					fieldLabel : ' 实际投资金额',
-					xtype : 'textfield',
-					vtype:"money",
+					fieldLabel : ' 实际投资金额(万元)',
+					xtype : 'custnumberfield',
+					// vtype:"money",
+					labelWidth : 120,
 					style : AllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : true,
@@ -60,7 +71,9 @@ function project_month_investment_plan_create_windows(moduleId, moduleName, para
 					}
 				}]
 			}]
-		}, {// 第二排
+		},
+
+		{// 第二排
 			layout : 'column',
 			baseCls : 'x-plain',
 			items : [{

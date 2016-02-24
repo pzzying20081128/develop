@@ -118,7 +118,12 @@ function create_project_year_investment_plan_window(moduleId, moduleName, params
 	var mainGrid = mainGridModule.getGrid();
 	
 	var month_grid = new create_project_month_investment_plan_window("project_month_investment_plan", "月进度", {
-		mainGrid : mainGrid
+		mainGrid : mainGrid,
+				projectGrid:{
+							projectGrid_id:projectGrid_id,
+							projectGrid:projectGrid
+							
+						}
 
 	});
 	
@@ -192,7 +197,12 @@ function create_project_year_investment_plan_window(moduleId, moduleName, params
 					},
 					// async: false, //ASYNC 是否异步( TRUE 异步 , FALSE 同步)
 					success : function(response, options) {
-						mainGrid.reload();
+						mainGrid.reload({
+							success:function(){
+							month_grid.getGrid().removeAll();	
+							}
+						}
+						);
 					}
 				});
 			}

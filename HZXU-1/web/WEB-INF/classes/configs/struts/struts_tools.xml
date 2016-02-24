@@ -46,7 +46,9 @@
 					results,
 					results\[\d+\]\.id,
 					results\[\d+\]\.name,
-					results\[\d+\]\.shortName
+					results\[\d+\]\.shortName,
+					results\[\d+\]\.\w+,
+					results\[\d+\]\.\w+.(\w+.)+\w+
 				</param>
 			</result>
 		</action>

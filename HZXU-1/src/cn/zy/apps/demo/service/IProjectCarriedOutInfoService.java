@@ -20,9 +20,16 @@ public interface IProjectCarriedOutInfoService {
     public SelectPage<ProjectCarriedOutInfo> search(OptType optType, ProjectCarriedOutInfoSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException ;
 
     public List<ProjectCarriedOutInfo> searchList(OptType optType, ProjectCarriedOutInfoSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException ;
+    
+    
+    public List<ProjectCarriedOutInfo> searchCombo(OptType optType, ProjectCarriedOutInfoSearchBean searchBean, CommSearchBean commSearchBean, int... startLimit) throws SystemOptServiceException ;
+    
+    
 
     public ProjectCarriedOutInfo remove(OptType optType, ProjectCarriedOutInfo optProjectCarriedOutInfo) throws SystemOptServiceException ;
 
     public ProjectCarriedOutInfo get(Integer id) throws SystemOptServiceException ;
+    
+    public List<String>   haveProjectMonth(Integer   projectId)throws SystemOptServiceException ;
 
 }
