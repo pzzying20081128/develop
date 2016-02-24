@@ -15,6 +15,11 @@ function create_project_year_investment_plan_window(moduleId, moduleName, params
 	var projectGrid = projectGridModule.getGrid();
 
 	var projectGrid_selection_rows = projectGrid.getSelectionModel().getSelections();
+	
+	var  power = projectGrid.searchPower("investment");
+	
+	var isUse = projectGrid.getisAdmin()==true ? 1:  (power==null ?   0:  power.isUse ) ;
+	
 
 	if (projectGrid_selection_rows == null) {
 		showErrorMsg('提示信息', '请选择重点项目');
@@ -43,6 +48,7 @@ function create_project_year_investment_plan_window(moduleId, moduleName, params
 				key : "add",
 				xtype : "tbbutton",
 				text : "增加",
+				 hidden: isUse==1 ? false:true,
 				// keyBinding : createCreateKey(),
 				handler : function(bt) {
 					project_year_investment_plan_create_windows(moduleId, moduleName, {
@@ -60,6 +66,7 @@ function create_project_year_investment_plan_window(moduleId, moduleName, params
 				xtype : "tbbutton",
 				text : "编辑",
 				key : "edit",
+				 hidden: isUse==1 ? false:true,
 				// keyBinding : createEditKey(),
 				handler : function(bt) {
 					project_year_investment_plan_update_windows(moduleId, moduleName, {
@@ -72,6 +79,7 @@ function create_project_year_investment_plan_window(moduleId, moduleName, params
 				// id : moduleId + '_delete',
 				xtype : "tbbutton",
 				text : "删除",
+				 hidden: isUse==1 ? false:true,
 				key : "delete",
 				// keyBinding : createDeleteKey(),
 				handler : function(bt) {
@@ -123,7 +131,12 @@ function create_project_year_investment_plan_window(moduleId, moduleName, params
 							projectGrid_id:projectGrid_id,
 							projectGrid:projectGrid
 							
-						}
+						},
+		power:{
+			isUse:isUse,
+			admin:projectGrid.getisAdmin(),
+			power:power
+		}
 
 	});
 	

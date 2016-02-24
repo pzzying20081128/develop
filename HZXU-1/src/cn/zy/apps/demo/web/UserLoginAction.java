@@ -28,7 +28,7 @@ public class UserLoginAction extends LoginAction<DemoUser> {
         {
             DemoUser demoUser = demoUserService.searchByName(userName) ;
             Loggerfactory.info(logger, " user login  userName :  " + userName + "   DemoUser :  " + demoUser) ;
-            if (demoUser == null) {
+            if (demoUser == null ||  ! demoUser.getPassword().equals(userPasswd) ) {
                 this.msg = "用户名或密码错误" ;
                 return null ;
             } else {

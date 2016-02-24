@@ -3,7 +3,7 @@ function demo_user_create_windows(moduleId, moduleName, params) {
 	var grid = params.grid.getGrid();
 
 	var userPowerPanel_ = new UserPowerPanel({
-		height : 400
+		height : 280
 	});
 
 	var demo_user_params = {
@@ -24,17 +24,17 @@ function demo_user_create_windows(moduleId, moduleName, params) {
 			baseCls : 'x-plain',
 			items : [{
 
-				columnWidth : .5,
+				columnWidth : .36,
 				layout : 'form',
 				defaultType : 'textfield',
 				baseCls : 'x-plain',
 				defaults : {
-					width : 250
+					width : 190
 				},
 				items : [{
-					id : 'demouser.userName',
-					name : 'demouser.userName',
-					fieldLabel : ' 用户信息',
+					id : 'demouser.userXMing',
+					name : 'demouser.userXMing',
+					fieldLabel : ' 用户姓名',
 					xtype : 'textfield',
 					style : NoAllowBlankStyle,
 					blankText : '不能为空！',
@@ -47,14 +47,52 @@ function demo_user_create_windows(moduleId, moduleName, params) {
 
 			}, // 1-1 end
 			{
+				columnWidth : .32,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 190
+				},
+				items : [{
+					id : 'demouser.userName',
+					name : 'demouser.userName',
+					fieldLabel : ' 登录名',
+					xtype : 'textfield',
+					style : NoAllowBlankStyle,
+					blankText : '不能为空！',
+					allowBlank : false,
+					listeners : {
+						'specialkey' : function(field, e) {
+						}
+					}
+				}]
+
+			}, {
+				columnWidth : .32,
+				layout : 'form',
+				defaultType : 'textfield',
+				baseCls : 'x-plain',
+				defaults : {
+					width : 185
+				},
+				items : [{
+					id : 'demouser.password',
+					name : 'demouser.password',
+					fieldLabel : ' 用户密码',
+					xtype : 'textfield',
+					inputType : 'password', // 密码
+					style : NoAllowBlankStyle,
+					blankText : '不能为空！',
+					allowBlank : false,
+					listeners : {
+						'specialkey' : function(field, e) {
+						}
+					}
+				}]
 
 			}// 1-2end
-			, {
 
-			}// 1-3 end
-			, {
-
-			}// 1-3 end
 			]
 		}, userPowerPanel_.getPanel()]
 

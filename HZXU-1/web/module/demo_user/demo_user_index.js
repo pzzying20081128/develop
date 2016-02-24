@@ -21,7 +21,7 @@ function create_demo_user_window(moduleId, moduleName) {
 		tbar : {
 			// plugins : new Ext.ux.ToolbarKeyMap(),
 			items : [{
-				// id : moduleId + '_add',
+//				id : moduleId + '_add',
 				key : "add",
 				xtype : "tbbutton",
 				text : "增加",
@@ -34,19 +34,20 @@ function create_demo_user_window(moduleId, moduleName) {
 					});
 				}
 			}, {
-				// id : moduleId + '_edit',
+//				id : moduleId + '_edit',
 				xtype : "tbbutton",
 				text : "编辑",
 				key : "edit",
 				// keyBinding : createEditKey(),
 				handler : function(bt) {
 					demo_user_update_windows(moduleId, moduleName, {
-						grid : mainGridModule,
-						
+						grid : mainGridModule
+						,
+
 					});
 				}
 			}, {
-				// id : moduleId + '_delete',
+//				id : moduleId + '_delete',
 				xtype : "tbbutton",
 				text : "删除",
 				key : "delete",
@@ -75,12 +76,12 @@ function create_demo_user_window(moduleId, moduleName) {
 		init : {
 			// 行被选择
 			select : function(rowDataId, data, sm, rowIdx, r) {
-//				stockSelect(data, checkButton, detailGrid);
-//				detailGrid.load({
-//					params : {
-//				// 'searchBean.combinedProductId' : rowDataId
-//					}
-//				});
+				// stockSelect(data, checkButton, detailGrid);
+				// detailGrid.load({
+				// params : {
+				// // 'searchBean.combinedProductId' : rowDataId
+				// }
+				// });
 
 			},
 			// 返回这一行的状态 1:OK -1 NO OK checkName:
@@ -143,9 +144,9 @@ function create_demo_user_window(moduleId, moduleName) {
 	window.showWin();
 
 	mainGrid.load({
-       params:{
-       	"searchBean.userKey":"sssd"
-       }
+		params : {
+			"searchBean.userKey" : "sssd"
+		}
 	});
 
 	function demo_user_delete_windows(moduleId, moduleName, params) {

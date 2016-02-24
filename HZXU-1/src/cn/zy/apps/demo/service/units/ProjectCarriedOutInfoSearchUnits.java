@@ -104,7 +104,7 @@ public class ProjectCarriedOutInfoSearchUnits extends ABCommonsService {
     }
 
     private String createWhere(Map<String, Object> value, ProjectCarriedOutInfoSearchBean searchBean, CommSearchBean commSearchBean) {
-        String sqlWhere = "where   1=1 " ;
+        String sqlWhere = "where   1=1   " ;
         if (searchBean.getStatus() != null) {
             sqlWhere = sqlWhere + "   and  projectCarriedOutInfo.status =:status  " ;
             value.put("status", searchBean.getStatus()) ;
@@ -158,6 +158,73 @@ public class ProjectCarriedOutInfoSearchUnits extends ABCommonsService {
             sqlWhere = sqlWhere + "   and  projectCarriedOutInfo.fenGuanHuShiZhangPhoto like :fenGuanMiShuZhangPhoto  " ;
             value.put("fenGuanMiShuZhangPhoto", "%" + searchBean.getFenGuanMiShuZhangPhoto() + "%") ;
         }
+        
+        if(ToolsUnits.isNOtNulll(  searchBean.getName())){
+            sqlWhere = sqlWhere + "   and  projectCarriedOutInfo.name like :name  " ;
+            value.put("name", "%" + searchBean.getName() + "%") ;
+        }
+        
+        if(ToolsUnits.isNOtNulll(  searchBean.getIsKaiGong()  )){
+            sqlWhere = sqlWhere + "   and  projectCarriedOutInfo.isKaiGong like :isKaiGong  " ;
+            value.put("isKaiGong", "%" + searchBean.getIsKaiGong() + "%") ;
+        }
+        
+        if(ToolsUnits.isNOtNulll(  searchBean.getIsProduction() )){
+            sqlWhere = sqlWhere + "   and  projectCarriedOutInfo.isProduction like :isProduction  " ;
+            value.put("isProduction", "%" + searchBean.getIsProduction() + "%") ;
+        }
+        
+        if(ToolsUnits.isNOtNulll(  searchBean.getProjectAddress())){
+            sqlWhere = sqlWhere + "   and  projectCarriedOutInfo.projectAddress like :projectAddress  " ;
+            value.put("projectAddress", "%" + searchBean.getProjectAddress() + "%") ;
+        }
+        
+        if(ToolsUnits.isNOtNulll(  searchBean.getImplementationUnit()  )){
+            sqlWhere = sqlWhere + "   and  projectCarriedOutInfo.implementationUnit like :implementationUnit  " ;
+            value.put("implementationUnit", "%" + searchBean.getImplementationUnit() + "%") ;
+        }
+        
+        if(ToolsUnits.isNOtNulll(  searchBean.getImplementationUnitPerson()  )){
+            sqlWhere = sqlWhere + "   and  projectCarriedOutInfo.implementationUnitPerson like :implementationUnitPerson  " ;
+            value.put("implementationUnitPerson", "%" + searchBean.getImplementationUnitPerson() + "%") ;
+        }
+        
+        if(ToolsUnits.isNOtNulll(  searchBean.getImplementationUnitPhoto()  )){
+            sqlWhere = sqlWhere + "   and  projectCarriedOutInfo.implementationUnitPhoto like :getImplementationUnitPhoto  " ;
+            value.put("getImplementationUnitPhoto", "%" + searchBean.getImplementationUnitPhoto() + "%") ;
+        }
+        
+        if(searchBean.getProjectTypeId() !=  null){
+            sqlWhere = sqlWhere + "   and  projectCarriedOutInfo.projectTypeId =: projectTypeId  " ;
+            value.put("projectTypeId", searchBean.getProjectTypeId()) ;
+        }
+        
+        if(searchBean.getProjectOwnershipAddressId() !=  null){
+            sqlWhere = sqlWhere + "   and  projectCarriedOutInfo.projectOwnershipAddressId =: getProjectOwnershipAddressId  " ;
+            value.put("getProjectOwnershipAddressId", searchBean.getProjectOwnershipAddressId()) ;
+        }
+        
+        if(searchBean.getProjectOwnershipAddressId() !=  null){
+            sqlWhere = sqlWhere + "   and  projectCarriedOutInfo.projectOwnershipAddressId =: getProjectOwnershipAddressId  " ;
+            value.put("getProjectOwnershipAddressId", searchBean.getProjectOwnershipAddressId()) ;
+        }
+        
+        if(searchBean.getProjectProgressTypeId() !=  null){
+            sqlWhere = sqlWhere + "   and  projectCarriedOutInfo.projectProgressTypeId =: projectProgressTypeId  " ;
+            value.put("projectProgressTypeId", searchBean.getProjectProgressTypeId()) ;
+        }
+        
+        if(searchBean.getProjectProgressTypeId() !=  null){
+            sqlWhere = sqlWhere + "   and  projectCarriedOutInfo.projectProgressTypeId =: projectProgressTypeId  " ;
+            value.put("projectProgressTypeId", searchBean.getProjectProgressTypeId()) ;
+        }
+        
+        if(searchBean.getProjectMajorTypeId() !=  null){
+            sqlWhere = sqlWhere + "   and  projectCarriedOutInfo.projectMajorTypeId =: projectMajorTypeId  " ;
+            value.put("projectMajorTypeId", searchBean.getProjectMajorTypeId()) ;
+        }
+        
+        
         
 
         return sqlWhere ;

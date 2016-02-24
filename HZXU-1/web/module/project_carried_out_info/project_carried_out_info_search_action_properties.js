@@ -10,6 +10,7 @@ var  project_carried_out_info_search_params = {
 	params : function() {
 		var params = {
 			optType : "search",
+			"searchBean.status":"有效"
 		}
 		return params;
 	}

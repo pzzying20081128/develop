@@ -33,11 +33,17 @@ public class ProjectCarriedOutInfoSaveUpdateUnits extends ABCommonsService {
 
     public ProjectCarriedOutInfo save(ProjectCarriedOutInfo optProjectCarriedOutInfo) throws SystemOptServiceException {
 
-        String sql = "select  projectCarriedOutInfo    from   ProjectCarriedOutInfo  as  projectCarriedOutInfo    where   projectCarriedOutInfo.name ='" + optProjectCarriedOutInfo.getName() + "'  " ;
+        String sql = "select   count(projectCarriedOutInfo.id)    from   " +
 
-        ProjectCarriedOutInfo optProjectCarriedOutInfo_ = baseService.findSinglenessByHSQL(sql) ;
+        " ProjectCarriedOutInfo  as  projectCarriedOutInfo  " +
 
-        if (optProjectCarriedOutInfo_ != null) {
+        "  where   projectCarriedOutInfo.name ='" + optProjectCarriedOutInfo.getName() + "'  " +
+
+        "  and  projectCarriedOutInfo.status ='" + Status.有效 + "'  " ;
+
+        Long l = baseService.findSinglenessByHSQL(sql) ;
+
+        if (l >0) {
             throw new SystemOptServiceException("项目名已经存在") ;
         }
 
@@ -52,13 +58,15 @@ public class ProjectCarriedOutInfoSaveUpdateUnits extends ABCommonsService {
 
     public ProjectCarriedOutInfo update(ProjectCarriedOutInfo optProjectCarriedOutInfo) throws SystemOptServiceException {
 
-        String sql = "select  projectCarriedOutInfo    from   ProjectCarriedOutInfo  as  projectCarriedOutInfo    where   projectCarriedOutInfo.name ='" + optProjectCarriedOutInfo.getName() + "'  " +
+        String sql = "select  count(projectCarriedOutInfo.id)    from   ProjectCarriedOutInfo  as  projectCarriedOutInfo    where   projectCarriedOutInfo.name ='" + optProjectCarriedOutInfo.getName() + "'  " +
 
-        "   and    projectCarriedOutInfo.id !=" + optProjectCarriedOutInfo.getId() ;
+        "  and  projectCarriedOutInfo.status ='" + Status.有效 + "'  " +
 
-        ProjectCarriedOutInfo optProjectCarriedOutInfo_ = baseService.findSinglenessByHSQL(sql) ;
+        "  and   projectCarriedOutInfo.id !=" + optProjectCarriedOutInfo.getId() ;
 
-        if (optProjectCarriedOutInfo_ != null) {
+        Long l = baseService.findSinglenessByHSQL(sql) ;
+
+        if (l >0) {
             throw new SystemOptServiceException("项目名已经存在") ;
         }
 

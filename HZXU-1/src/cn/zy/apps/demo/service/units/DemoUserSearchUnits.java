@@ -70,8 +70,8 @@ public class DemoUserSearchUnits extends ABCommonsService {
     }
 
     private String createWhere(Map<String, Object> value, DemoUserSearchBean searchBean, CommSearchBean commSearchBean) {
-        System.out.println("==>   " + searchBean.getUserKey()) ;
-        String sqlWhere = " where   1 =1 " ;
+        
+        String sqlWhere = " where   demoUser.userName !='admin' " ;
 
         if (searchBean.getId() != null) {
             sqlWhere = sqlWhere + "   and  demoUser.id = " + searchBean.getId() ;

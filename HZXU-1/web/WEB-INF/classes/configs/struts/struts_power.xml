@@ -56,6 +56,17 @@
 				</param>
 			</result>
 		</action>
+		
+		
+		<action name="listPowerByUserId" class="SearchUserPowerAction" method="listPowerByUserId">
+			<result type="json" name="success">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="root">
+					powerBean
+				</param>
+			</result>
+		</action>
 	
 
 	</package>

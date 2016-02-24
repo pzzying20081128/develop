@@ -1,16 +1,23 @@
 function create_project_month_investment_plan_window(moduleId, moduleName, params) {
 
 	var yearGrid = params.mainGrid;
+
+	var projectGrid = params.projectGrid;
+
+	var projectGrid = projectGrid.projectGrid_id;
+
+	var power = params.power;
+
+	//getisAdmin
 	
-	var projectGrid =  params.projectGrid;
-	
-	var projectGrid  =projectGrid.projectGrid_id;
+	var isUse =     power.isUse;
 
 	var complete = new Ext.Toolbar.Button({
 		// id : moduleId + '_search',
 		xtype : "tbbutton",
 		text : "完成",
 		key : "complete",
+		 hidden: isUse==1 ? false:true,
 		// keyBinding : createSearchKey(),
 		handler : function() {
 			project_month_investment_plan_complete_windows(moduleId, moduleName, {
@@ -36,6 +43,7 @@ function create_project_month_investment_plan_window(moduleId, moduleName, param
 				key : "add",
 				xtype : "tbbutton",
 				text : "增加",
+				 hidden: isUse==1 ? false:true,
 				// keyBinding : createCreateKey(),
 				handler : function(bt) {
 					var yearGrid_selection_rows = yearGrid.getSelectionModel().getSelections();
@@ -53,7 +61,7 @@ function create_project_month_investment_plan_window(moduleId, moduleName, param
 					project_month_investment_plan_create_windows(moduleId, moduleName, {
 						grid : mainGridModule,
 						YearGrid_selection_rows_selectId : YearGrid_selection_rows_selectId,
-						projectGrid:projectGrid
+						projectGrid : projectGrid
 
 					});
 				}
@@ -62,6 +70,7 @@ function create_project_month_investment_plan_window(moduleId, moduleName, param
 				xtype : "tbbutton",
 				text : "编辑",
 				key : "edit",
+				 hidden: isUse==1 ? false:true,
 				// keyBinding : createEditKey(),
 				handler : function(bt) {
 					var yearGrid_selection_rows = yearGrid.getSelectionModel().getSelections();
@@ -83,6 +92,7 @@ function create_project_month_investment_plan_window(moduleId, moduleName, param
 				xtype : "tbbutton",
 				text : "删除",
 				key : "delete",
+				 hidden: isUse==1 ? false:true,
 				// keyBinding : createDeleteKey(),
 				handler : function(bt) {
 					project_month_investment_plan_delete_windows(moduleId, moduleName, {
@@ -100,9 +110,11 @@ function create_project_month_investment_plan_window(moduleId, moduleName, param
 		init : {
 			// 行被选择
 			select : function(rowDataId, data, sm, rowIdx, r) {
+                if( isUse==1){
+                var shwocomplete = ( data.complete == '已完成' ? "取消完成" : "已完成" );
+				complete.setText(shwocomplete);	
+                }
 				
-				var shwocomplete =  (data.complete == '已完成' ? "取消完成" : "已完成");
-				complete.setText(shwocomplete);
 				// stockSelect(data, checkButton, detailGrid);
 				// detailGrid.load({
 				// params : {

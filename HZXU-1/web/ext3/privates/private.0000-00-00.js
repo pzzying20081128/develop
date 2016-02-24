@@ -12,7 +12,7 @@ Ext.apply(Ext.form.VTypes, {
 		if (!reg.test(val))
 			return false;
 		return true
-	}, 
+	},
 	chineseText : "请输入中文",
 	age : function(val, field) {
 		try {
@@ -225,6 +225,19 @@ function showMsgYN(params) {
 		else if (typeof params.no == "function")
 			params.no()
 	})
+}
+function showMsgButtons(params) {
+	var config = {
+		title : params.title,
+		msg : params.msg,
+		width : 400,
+		multiline : false,
+		closable : false,
+		buttons : params.buttons,
+		icon : Ext.MessageBox.Question,
+		fn : params.callback
+	};
+	Ext.MessageBox.show(config)
 }
 Ext.form.ERPShowTextField = Ext.extend(Ext.form.TextField, {
 	disabled : true,
@@ -2608,8 +2621,11 @@ Ext.grid.ERPGridPanel = Ext.extend(Ext.grid.GridPanel, {
 	},
 	searchPower : function(key) {
 		var _map_ = this.getPowerMap();
-		power = _map_.get(key);
-		return power
+		if (_map_ != null) {
+			power = _map_.get(key);
+			return power
+		} else
+			return null
 	},
 	openAllButton : function(isOpen) {
 		var _map_ = this.getPowerMap();

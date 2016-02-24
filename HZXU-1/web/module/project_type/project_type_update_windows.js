@@ -25,35 +25,35 @@ function project_type_update_windows(moduleId, moduleName, params) {
 		// url
 			url : "./simple_ProjectType_save.do",
 		params : {
-			optType : "update"
+			optType : "update",
+			"projecttype.id":selectId
 		},
 	   reader : new Ext.data.JsonReader({
 			successProperty : 'success',
 			root : 'result',
 			totalProperty : 'totalProperty'
 		}, [{
-			name : 'dept.name',
-			mapping : 'name'
+			name : 'projecttype.typeName',
+			mapping : 'typeName'
 		}]),
 		// 字段
-		field : [
-		{// 第一排
+		field : [{// 第一排
 			layout : 'column',
 			baseCls : 'x-plain',
-			items : [{// 1-1
-				columnWidth : .34,
+			items : [{
+				columnWidth : 1,
 				layout : 'form',
 				defaultType : 'textfield',
 				baseCls : 'x-plain',
 				defaults : {
-					width : 200
+					width : 350
 				},
 				items : [{
-					id : 'goods.name',
-					name : 'goods.name',
-					fieldLabel : ' 物料名字',
+					id : 'projecttype.typeName',
+					name : 'projecttype.typeName',
+					fieldLabel : ' 项目类型',
 					xtype : 'textfield',
-					style : 'background:#fff1a4;',
+					style : NoAllowBlankStyle,
 					blankText : '不能为空！',
 					allowBlank : false,
 					listeners : {
@@ -61,53 +61,9 @@ function project_type_update_windows(moduleId, moduleName, params) {
 						}
 					}
 				}]
-			}, // 1-1 end
-			{// 1-2
-				columnWidth : .33,
-				layout : 'form',
-				baseCls : 'x-plain',
-				defaultType : 'textfield',
-				defaults : {
-					width : 200
-				},
-				items : [createERPcombo({
-					id : 'goods.classification',
-					name : 'goods.classification',
-					label : "物料类别",
-					url : "./searchMatrialClassification.action",
-					allowBlank : false,
-					forceSelection : false
-					// width : 150
-				})]
-			}// 1-2end
-			, {// 1-3
-				columnWidth : .33,
-				layout : 'form',
-				defaultType : 'textfield',
-				baseCls : 'x-plain',
-				defaults : {
-					width : 200
-				},
-				items : [{
-
-					id : 'goods.serialNumber',
-					name : 'goods.serialNumber',
-					fieldLabel : ' 物料编号',
-					xtype : 'textfield',
-					style : 'background:#fff1a4;',
-					blankText : '不能为空！',
-					allowBlank : false,
-					listeners : {
-						'specialkey' : function(field, e) {
-						}
-					}
-
-				}]
-			}// 1-3 end
+			} // 1-1 end
 			]
-
-		}
-		]
+		}]
 		
 	}
 

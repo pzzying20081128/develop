@@ -14,26 +14,33 @@ function demo_user_save_update_form_panel_windows(params) {
 			text : '提交',
 			listeners : {
 				'click' : function() {
-					userPowerMenus = userPowerPanel.getUserPowerMenus();
-					params.params.power = Ext.encode(userPowerMenus);
-					form_panel.submit({
-						url : params.url,
-						waitMsg : '正在提交...',
-						submitEmptyText : false,
-						params : params.params,
-						success : function(result) {
-							json = result.result;
-							if (params.action == "save") {
-								params.grid.insertRow(json[params.pojo]);
-								userPowerPanel.clearPower();
-								form_panel.reset();
-							} else {
-								params.grid.updateRow(json[params.pojo]);
-								window.close();
-							}
 
+					showMsgYN({
+						msg : "是否要" + ( params.action == "save" ? "增加用户信息" : "更新用户信息" ),
+						yes : function(YN) {
+							userPowerMenus = userPowerPanel.getUserPowerMenus();
+							params.params.power = Ext.encode(userPowerMenus);
+							form_panel.submit({
+								url : params.url,
+								waitMsg : '正在提交...',
+								submitEmptyText : false,
+								params : params.params,
+								success : function(result) {
+									json = result.result;
+									if (params.action == "save") {
+										params.grid.insertRow(json[params.pojo]);
+										userPowerPanel.clearPower();
+										form_panel.reset();
+									} else {
+										params.grid.updateRow(json[params.pojo]);
+										window.close();
+									}
+
+								}
+							});
 						}
 					});
+
 				}
 			}
 		}, {

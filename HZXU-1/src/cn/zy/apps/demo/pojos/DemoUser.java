@@ -19,6 +19,11 @@ public class DemoUser extends ABUser {
     @Column(name = "user_name")
     @FieldDesc(name = "用户信息")
     private String userName ;
+    
+    @Column(name = "password")
+    private  String password;
+    @Column(name = "user_xm")
+    private String userXMing;
 
     @Transient
     private String name ;
@@ -66,9 +71,29 @@ public class DemoUser extends ABUser {
     }
 
     public String getName() {
-        String xx = id + "  " + userName ;
+        String xx =userName+" "+userXMing ;
         name = xx ;
         return name ;
+    }
+
+    public String getPassword() {
+        return password ;
+    }
+
+    public void setPassword(String password) {
+        this.password = password ;
+    }
+
+    public String getUserXMing() {
+        return userXMing ;
+    }
+
+    public void setUserXMing(String userXMing) {
+        this.userXMing = userXMing ;
+    }
+
+    public void setName(String name) {
+        this.name = name ;
     }
 
 }

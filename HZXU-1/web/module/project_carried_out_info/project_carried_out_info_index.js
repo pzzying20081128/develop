@@ -19,9 +19,9 @@ function create_project_carried_out_info_window(moduleId, moduleName) {
 		// grid_column.column
 		column : project_carried_out_info_grid_column.column,
 		tbar : {
-//			 plugins : new Ext.ux.ToolbarKeyMap(),
+			// plugins : new Ext.ux.ToolbarKeyMap(),
 			items : [{
-				// id : moduleId + '_add',
+//				id : moduleId + '_add',
 				key : "add",
 				xtype : "tbbutton",
 				text : "增加",
@@ -34,7 +34,7 @@ function create_project_carried_out_info_window(moduleId, moduleName) {
 					});
 				}
 			}, {
-				 id : moduleId + '_edit',
+//				id : moduleId + '_edit',
 				xtype : "tbbutton",
 				text : "编辑",
 				key : "edit",
@@ -47,7 +47,7 @@ function create_project_carried_out_info_window(moduleId, moduleName) {
 					});
 				}
 			}, {
-				// id : moduleId + '_delete',
+//				id : moduleId + '_delete',
 				xtype : "tbbutton",
 				text : "删除",
 				key : "delete",
@@ -59,7 +59,7 @@ function create_project_carried_out_info_window(moduleId, moduleName) {
 					});
 				}
 			}, {
-				// id : moduleId + '_search',
+//				id : moduleId + '_search',
 				xtype : "tbbutton",
 				text : "查询",
 				key : "search",
@@ -71,14 +71,14 @@ function create_project_carried_out_info_window(moduleId, moduleName) {
 					});
 				}
 			}, {
-				// id : moduleId + '_search',
+//				id : moduleId + '_investment',
 				xtype : "tbbutton",
 				text : "投资计划",
-				key : "search",
+//				key : "investment",
 				// keyBinding : createSearchKey(),
 				handler : function() {
 					var searchWindex = create_project_year_investment_plan_window("project_year_investment_plan", "投资计划", {
-						projectGridModule : mainGridModule
+						  projectGridModule : mainGridModule
 					});
 				}
 			}]
@@ -103,8 +103,6 @@ function create_project_carried_out_info_window(moduleId, moduleName) {
 	});
 
 	var mainGrid = mainGridModule.getGrid();
-
-	
 
 	var window = new Ext.ERPWindow({
 		title : moduleName,

@@ -1,6 +1,6 @@
 function project_month_investment_plan_save_update_form_panel_windows(params) {
-	
-	var  monthSelect= params.monthSelect;
+
+	var monthSelect = params.monthSelect;
 
 	var form_panel = new Ext.form.ERPFormPanel({
 		labelWidth : 80,
@@ -14,9 +14,18 @@ function project_month_investment_plan_save_update_form_panel_windows(params) {
 			text : '提交',
 			listeners : {
 				'click' : function() {
-					showMsgYN({
-						msg : "是否要"+( params.action =="save"?"提交月投资进度":"更新月投资进度" ),
-						yes : function(YN) {
+
+					showMsgButtons({
+						title : "信息",
+						msg : "是否要"+( params.action =="save"?"提交月投资进度":"更新月投资进度"),
+						buttons : {
+							no : "保存",
+							yes:"提交并短信提醒",
+							cancel:"关闭"
+						
+						},
+						callback : function(btn) {
+						     if(btn =='cancel')return ;
 							form_panel.submit({
 								url : params.url,
 								waitMsg : '正在提交...',
@@ -24,14 +33,14 @@ function project_month_investment_plan_save_update_form_panel_windows(params) {
 								params : params.params,
 								success : function(result) {
 									json = result.result;
-								
+
 									if (params.action == "save") {
 										params.grid.insertRow(json[params.pojo]);
-											monthSelect.load({
-											  params:{
-											  	"searchBean._ac":1
-											  }
-											});
+										monthSelect.load({
+											params : {
+												"searchBean._ac" : 1
+											}
+										});
 										form_panel.reset();
 									} else {
 										params.grid.updateRow(json[params.pojo]);
@@ -40,8 +49,10 @@ function project_month_investment_plan_save_update_form_panel_windows(params) {
 
 								}
 							});
+
 						}
 					});
+				
 
 				}
 			}
