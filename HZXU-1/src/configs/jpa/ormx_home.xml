@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orm:entity-mappings version="2.0" xmlns:orm="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_1_0.xsd ">
+
+	<!-- 工作描述 SQL 语句 -->
+	<orm:package>cn.communications.erp.hibernate.dao.jopo</orm:package>
+	
+	<orm:named-native-query
+		name="searchKeyStatisticsSum"
+		result-set-mapping="searchKeyStatisticsSumResult">
+		<orm:query>
+		SELECT 
+		    (SUM( CASE WHEN project_month_complete.`is_complete` = '已完成' THEN 1 ELSE 0 END)) AS 已完成   ,  
+		    (SUM( CASE WHEN project_month_complete.`is_complete` = '末完成' THEN 1 ELSE 0 END)) AS  末完成  ,
+		    (SUM( CASE WHEN project_month_complete.`is_complete` IS  NULL  THEN 1 ELSE 0 END)) AS  没计划
+      FROM  `project_month_complete` AS project_month_complete
+		</orm:query>
+	</orm:named-native-query>
+
+
+	<!-- <orm:named-native-query name="ISysUserGuestInfoService_ListAllNotContainGuestInfo_containId_name" result-set-mapping="ListAllGuestInfo_Result"> <orm:query> </orm:query> </orm:named-native-query> -->
+
+	<orm:sql-result-set-mapping name="searchKeyStatisticsSumResult">
+		<orm:column-result name="已完成" />
+		<orm:column-result name="末完成" />
+		<orm:column-result name="没计划" />
+	</orm:sql-result-set-mapping>
+
+
+</orm:entity-mappings>

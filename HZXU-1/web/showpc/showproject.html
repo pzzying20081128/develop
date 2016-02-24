@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+　　<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+　　<title>惠州市重大项目管理系统</title>
+        <script type="text/javascript" src="/demo/showpc/js/echarts.simple.min.js"></script>
+	<script type="text/javascript" src="/demo/showpc/js/js/jquery-1.12.0.min.js"></script>
+　　<style>
+
+body {
+    padding:0;  /*去除内边距*/
+    border:0;   /*去除边框*/
+    margin:0;   /*去除外边距*/
+	}
+	.divcss5{border:0px solid #F00} 
+	    ul,li{margin:0;padding:0;font-size:18px;color:#000000;}  
+		ul{height:200px;overflow:hidden;}  
+		ul li{line-height:20px;height:20px;} 
+　　</style>
+　　</head>
+　　<body>
+     
+	 <div style="width:100%; height:50px"> 
+	      <table border="1" cellpadding="0" cellspacing="0" style="width:100%; height:50px ">
+		    <tr>
+								  <td style="width:100%" colspan="7" align="center">
+								     惠州市重大项目管理系统
+								  </td >
+								
+		  </tr>
+		  <tr align="center">
+								  <td style="width:13%;">
+								    <a href="/demo/showpc/index.html">首页</a> 
+								  </td >
+								  <td style="width:13%;">
+								     <a href="/demo/showpc/xmxxrr.html"> 项目信息录入 </a>
+								  </td >
+								  <td style="width:13%;">
+								     <a href="/demo/showpc/pclist_key_project.do?searchBean.status=有效"> 项目信息查询 </a>
+								  </td >
+								  <td style="width:13%;">
+								         <a href="/demo/showpc/scbb.html">生成报表</a>
+								  </td >
+								  <td style="width:13%;">
+								   <a href="/demo/showpc/xmfx.html">项目分析</a>
+								  </td >
+								  <td style="width:13%;">
+								  <a href="./index.html">后台管理</a>
+								  
+								  </td >
+								  <td style="width:13%;">
+								   <a href="/demo/showpc/qxjlxr.html">权限及联系人</a>
+								  </td >
+		  </tr>
+		  </table>
+	 </div>
+	 
+	 
+	 <br/>
+	    <a href="/demo/showpc/index.html"> 首页</a> -> <a href="/demo/showpc/pclist_key_project.do?searchBean.status=有效"> 项目列表</a> ->${projectCarriedOutInfo.name} 
+	 <br/>
+     
+	      <div style="width:100%; height:auto">
+	      <div align="center">
+                       项目${projectCarriedOutInfo.name} 详情
+	      </div>
+	       <table border="1" cellpadding="0" cellspacing="0" style="width:100%; height:50px ">
+	                 <tr>
+	                     <td>项目名称 </td>
+	                     <td>建设内容</td>
+	                     <td>投资资产</td>
+	                      <td>项目地址</td>
+	                     <td>实施单位</td>
+	                     <td>责任单位</td>
+	                 </tr>
+	                 
+	                  
+						                       <tr>
+							                     <td >
+							                     ${projectCarriedOutInfo.name}
+							                     </td>
+							                     <td>${projectCarriedOutInfo.constructionContent}</td>
+							                     <td>${projectCarriedOutInfo.totalInvestment}万元</td>
+							                      <td>${projectCarriedOutInfo.projectAddress}</td>
+							                     <td>${projectCarriedOutInfo.implementationUnit}</td>
+							                     <td>${projectCarriedOutInfo.responsibilityUnit}</td>
+							                 </tr>
+                    
+	       
+	       </table>
+	                           
+					
+		</div>
+		
+		
+		 <br/>
+	       <div align="center">
+                       年投资计划
+	      </div>
+	       <table border="1" cellpadding="0" cellspacing="0" style="width:100%; height:50px ">
+	                 <tr>
+	                     <td align="center">年份 </td>
+	                     <td align="center">投资计划</td>
+	                
+	                 </tr>
+	                 
+	                    #foreach(  $projectYearInvestmentPlan  in $projectYearInvestmentPlans)
+						                       <tr>
+							                     <td align="center">
+							                            
+							                            ${projectYearInvestmentPlan.yearString}
+							                      
+							                          </td>
+							                     <td align="center" >
+							                     <table border="1" cellpadding="0" cellspacing="0" style="width:100%; height:50px ">
+							                               <tr>
+							                                  <td colspan="6">
+							                                        ${projectYearInvestmentPlan.investmentPlan}
+							                                  </td>
+							                               </tr>
+							                               <tr align="center">
+										                                  <td>
+										                                         月份
+										                                  </td>
+										                                  <td>
+										                                          月投资计划
+										                                  </td>
+										                                   <td>
+										                                          实际投资金额
+										                                  </td>
+										                                  <td>
+										                                          主要建设内容
+										                                  </td>
+										                                   <td>
+										                                         实际建设内容
+										                                  </td>
+										                                   <td>
+										                                          是否完成
+										                                  </td>
+										                                  
+										                                    
+										                                  <!-- 
+										                                    <td>
+										                                          存在问题
+										                                  </td>
+										                                    <td>
+										                                          形象进度
+										                                  </td>
+										                                   -->
+							                               </tr>
+							                               
+							                                #foreach(  $projectMonthInvestmentPlans  in $projectYearInvestmentPlan.projectMonthInvestmentPlans)
+							                                        <tr>
+										                                  <td align="center">
+										                                  <!--  月份  -->
+										                                         $projectMonthInvestmentPlans.month
+										                                  </td>
+										                                    <td>
+										                                    <!--    月投资计划 -->
+										                                         $!projectMonthInvestmentPlans.investmentPlan
+										                                  </td>
+										                                   <td align="center">
+										                                    <!--  实际投资金额 -->
+										                                          $!projectMonthInvestmentPlans.truthInvestment
+										                                  </td>
+										                                      <td>
+										                                    <!--    主要建设内容 -->
+										                                          $!projectMonthInvestmentPlans.constructionContent
+										                                  </td>
+										                                      <td align="center">
+										                                      <!--  实际完成情况 -->
+										                                          $!projectMonthInvestmentPlans.truthCompletionStatus
+										                                  </td>
+										                                      <td align="center">
+										                                       <!--   是否完成 -->
+										                                          $!projectMonthInvestmentPlans.complete
+										                                  </td>
+										                                
+										                                
+										                                  <!-- 
+										                                    <td>
+										                                         存在问题 
+										                                         $!projectMonthInvestmentPlans.existingProblems
+										                                  </td>
+										                                    <td>
+										                                           形象进度 
+										                                           $!projectMonthInvestmentPlans.imageProgress
+										                                  </td>
+										                                  -->
+							                               </tr>
+							                                
+							                                #end
+							                               
+							                               
+							                     </table>
+							                     
+							                       
+							                     </td>
+							                     
+							                 </tr>
+                       #end    
+	       
+	       
+	       </table>
+	
+	 
+　　
+　　</body>
+</html>

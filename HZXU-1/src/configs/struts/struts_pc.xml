@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<package name="showpc" namespace="/showpc" extends="struts-default">
+
+		<action name="pclist_key_project" class="PCListProjectAction" method="list_key_project">
+			<result name="success" type="velocity">showlist.html</result>
+		</action>
+
+		<action name="get_key_project" class="PCListProjectAction" method="get_key_project">
+			<result name="success" type="velocity">showproject.html</result>
+		</action>
+
+
+	</package>
+
+
+	<package name="showpc_ajax" namespace="/showpc" extends="json-default">
+		<action name="homeKeyStatisticsSum" class="PCHomeProjectAction" method="searchKeyStatisticsSum">
+			<result type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">
+					success,msg,
+					keyPCHomeSumBean,
+					keyPCHomeSumBean.\w+
+				</param>
+			</result>
+		</action>
+		
+			<action name="listYearMonthProjectCarriedOutInfo" class="PCHomeProjectAction" method="listYearMonthProjectCarriedOutInfo">
+			<result type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">
+					success,msg,
+					projectCarriedOutInfos,
+					projectCarriedOutInfos\[\d+\]\.\w+
+				</param>
+			</result>
+		</action>
+		
+		
+		
+
+	</package>
+</struts>
